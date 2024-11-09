@@ -1,4 +1,10 @@
 # gen_api
+
+[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen_api-blue.svg?style=flat)](https://github.com/joanalnu/gen_api)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen_api/LICENSE)
+![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
+[![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
+
 GEN_API is an API for using the [genetics10](https://joanalnu.github.io/genetics10) tool integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
 
 The API allows you to translate DNA sequences into RNa or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold API, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. Gen_api is also a powerful tool for students to experiment with, learn from, and create their own code.
@@ -176,6 +182,24 @@ print('NHEJ Repaired DNA: ', nhej_repaired_dna)
 hdr_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
 print('HDR Repaired DNA: ', hdr_repaired_dna)
 ```
+
+## Citing gen API
+If you make use of this code please cite it:
+```bibtex
+@software{joanalnu_2024b,
+    author = [Alcaide-Núñez, Joan],
+    title = {GEN API},
+    month = november,
+    year = {2024},
+    publisher = {Zenodo},
+    version = {1.0},
+    doi = {10.5281/zenodo.14059749},
+    url = {https://github.com/joanalnu/gen_api},
+}
+```
+
+## Contributing
+Please contact me via [email](mailto:joanalnu@outlook.com) or send pull requests.
 
 ## Info for educators
 This is the formal API for the [genetic10](https://joanalnu.github.io/genetics10) educational software. While the jupyter notebook is a beginner-friendly interface and does not require installation, making it ideal for school-managed devices, the API is designed to be used in a more professional environment. It is up to you to decide whether to use the API or the jupyter notebook, considering your alumns' level of expertise and the resources available.
