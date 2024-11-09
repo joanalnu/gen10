@@ -7,7 +7,7 @@ with open("README.md", "r") as readme_file:
 with open("requirements.txt") as requirements_file:
     requirements = requirements_file.read().splitlines()
 
-with open("HERE_api/_version.py") as version_file: # change this to the name of the folder
+with open("gen_api/_version.py") as version_file:
     for line in version_file:
         if "__version__" in line:
             __version__ = line.split()[-1].replace('"', "")
