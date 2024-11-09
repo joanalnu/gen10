@@ -3,13 +3,11 @@ import pandas as pd
 import os
 import requests
 import py3Dmol
+import gen_api
 
-def __init__(self):
-    # Setup variables
-    self.sample = 1
-    self.dirpath = os.path.dirname(os.path.abspath(__doc__))
+dirpath = os.path.dirname(os.path.abspath(__file__))
 
-def dna2rna(self, dna):
+def dna2rna(dna):
     """Returns RNA string by inputting a DNA string"""
     rna = ""
     for base in dna:
@@ -25,7 +23,7 @@ def dna2rna(self, dna):
             raise ValueError('Could not read provided DNA string')
     return rna
 
-def rna2amino(self, rna):
+def rna2amino(rna):
     """Returns amino acids by inputting an RNA string"""
     amino=''
     codon_catalog = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
@@ -55,7 +53,7 @@ def rna2amino(self, rna):
             raise ValueError(f'Error: invalid codon {codon}')
     return amino
 
-def dna2amino(self, dna):
+def dna2amino(dna):
     """Returns amino acids by inputting an DNA string"""
     rna = ""
     for base in dna:
@@ -99,7 +97,7 @@ def dna2amino(self, dna):
             raise ValueError(f'Error: invalid codon {codon}')
     return amino
 
-def compare(self, original, copy):
+def compare(original, copy):
     """Compares two different string (original, copy) and return True or False with the reason"""
     if len(original) != len(copy):
         return 'not same length'
@@ -109,7 +107,7 @@ def compare(self, original, copy):
                 return f'Difference in {i} base/aminoacid'
         return "Identical"
 
-def check(self, string):
+def check(string):
     if len(string)%3 == 0:
         if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
             return 'Valid DNA string'
@@ -118,11 +116,11 @@ def check(self, string):
         else:
             raise ValueError('Invalid string (starting/ending codons not found)')
 
-def read_input(self, path):
+def read_input(path):
     """if string return string; if a txt file path returns string in file"""
     if path[-3:]=='txt':
         try:
-            file = open(f'{self.dirpath}/{path}', 'r')
+            file = open(f'{dirpath}/{path}', 'r')
             contents = list()
             for line in file:
                 contents.append(line.replace('\n', ''))
@@ -132,7 +130,7 @@ def read_input(self, path):
     else:
         return path
 
-def createmutation(self, string):
+def createmutation(string):
     mutated = ""
     muttype = randint(1, 6)
     index = randint(0, len(string)-1)
@@ -158,7 +156,7 @@ def createmutation(self, string):
             mutated+=string[i]
     return mutated
 
-def iterate(self, strings, functions):
+def iterate(strings, functions):
     """Creates a CSV file in your directory with the information you request."""
     """The argument consits of a list of strings and a list of functions"""
     columns = ['input']+[function for function in functions]
@@ -167,21 +165,21 @@ def iterate(self, strings, functions):
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(self, function)(memory[-1])
+            result = getattr(function)(memory[-1])
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
     
-    df.to_csv(f'{self.dirpath}/Results.csv', index=False)
+    df.to_csv(f'{dirpath}/Results.csv', index=False)
     return df
 
-def tosingle(self, sin):
+def tosingle(sin):
     inp = sin.split()
     sout = ''
     for base in inp:
         sout+=base[0]
     return sout
 
-def alphafold_prediction(self, uniprot_id):
+def alphafold_prediction(uniprot_id):
     url = f'https://alphafold.ebi.ac.uk/api/prediction/{uniprot_id}'
     response = requests.get(url)
     if response.status_code == 200:
@@ -191,20 +189,20 @@ def alphafold_prediction(self, uniprot_id):
         raise ValueError(f'Failed to fetch data: {response.status_code}')
         return None
 
-def download_pdb(self, url):
+def download_pdb(url):
     response = requests.get(url)
     if response.status_code == 200:
-        with open(f'{self.dirpath}/alphafold_protein__structure_prediction.pdb', 'wb') as f:
+        with open(f'{dirpath}/alphafold_protein__structure_prediction.pdb', 'wb') as f:
             f.write(response.content)
         return True
     else:
         return False
 
-def generate_protein(self, structure_dict):
+def generate_protein(structure_dict):
     url = structure_dict['pdbUrl']
     
-    if self.download_pdb(url):
-        filepath = f'{self.dirpath}/alphafold_protein__structure_prediction.pdb'
+    if gen_api.download_pdb(url):
+        filepath = f'{dirpath}/alphafold_protein__structure_prediction.pdb'
         pdb_file = open(filepath).read()
         view = py3Dmol.view(width=400, height=400)
         view.addModel(pdb_file, 'pdb')
@@ -212,13 +210,13 @@ def generate_protein(self, structure_dict):
         view.zoomTo()
         return view.show()
 
-def cut_dna(self, dna, cut_pos):
+def cut_dna(dna, cut_pos):
     """Cuts the DNA at the specified position."""
     if cut_pos<0 or cut_pos>=len(dna):
         raise ValueError("Cut position is out of bounds.")
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def repair_dna(self, dna, cut_pos, repair_type, repair_sequence=None):
+def repair_dna(dna, cut_pos, repair_type, repair_sequence=None):
     """Repairs the DNA after a cut."""
 
     if '|' in dna: # ignore cut_pos and repair on existing cut

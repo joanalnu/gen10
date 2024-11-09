@@ -111,11 +111,11 @@ Please, note that a step-for-step guide on how to access UniProt IDs is comming 
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # provide DNA string
 
 # get rna string
-my_rna = gen10.dna2rna(my_dna)
+my_rna = gen_api.dna2rna(my_dna)
 print(my_rna)
 
 # get aminoacids string
-my_amino = gen10.rna2amino(my_rna)
+my_amino = gen_api.rna2amino(my_rna)
 print(my_amino)
 ```
 
@@ -125,20 +125,20 @@ print(my_amino)
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # provide DNA string
 
 # create mutation
-mutation = gen10.createmutation(my_dna)
+mutation = gen_api.createmutation(my_dna)
 print(mutation)
 
 # get place where mutation happened
-index = gen10.compare(my_dna, mutation)
+index = gen_api.compare(my_dna, mutation)
 print(index)
 ```
 
 ### Opening a txt file and using iteration
 ```python
 # read input file
-dnas = gen10.read_input('/examples/my_dnas.txt') # note that you must have saved a file named so in the same folder as this file
+dnas = gen_api.read_input('/examples/my_dnas.txt') # note that you must have saved a file named so in the same folder as this file
 functions = ['createmutation', 'dna2rna', 'rna2amino'] # what functions do you want to run
-output = gen10.iterate(dnas, functions) # call iterate functions
+output = gen_api.iterate(dnas, functions) # call iterate functions
 print(output) # show output of iterate()
 ```
 
@@ -152,10 +152,10 @@ amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYD
 uniprot_id = 'Q8W3K0'
 
 # Now we fetch the alphafold structure prediction
-structure = gen10.alphafold_prediction(uniprot_id)
+structure = gen_api.alphafold_prediction(uniprot_id)
 
 # Finally we call generate_protein() to show the prediction
-protein = gen10.generate_protein(structure)
+protein = gen_api.generate_protein(structure)
 ```
 
 ### Simulation of CRISPR Cas
@@ -165,15 +165,15 @@ print('Original DNA:', my_dna)
 
 # Cutting DNA at position 16
 cut_position = 16
-cut_dna = gen10.cut_dna(my_dna, cut_position)
+cut_dna = gen_api.cut_dna(my_dna, cut_position)
 print('Cut DNA: ', cut_dna)
 
 # Repairing the DNA using NHEJ (deletion)
-nhej_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'NHEJ')
+nhej_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'NHEJ')
 print('NHEJ Repaired DNA: ', nhej_repaired_dna)
 
 # Repairing the DNA using HDR (insertion of 'XYZ')
-hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
+hdr_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
 print('HDR Repaired DNA: ', hdr_repaired_dna)
 ```
 
