@@ -208,7 +208,8 @@ def generate_protein(structure_dict):
         view.addModel(pdb_file, 'pdb')
         view.setStyle({'cartoon': {'color': 'spectrum'}})
         view.zoomTo()
-        return view.show()
+        view.show()
+        return None
 
 def cut_dna(dna, cut_pos):
     """Cuts the DNA at the specified position."""
