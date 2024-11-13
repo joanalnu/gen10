@@ -202,7 +202,7 @@ def generate_protein(structure_dict):
     url = structure_dict['pdbUrl']
     
     if gen_api.download_pdb(url):
-        filepath = f'{dirpath}/alphafold_protein__structure_prediction.pdb'
+        filepath = f'./gen_api/alphafold_protein__structure_prediction.pdb'
         pdb_file = open(filepath).read()
         view = py3Dmol.view(width=400, height=400)
         view.addModel(pdb_file, 'pdb')
