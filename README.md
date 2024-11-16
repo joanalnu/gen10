@@ -7,7 +7,7 @@
 
 GEN_API is an API for using the [genetics10](https://joanalnu.github.io/genetics10) tool integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
 
-The API allows you to translate DNA sequences into RNa or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold API, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. Gen_api is also a powerful tool for students to experiment with, learn from, and create their own code.
+The API allows you to translate DNA sequences into RNA or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold API, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. Gen_api is also a powerful tool for students to experiment with, learn from, and create their own code.
 
 [(jump to the info for educators below)](#info-for-educators)
 
