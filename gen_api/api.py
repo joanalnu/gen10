@@ -191,7 +191,7 @@ def alphafold_prediction(uniprot_id):
         raise ValueError(f'Failed to fetch data: {response.status_code}')
         return None
 
-def download_pdb(url):
+def download_pdb(url, dirpath):
     response = requests.get(url)
     if response.status_code == 200:
         with open(f'{dirpath}/alphafold_protein__structure_prediction.pdb', 'wb') as f:
