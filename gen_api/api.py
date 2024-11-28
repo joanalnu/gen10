@@ -200,17 +200,21 @@ def download_pdb(url, dirpath):
     else:
         return False
 
-def generate_protein(structure_dict):
+def generate_protein(self, structure_dict):
     url = structure_dict['pdbUrl']
 
     if gen_api.download_pdb(url):
-        filepath = f'{self.dirpath}/alphafold_protein__structure_prediction.pdb'
-        pdb_file = open(filepath).read()
-        view = py3Dmol.view(width=400, height=400)
-        view.addModel(pdb_file, 'pdb')
-        view.setStyle({'cartoon': {'color': 'spectrum'}})
-        view.zoomTo()
-        return view.show()
+        filepath = os.path.join(dirpath, 'alphafold_protein__structure_prediction.pdb')
+        with open(filepath) as pdb_file:
+            pdb_content = pdb_file.read()
+            view = py3Dmol.view(width=400, height=400)
+            view.addModel(pdb_content, 'pdb')
+            view.setStyle({'cartoon': {'color': 'spectrum'}})
+            view.zoomTo()
+            # Instead of view.show(), return the HTML
+            return view.png()  # or view.js() for JavaScript
+    else:
+        raise ValueError("Failed to download PDB file.")
     
 
         # filepath = f'./gen_api/alphafold_protein__structure_prediction.pdb'
