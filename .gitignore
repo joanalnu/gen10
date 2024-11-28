@@ -2,3 +2,4 @@ deprecated/
 build/
 gen_api/__pycache__
 Gen_API.egg-info
+.venv

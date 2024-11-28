@@ -201,35 +201,26 @@ def download_pdb(url):
         return False
 
 def generate_protein(structure_dict):
-    # url = structure_dict['pdbUrl']
-    
-    # if gen_api.download_pdb(url):
-        filepath = f'./gen_api/alphafold_protein__structure_prediction.pdb'
+    url = structure_dict['pdbUrl']
+
+    if gen_api.download_pdb(url):
+        filepath = f'{self.dirpath}/alphafold_protein__structure_prediction.pdb'
         pdb_file = open(filepath).read()
         view = py3Dmol.view(width=400, height=400)
         view.addModel(pdb_file, 'pdb')
         view.setStyle({'cartoon': {'color': 'spectrum'}})
         view.zoomTo()
-        view.show()
-        return None
-    # url = structure_dict['pdbUrl']
+        return view.show()
     
-    # if gen_api.download_pdb(url):
-    #     filepath = './gen_api/alphafold_protein__structure_prediction.pdb'
-    #     pdb_file = open(filepath).read()
-        
-    #     view = py3Dmol.view(width=400, height=400)
-    #     view.addModel(pdb_file, 'pdb')
-    #     view.setStyle({'cartoon': {'color': 'spectrum'}})
-    #     view.zoomTo()
-        
-    #     # Save the view as HTML
-    #     with open('protein_view.html', 'w') as f:
-    #         f.write(view._make_html())
-        
-    #     # Open the HTML file in a new browser tab
-    #     webbrowser.open('protein_view.html')
-    #     return None
+
+        # filepath = f'./gen_api/alphafold_protein__structure_prediction.pdb'
+        # pdb_file = open(filepath).read()
+        # view = py3Dmol.view(width=400, height=400)
+        # view.addModel(pdb_file, 'pdb')
+        # view.setStyle({'cartoon': {'color': 'spectrum'}})
+        # view.zoomTo()
+        # view.show()
+        # return None
 
 def cut_dna(dna, cut_pos):
     """Cuts the DNA at the specified position."""
