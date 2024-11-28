@@ -212,19 +212,10 @@ def generate_protein(self, structure_dict):
             view.setStyle({'cartoon': {'color': 'spectrum'}})
             view.zoomTo()
             # Instead of view.show(), return the HTML
-            return view.png()  # or view.js() for JavaScript
+            print("Hello how are u?")
+            view.png('protein_structure.png')  # Save as PNG
     else:
         raise ValueError("Failed to download PDB file.")
-    
-
-        # filepath = f'./gen_api/alphafold_protein__structure_prediction.pdb'
-        # pdb_file = open(filepath).read()
-        # view = py3Dmol.view(width=400, height=400)
-        # view.addModel(pdb_file, 'pdb')
-        # view.setStyle({'cartoon': {'color': 'spectrum'}})
-        # view.zoomTo()
-        # view.show()
-        # return None
 
 def cut_dna(dna, cut_pos):
     """Cuts the DNA at the specified position."""
