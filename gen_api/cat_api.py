@@ -2,8 +2,12 @@ from random import randint
 import pandas as pd
 import os
 import requests
-import py3Dmol
-import gen_api
+
+from Bio.PDB import PDBParser
+import matplotlib.pyplot as plt # this is API-specific for protein structure visualization
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.colors import Normalize
+from matplotlib import cm
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
@@ -189,26 +193,53 @@ def alphafold(self, uniprot_id):
         raise ValueError(f"Error a l'obtenir lesdades: {response.status_code}")
         return None
 
-def download_pdb(self, url):
+def generar_proteina(structure_dict, filepath='alphafold_protein_structure_prediction.pdb', show=True):
+    url = structure_dict['pdbUrl']
     response = requests.get(url)
     if response.status_code == 200:
-        with open(f'{self.dirpath}/alphafold_predicció_estructura_proteina.pdb', 'wb') as f:
-            f.write(response.content)
-        return True
-    else:
-        return False
+        content = response.content
+        with open(filepath, 'wb') as f:
+            f.write(content)
 
-def generar_proteina(self, structure_dict):
-    url = structure_dict['pdbUrl']
-    
-    if gen_api.download_pdb(url):
-        filepath = f'./gen_api/alphafold_predicció_estructura_proteina.pdb'
-        pdb_file = open(filepath).read()
-        view = py3Dmol.view(width=400, height=400)
-        view.addModel(pdb_file, 'pdb')
-        view.setStyle({'cartoon': {'color': 'spectrum'}})
-        view.zoomTo()
-        return view.show()
+        parser = PDBParser()
+        structure = parser.get_structure("alphafold_protein_structure_prediction.pdb", filepath)
+
+        # Extract atomic coordinates
+        x_coords = []
+        y_coords = []
+        z_coords = []
+        accuracy_scores = []
+
+        for atom in structure.get_atoms():
+            x, y, z = atom.coord
+            x_coords.append(x)
+            y_coords.append(y)
+            z_coords.append(z)
+            accuracy_scores.append(atom.bfactor)
+
+        # Normalize colors
+        norm = Normalize(vmin=0, vmax=100)
+        cmap = cm.hsv
+        colors = cmap(norm(accuracy_scores))
+
+        fig = plt.figure(figsize=(8,6))
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x_coords, y_coords, z_coords, c=colors, s=20, alpha=0.7, edgecolors='k')
+        ax.plot(x_coords, y_coords, z_coords, color='black', linewidth=1.0, alpha=0.7)
+
+        # Add labels
+        ax.set_xlabel('Eix X')
+        ax.set_ylabel('Eix Y')
+        ax.set_zlabel('Eix Z')
+        cbar = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax, pad=0.1)
+        cbar.set_label("Seguretat de Predicció (0%-100%)")
+
+        plt.grid(True)
+        if show is True:
+            plt.show()
+
+    else:
+        raise ValueError(f'Error al descarregar les dades. Codi: {response.status_code}')
 
 def tallar_adn(self, dna, cut_pos):
     """Talla l'ADN al punt especificat."""

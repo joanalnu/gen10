@@ -3,3 +3,5 @@ build/
 gen_api/__pycache__
 Gen_API.egg-info
 .venv
+.idea/
+alphafold_protein__structure_prediction.pdb

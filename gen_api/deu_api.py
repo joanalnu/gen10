@@ -2,8 +2,12 @@ from random import randint
 import pandas as pd
 import os
 import requests
-import py3Dmol
-import gen_api
+
+from Bio.PDB import PDBParser
+import matplotlib.pyplot as plt # this is API-specific for protein structure visualization
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.colors import Normalize
+from matplotlib import cm
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
@@ -189,26 +193,53 @@ def alphafold_struktur(self, uniprot_id):
         raise ValueError(f'Daten können nicht abgerufen werden: {response.status_code}')
         return None
 
-def download_pdb(self, url):
+def protein_generieren(structure_dict, filepath='alphafold_protein_structure_prediction.pdb', show=True):
+    url = structure_dict['pdbUrl']
     response = requests.get(url)
     if response.status_code == 200:
-        with open(f'{self.dirpath}/alphafold_protein__struktur.pdb', 'wb') as f:
-            f.write(response.content)
-        return True
-    else:
-        return False
+        content = response.content
+        with open(filepath, 'wb') as f:
+            f.write(content)
 
-def protein_generieren(self, structure_dict):
-    url = structure_dict['pdbUrl']
-    
-    if gen_api.download_pdb(url):
-        filepath = f'./gen_api/alphafold_protein__struktur.pdb'
-        pdb_file = open(filepath).read()
-        view = py3Dmol.view(width=400, height=400)
-        view.addModel(pdb_file, 'pdb')
-        view.setStyle({'cartoon': {'color': 'spectrum'}})
-        view.zoomTo()
-        return view.show()
+        parser = PDBParser()
+        structure = parser.get_structure("alphafold_protein_structure_prediction.pdb", filepath)
+
+        # Extract atomic coordinates
+        x_coords = []
+        y_coords = []
+        z_coords = []
+        accuracy_scores = []
+
+        for atom in structure.get_atoms():
+            x, y, z = atom.coord
+            x_coords.append(x)
+            y_coords.append(y)
+            z_coords.append(z)
+            accuracy_scores.append(atom.bfactor)
+
+        # Normalize colors
+        norm = Normalize(vmin=0, vmax=100)
+        cmap = cm.hsv
+        colors = cmap(norm(accuracy_scores))
+
+        fig = plt.figure(figsize=(8,6))
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x_coords, y_coords, z_coords, c=colors, s=20, alpha=0.7, edgecolors='k')
+        ax.plot(x_coords, y_coords, z_coords, color='black', linewidth=1.0, alpha=0.7)
+
+        # Add labels
+        ax.set_xlabel('X Achse')
+        ax.set_ylabel('Y Achse')
+        ax.set_zlabel('Z Achse')
+        cbar = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax, pad=0.1)
+        cbar.set_label("Prediction Accuracy (0%-100%)")
+
+        plt.grid(True)
+        if show is True:
+            plt.show()
+
+    else:
+        raise ValueError(f'Abruf von Proteinstrukturdaten fehlgeschlagen. HTTP-Antwort-Code: {response.status_code}')
     
 def dna_schneiden(self, dna, cut_pos):
     """Schneidet DNA String an der Position cut_pos"""
