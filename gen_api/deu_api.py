@@ -11,7 +11,7 @@ from matplotlib import cm
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
-def dna2rna(self, dna):
+def dna2rna(dna):
     """Gibt RNA-String durch Eingabe eines DNA-Strings zurück"""
     rna = ""
     for base in dna:
@@ -27,7 +27,7 @@ def dna2rna(self, dna):
             raise ValueError('Fehler: Die angegebene DNA-Zeichenkette konnte nicht gelesen werden.')
     return rna
 
-def rna2amino(self, rna):
+def rna2amino(rna):
     """Gibt Aminosäuren durch Eingabe einer RNA-Zeichenkette zurück"""
     amino=''
     codon_catalog = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
@@ -57,7 +57,7 @@ def rna2amino(self, rna):
             raise ValueError(f'Error: invalid codon {codon}')
     return amino
 
-def dna2amino(self, dna):
+def dna2amino(dna):
     """Gibt Aminosäuren durch Eingabe einer DNA-Zeichenkette zurück"""
     rna = ""
     for base in dna:
@@ -101,7 +101,7 @@ def dna2amino(self, dna):
             raise ValueError(f'Fehler: ungültiges Codon {codon}')
     return amino
 
-def vergleichen(self, original, copy):
+def vergleichen(original, copy):
     """Vergleicht zwei verschiedene Zeichenketten (Original, Kopie) und gibt die Unterschiede"""
     if len(original) != len(copy):
         return 'not same length'
@@ -111,7 +111,7 @@ def vergleichen(self, original, copy):
                 return f'Unterschiede in der {i} Base/Aminosäure'
         return "Identisch"
 
-def checken(self, string):
+def checken(string):
     if len(string)%3 == 0:
         if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
             return 'Gültiger DNA-String'
@@ -120,11 +120,11 @@ def checken(self, string):
         else:
             raise ValueError('Ungültiger String (Start-/Endcodons nicht gefunden)')
 
-def input_lesen(self, path):
+def input_lesen(path):
     """Wenn string, wird string zurückgegeben; wenn ein txt-Dateipfad, wird string in file zurückgegeben"""
     if path[-3:]=='txt':
         try:
-            file = open(f'{self.dirpath}/{path}', 'r')
+            file = open(path, 'r')
             contents = list()
             for line in file:
                 contents.append(line.replace('\n', ''))
@@ -134,7 +134,7 @@ def input_lesen(self, path):
     else:
         return path
 
-def mutation_erstellen(self, string):
+def mutation_erstellen(string):
     mutated = ""
     muttype = randint(1, 6)
     index = randint(0, len(string)-1)
@@ -160,7 +160,7 @@ def mutation_erstellen(self, string):
             mutated+=string[i]
     return mutated
 
-def iterieren(self, strings, functions):
+def iterieren(strings, functions, filepath=dirpath):
     """Erstellt eine CSV-Datei in Ihrem Verzeichnis mit den von Ihnen angeforderten Informationen."""
     """Das Argument besteht aus einer Liste von Zeichenketten und einer Liste von Funktionen"""
     columns = ['input']+[function for function in functions]
@@ -169,21 +169,21 @@ def iterieren(self, strings, functions):
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(self, function)(memory[-1])
+            result = getattr(function)(memory[-1])
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
     
-    df.to_csv(f'{self.dirpath}/Ergebnis.csv', index=False)
+    df.to_csv(f'{filepath}/Ergebnis.csv', index=False)
     return df
 
-def zueinfach(self, sin):
+def zueinfach(sin):
     inp = sin.split()
     sout=''
     for base in inp:
         sout+=base[0]
     return sout
 
-def alphafold_struktur(self, uniprot_id):
+def alphafold_struktur(uniprot_id):
     url = f'https://alphafold.ebi.ac.uk/api/prediction/{uniprot_id}'
     response = requests.get(url)
     if response.status_code == 200:
@@ -241,13 +241,13 @@ def protein_generieren(structure_dict, filepath='alphafold_protein_structure_pre
     else:
         raise ValueError(f'Abruf von Proteinstrukturdaten fehlgeschlagen. HTTP-Antwort-Code: {response.status_code}')
     
-def dna_schneiden(self, dna, cut_pos):
+def dna_schneiden(dna, cut_pos):
     """Schneidet DNA String an der Position cut_pos"""
     if cut_pos<0 or cut_pos>=len(dna):
         raise ValueError('Die Schnittposition befindet sich außerhalb des Strings.')
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def dna_reparieren(self, dna, cut_pos, repair_type, neue_string=None):
+def dna_reparieren(dna, cut_pos, repair_type, neue_string=None):
     """Repariert DNA nach den Schnitt."""
     if '|' in dna: # Schnitt_pos ignorieren und auf vorhandenem Schnitt reparieren
         cut_pos = dna.index('|')

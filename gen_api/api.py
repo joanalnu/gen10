@@ -126,7 +126,7 @@ def read_input(path):
     """if string return string; if a txt file path returns string in file"""
     if path[-3:]=='txt':
         try:
-            file = open(f'{dirpath}/{path}', 'r')
+            file = open(path, 'r')
             contents = list()
             for line in file:
                 contents.append(line.replace('\n', ''))
@@ -162,7 +162,7 @@ def createmutation(string):
             mutated+=string[i]
     return mutated
 
-def iterate(strings, functions):
+def iterate(strings, functions, filepath=dirpath):
     """Creates a CSV file in your directory with the information you request."""
     """The argument consits of a list of strings and a list of functions"""
     columns = ['input']+[function for function in functions]
@@ -175,7 +175,7 @@ def iterate(strings, functions):
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
     
-    df.to_csv(f'{dirpath}/Results.csv', index=False)
+    df.to_csv(f'{filepath}/Results.csv', index=False)
     return df
 
 def tosingle(sin):
