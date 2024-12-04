@@ -1,0 +1,21 @@
+# dev files
+deprecated/
+
+# build
+build/
+Gen_API.egg-info
+.venv
+gen_api/__pycache__
+
+# IDE
+.idea/
+
+# testing
+.github/workflows/
+tests/
+
+.DS_Store
+gen_api/.DS_Store
+
+alphafold_protein__structure_prediction.pdb
+alphafold_protein_structure_prediction.pdb
