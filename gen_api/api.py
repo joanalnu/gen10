@@ -110,7 +110,7 @@ def compare(original, copy):
     else:
         for i in range(len(original)):
             if original[i]!=copy[i]:
-                return f'Difference in {i} base/aminoacid'
+                return f'Difference in {i+1} base/aminoacid'
         return "Identical"
 
 def check(string):

@@ -71,9 +71,9 @@ def adn2amino(dna):
             rna+='C'
         else:
             raise ValueError('Error: no se pudo leer la secuencia de ADN')
-    
+
     amino=''
-    
+
     codon_catalog = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
         'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser',
         'UAU': 'Tyr', 'UAC': 'Tyr', 'UAA': 'STOP', 'UAG': 'STOP',
@@ -108,7 +108,7 @@ def comparar(original, copy):
     else:
         for i in range(len(original)):
             if original[i]!=copy[i]:
-                return f'Diferencia en la {i} base/aminoácido'
+                return f'Diferencia en la {i+1} base/aminoácido'
         return "Identicas"
 
 def comprobar(string):
@@ -165,14 +165,14 @@ def iterar(strings, functions, filepath=dirpath):
     """El argumento consiste en una lista de secuencias y una lista de funciones"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
-    
+
     for string in strings:
         memory = [string]
         for function in functions:
             result = getattr(function)(memory[-1])
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
-    
+
     df.to_csv(f'{filpath}/resultados.csv', index=False)
     return df
 
@@ -256,12 +256,12 @@ def reparar_adn(dna, cut_pos, repair_type, nueva_secuencia=None):
             return dna[:cut_pos] + dna[cut_pos+2:] # Eliminar una base
         elif repair_type=='HDR' and nueva_secuencia: # Simular inserción
             return dna[:cut_pos] + nueva_secuencia + dna[cut_pos:]
-    
+
     elif '|' not in dna: # usar cut_pos
         if repair_type=='NHEJ': # Simular supresión
             return dna[:cut_pos] + dna[cut_pos+2:] # Eliminar una base
         elif repair_type=='HDR' and nueva_secuencia: # Simular inserción
             return dna[:cut_pos] + nueva_secuencia + dna[cut_pos:]
-    
+
     else:
         raise ValueError('Tipo de reparación invalida o falta la nueva secuencia para HDR.')
