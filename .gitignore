@@ -11,11 +11,11 @@ gen_api/__pycache__
 .idea/
 
 # testing
-.github/workflows/
 .pytest_cache
 tests/__pycache__
 
 .DS_Store
 gen_api/.DS_Store
 
+alphafold_protein__structure_prediction.pdb
 alphafold_protein_structure_prediction.pdb
