@@ -113,9 +113,9 @@ def compara(original, copy):
 
 def comprova(string):
     if len(string)%3 == 0:
-        if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
+        if string[:3]=='TAC' and (string[-3:]=='ATT' or string[-3:]=='ATC' or string[-3:]=='ACC'):
             return "Cadena d'ADN vàlida"
-        elif string[:-3]=='AUG' and (string[-3]=='UAA' or string[-3]=='UAG' or string[-3]=='UGG'):
+        elif string[:3]=='AUG' and (string[-3:]=='UAA' or string[-3:]=='UAG' or string[-3:]=='UGG'):
             return "Cadena d'ARN vàlida"
         else:
             raise ValueError("Cadena invàlida (no s'ha trobat el códo inicial/final)")

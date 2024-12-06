@@ -113,9 +113,9 @@ def vergleichen(original, copy):
 
 def checken(string):
     if len(string)%3 == 0:
-        if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
+        if string[:3]=='TAC' and (string[-3:]=='ATT' or string[-3:]=='ATC' or string[-3:]=='ACC'):
             return 'Gültiger DNA-String'
-        elif string[:-3]=='AUG' and (string[-3]=='UAA' or string[-3]=='UAG' or string[-3]=='UGG'):
+        elif string[:3]=='AUG' and (string[-3:]=='UAA' or string[-3:]=='UAG' or string[-3:]=='UGG'):
             return 'Gültiger RNA-String'
         else:
             raise ValueError('Ungültiger String (Start-/Endcodons nicht gefunden)')
