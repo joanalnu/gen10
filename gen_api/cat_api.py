@@ -71,9 +71,9 @@ def adn2amino(dna):
             rna+='C'
         else:
             raise ValueError("Error: no s'ha pogut llegir la cadena d'ADN")
-    
+
     amino=''
-    
+
     codon_catalog = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
         'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser',
         'UAU': 'Tyr', 'UAC': 'Tyr', 'UAA': 'STOP', 'UAG': 'STOP',
@@ -108,7 +108,7 @@ def compara(original, copy):
     else:
         for i in range(len(original)):
             if original[i]!=copy[i]:
-                return f'Diferència a la base/aminoàcid {i}'
+                return f'Diferència a la base/aminoàcid {i+1}'
         return "Idèntiques"
 
 def comprova(string):
@@ -165,14 +165,14 @@ def iterar(strings, functions, filepath=dirpath):
     """L'argument consisteix d'una llista d'entrades i una llista de funcions"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
-    
+
     for string in strings:
         memory = [string]
         for function in functions:
             result = getattr(function)(memory[-1])
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
-    
+
     df.to_csv(f'{filepath}/resultats.csv', index=False)
     return df
 
@@ -256,12 +256,12 @@ def reparar_adn(dna, cut_pos, repair_type, nova_sequencia=None):
             return dna[:cut_pos] + dna[cut_pos+2:] # Eliminant una base
         elif repair_type=='HDR' and nova_sequencia: # Simular inserció
             return dna[:cut_pos] + nova_sequencia + dna[cut_pos:]
-    
+
     elif '|' not in dna: # utilitzar cut_pos
         if repair_type=='NHEJ': # Simular eliminació
             return dna[:cut_pos] + dna[cut_pos+2:] # Eliminant una base
         elif repair_type=='HDR' and nova_sequencia: # Simular inserció
             return dna[:cut_pos] + nova_sequencia + dna[cut_pos:]
-    
+
     else:
         raise ValueError('Tipus de reparació o seqüència de reparació de missions no vàlids per a HDR.')

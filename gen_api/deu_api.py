@@ -71,9 +71,9 @@ def dna2amino(dna):
             rna+='C'
         else:
             raise ValueError('Die angegebene DNA-Zeichenkette konnte nicht gelesen werden.')
-    
+
     amino=''
-    
+
     codon_catalog = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
         'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser',
         'UAU': 'Tyr', 'UAC': 'Tyr', 'UAA': 'STOP', 'UAG': 'STOP',
@@ -108,7 +108,7 @@ def vergleichen(original, copy):
     else:
         for i in range(len(original)):
             if original[i]!=copy[i]:
-                return f'Unterschiede in der {i} Base/Aminosäure'
+                return f'Unterschiede in der {i+1} Base/Aminosäure'
         return "Identisch"
 
 def checken(string):
@@ -165,14 +165,14 @@ def iterieren(strings, functions, filepath=dirpath):
     """Das Argument besteht aus einer Liste von Zeichenketten und einer Liste von Funktionen"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
-    
+
     for string in strings:
         memory = [string]
         for function in functions:
             result = getattr(function)(memory[-1])
             memory.append(result)
         df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
-    
+
     df.to_csv(f'{filepath}/Ergebnis.csv', index=False)
     return df
 
@@ -240,7 +240,7 @@ def protein_generieren(structure_dict, filepath='alphafold_protein_structure_pre
 
     else:
         raise ValueError(f'Abruf von Proteinstrukturdaten fehlgeschlagen. HTTP-Antwort-Code: {response.status_code}')
-    
+
 def dna_schneiden(dna, cut_pos):
     """Schneidet DNA String an der Position cut_pos"""
     if cut_pos<0 or cut_pos>=len(dna):
@@ -255,12 +255,12 @@ def dna_reparieren(dna, cut_pos, repair_type, neue_string=None):
             return dna[:cut_pos] + dna[cut_pos+2:] # Löschen einer Basis
         elif repair_type=='HDR' and neue_string: # Einfügung simulieren
             return dna[:cut_pos] + neue_string + dna[cut_pos:]
-    
+
     elif '|' not in dna: # cut_pos verwenden
         if repair_type=='NHEJ': # Löschung simulieren
             return dna[:cut_pos] + dna[cut_pos+2:] # Löschen einer Basis
         elif repair_type=='HDR' and neue_string: # Einfügung simulieren
             return dna[:cut_pos] + neue_string + dna[cut_pos:]
-    
+
     else:
         raise ValueError('Ungültiger Reparaturtyp oder falsche Reparatursequenz für HDR.')

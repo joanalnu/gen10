@@ -5,7 +5,7 @@
 ![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
 [![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
 
-GEN_API is an API for using the [genetics10](https://joanalnu.github.io/genetics10) tool integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
+GEN_API is an API for using the [genetics10](https://joanalnu.github.io/genetics10) tools integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
 
 The API allows you to translate DNA sequences into RNA or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold API, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. Gen_api is also a powerful tool for students to experiment with, learn from, and create their own code.
 
@@ -35,7 +35,7 @@ The available functions are the following:
     Transcribes the provided DNA string into a RNA string by changing the bases (A->U, T-> A, C->G, G->C).\
    Argument: ```string```\
    Output: ```string```
-   
+
 2. ```rna2amino()```\
     Transcribes the provided DNA string into an aminoacid string by reading codons (3x bases) and using the catalog.\
    Argument: ```string```\
@@ -70,7 +70,7 @@ The available functions are the following:
     By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input.
     Argument: ```list, list```
     Outpu  ```dataframe``` (table)
-   
+
 9. ```tosingle()```\
     Transcribes an aminoacid string from three-letter code to single-letter code.\
     Argument: ```string```\
@@ -98,9 +98,6 @@ The available functions are the following:
             ```string``` type of repair (NHEJ or HDR)\
             ```string``` Optional: string to insert by HDR repair\
     Output: ```string``` Repaired DNA
-
-**X.** ```download_pdb()```\
-   Internal function which enables ```generate_protein``` to work. Basically it retrieves the structure data from the url.
 
 $^1$ The Alphafold API only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
