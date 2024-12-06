@@ -13,6 +13,7 @@ gen_api/__pycache__
 # testing
 .github/workflows/
 tests/
+.pytest_cache
 
 .DS_Store
 gen_api/.DS_Store
