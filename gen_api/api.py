@@ -245,4 +245,25 @@ def generate_protein(structure_dict, filepath='alphafold_protein_structure_predi
 
 def cut_dna(dna, cut_pos):
     """Cuts the DNA at the specified position."""
-    if cut_pos<0 or cut_pos>=
+    if cut_pos<0 or cut_pos>=len(dna):
+        raise ValueError("Cut position is out of bounds.")
+    return dna[:cut_pos] + '|' + dna[cut_pos:]
+
+def repair_dna(dna, cut_pos, repair_type, repair_sequence=None):
+    """Repairs the DNA after a cut."""
+
+    if '|' in dna: # ignore cut_pos and repair on existing cut
+        cut_pos = dna.index('|')
+        if repair_type=='NHEJ': # Simulate deletion
+            return dna[:cut_pos] + dna[cut_pos+2:] # Deleting one base
+        elif repair_type=='HDR' and repair_sequence: # Simulate insertion
+            return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
+    
+    elif '|' not in dna: # use cut_pos
+        if repair_type=='NHEJ': # Simulate deletion
+            return dna[:cut_pos] + dna[cut_pos+2:] # Deleting one base
+        elif repair_type=='HDR' and repair_sequence: # Simulate insertion
+            return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
+    
+    else:
+        raise ValueError("Invalid repair type or missiogn repair sequence for HDR.")
