@@ -11,8 +11,8 @@ gen_api/__pycache__
 .idea/
 
 # testing
+tests
 .github/workflows/
-tests/
 .pytest_cache
 
 .DS_Store
