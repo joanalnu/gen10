@@ -115,12 +115,14 @@ def compare(original, copy):
 
 def check(string):
     if len(string)%3 == 0:
-        if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
+        if string[:3]=='TAC' and (string[-3:]=='ATT' or string[-3:]=='ATC' or string[-3:]=='ACC'):
             return 'Valid DNA string'
-        elif string[:-3]=='AUG' and (string[-3]=='UAA' or string[-3]=='UAG' or string[-3]=='UGG'):
+        elif string[:3]=='AUG' and (string[-3:]=='UAA' or string[-3:]=='UAG' or string[-3:]=='UGG'):
             return 'Valid RNA string'
         else:
             raise ValueError('Invalid string (starting/ending codons not found)')
+    else:
+        raise ValueError('String could not be divided into codons.')
 
 def read_input(path):
     """if string return string; if a txt file path returns string in file"""
@@ -133,6 +135,8 @@ def read_input(path):
             return contents
         except OSError or KeyError:
             raise ValueError('Could not open file, please, check user guide.')
+    elif path[-3:]=='pdf' or path[-3:]=='doc' or path[-4:]=='docx' or path[-3:]=='csv' or path[-4:]=='xlsx' or path[-4:]=='html':
+        raise ValueError("File type must be 'txt'")
     else:
         return path
 

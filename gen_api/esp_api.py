@@ -113,9 +113,9 @@ def comparar(original, copy):
 
 def comprobar(string):
     if len(string)%3 == 0:
-        if string[:-3]=='TAC' and (string[-3]=='ATT' or string[-3]=='ATC' or string[-3]=='ACC'):
+        if string[:3]=='TAC' and (string[-3:]=='ATT' or string[-3:]=='ATC' or string[-3:]=='ACC'):
             return 'Secuencia de ADN válida'
-        elif string[:-3]=='AUG' and (string[-3]=='UAA' or string[-3]=='UAG' or string[-3]=='UGG'):
+        elif string[:3]=='AUG' and (string[-3:]=='UAA' or string[-3:]=='UAG' or string[-3:]=='UGG'):
             return 'Secuencia de ARN válida'
         else:
             raise ValueError('Secuencia inválida (codones iniciales/finales no encontrados)')
