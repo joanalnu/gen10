@@ -1,4 +1,4 @@
-# gen_api
+# GEN-API
 
 [![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen_api-blue.svg?style=flat)](https://github.com/joanalnu/gen_api)
 [![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen_api/LICENSE)

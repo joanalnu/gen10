@@ -2,35 +2,37 @@ name: Python CI
 
 on:
   push:
-    branches:
-      - main  # Trigger the workflow on pushes to the 'main' branch
+    branches: [main]  # or other branches you want to trigger the CI on
   pull_request:
-    branches:
-      - main  # Trigger the workflow on pull requests to the 'main' branch
+    branches: [main]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  # Runs the tests on the latest Ubuntu image
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
-      - name: Checkout code
-        uses: actions/checkout@v2
+    # Step 1: Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # Step 2: Set up Python
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'  # Set the Python version you want to use (can be any version you need)
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
 
-      # Step 3: Install dependencies (assuming you have a requirements.txt or similar)
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Assumes you have a requirements.txt file
+    # Step 3: Install dependencies (if any)
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      # Step 4: Run tests
-      - name: Run tests
-        run: |
-          pytest tests/test_functions.py  # Runs tests from the 'tests/test_functions.py' file
-          # or you can run all tests by just running 'pytest' if they are all in the 'tests/' directory
+    # Step 4: Build the package or install from source
+    - name: Build project
+      run: |
+        python setup.py install  # This will generate the 'build' directory (or another custom build step)
+
+    # Step 5: Run tests
+    - name: Run tests with pytest
+      run: |
+        pytest tests/test_functions.py  # Or simply 'pytest' to run all tests
