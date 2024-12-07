@@ -65,3 +65,25 @@ def test_read_input_non_txt_file():
 def test_tosingle():
     amino = ' Met Val His Leu Thr Pro Glu Glu'
     assert gen_api.tosingle(amino) == "MVHLTPGG"
+
+def test_cut_dna():
+    test_cases = [
+        ('TACCACGTGGACTGAGGACTCCTCATT', 12, "TACCACGTGGAC|TGAGGACTCCTCATT"),
+        ('TACCACGTCTGAGGACTCCTCATT', 0, "|TACCACGTCTGAGGACTCCTCATT"),
+        ('TACGTGGACTGAGGACTCATT', 1, "T|ACGTGGACTGAGGACTCATT"),
+        ('TACCACGTCTGAGGAGGACTCCTCATT', 26, "TACCACGTCTGAGGAGGACTCCTCAT|T")
+    ]
+
+    for dna, cut_pos, expected in test_cases:
+        assert gen_api.cut_dna(dna, cut_pos) == expected
+
+
+def test_cut_dna_raise_error():
+    test_cases = [
+        ('TACCACGTGGACTGAGGACTCCTCATT', -1),
+        ('TACGTGGACTGAGGACTCATT', 25),
+    ]
+
+    for dna, cut_pos in test_cases:
+        with pytest.raises(ValueError, match='Cut position is out of bounds.'):
+            gen_api.cut_dna(dna, cut_pos)
