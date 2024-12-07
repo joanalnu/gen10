@@ -270,4 +270,4 @@ def repair_dna(dna, cut_pos, repair_type, repair_sequence=None):
             return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
 
     else:
-        raise ValueError("Invalid repair type or missiogn repair sequence for HDR.")
+        raise ValueError("Invalid repair type or missing repair sequence for HDR.")

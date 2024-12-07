@@ -77,7 +77,6 @@ def test_cut_dna():
     for dna, cut_pos, expected in test_cases:
         assert gen_api.cut_dna(dna, cut_pos) == expected
 
-
 def test_cut_dna_raise_error():
     test_cases = [
         ('TACCACGTGGACTGAGGACTCCTCATT', -1),
@@ -87,3 +86,35 @@ def test_cut_dna_raise_error():
     for dna, cut_pos in test_cases:
         with pytest.raises(ValueError, match='Cut position is out of bounds.'):
             gen_api.cut_dna(dna, cut_pos)
+
+def test_repair_dna():
+    dna = "TACCACGTGGACTGAGGACTCCTCATT"
+    cut_pos = 12
+    test_cases = [ # (dna, repair_type, repair_sequence, expected)
+        ('TACCACGTGGACTGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGACTGAGGACTCCTCATT'), # NHEJ + no marker
+        ('TACCACGTGGACTGAGGACTCCTCATT', 'HDR', 'AGCT', 'TACCACGTGGACAGCTTGAGGACTCCTCATT'), # HDR + no marker + repair sequence
+        ('TACCACGTGGAC|TGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGAC|TGAGGACTCCTCATT'), #NHEJ + marker
+        ('TACCACGTGGAC|TGAGGACTCCTCATT', 'HDR', 'AGCT', 'TACCACGTGGACAGCTTGAGGACTCCTCATT'), # HDR + marker + repair sequence
+
+    ]
+
+    for repair_type, repair_sequence, expected in test_cases:
+        assert expected == gen_api.repair_dna(dna, cut_pos, repair_type, repair_sequence)
+
+def test_repair_dna_extreme():
+    dna = "TACCACGTGGACTGAGGACTCCTCATT"
+    repair_type = "NHEJ"
+    extreme_cases = [ # (cut_pos, expected)
+        (0, 'TACCACGTGGACTGAGGACTCCTCATT'),
+        (26, 'TACCACGTGGACTGAGGACTCCTCATT')
+    ]
+
+    for cut_pos, expected in extreme_cases:
+        assert expected == gen_api.repair_dna(dna, cut_pos, repair_type)
+
+def test_repair_dna_error():
+    # HDR repair without repair_sequence input
+    with pytest.raises(ValueError, match='Invalid repair type or missing repair sequence for HDR.'):
+        gen_api.repair_dna('TACCACGTGGAC|TGAGGACTCCTCATT', )
+# raises ValueError
+# ('TACCACGTGGAC|TGAGGACTCCTCATT', 'HDR', None, )
