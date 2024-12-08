@@ -141,10 +141,6 @@ def read_input(path):
     else:
         return path
 
-from random import randint, choice
-
-import random
-
 def createmutation(string):
     bases = ['A', 'T', 'C', 'G']
     mutated = ""
