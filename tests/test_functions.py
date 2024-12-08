@@ -11,8 +11,9 @@ def test_compare():
 
 def test_createmutation():
     dna = "TACCACGTGGACTGAGGACTCCTCATT"
-    mutation = gen_api.createmutation(dna)
-    assert dna != mutation  # Check mutation occurred
+    for i in range(10):
+        mutation = gen_api.createmutation(dna)
+        assert dna != mutation  # Check mutation occurred
 
 def test_dna2amino():
     dna = "TACCACGTGGACTGAGGACTCCTCATT"
