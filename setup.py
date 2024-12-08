@@ -14,7 +14,7 @@ with open("gen_api/_version.py") as version_file:
 
 setuptools.setup(
     name="Gen API",
-    version=1.0,
+    version="1.2",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
     license="MIT",
