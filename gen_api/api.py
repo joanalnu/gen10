@@ -9,6 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.colors import Normalize
 from matplotlib import cm
 
+import random
 import webbrowser
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
@@ -140,30 +141,41 @@ def read_input(path):
     else:
         return path
 
+from random import randint, choice
+
+import random
+
 def createmutation(string):
+    bases = ['A', 'T', 'C', 'G']
     mutated = ""
-    muttype = randint(1, 6)
-    index = randint(0, len(string)-1)
-    for i in range(len(string)):
-        if i == index:
-            if muttype==1: # change for A
-                mutated+='A'
-            elif muttype==2: # change for T
-                mutated+='T'
-            elif muttype==3: # change for C
-                mutated+='C'
-            elif muttype==4: # change for G
-                mutated+='G'
-            elif muttype==5: # remove base
-                continue
-            elif muttype==6: # add random base
-                base = randint(1, 4)
-                if base==1: mutated+='A'
-                elif base==2: mutated+='T'
-                elif base==3: mutated+='C'
-                elif base==4: mutated+='G'
-        else:
-            mutated+=string[i]
+
+    while True:
+        muttype = random.choices([1, 5, 6], weights=[75, 15, 10], k=1)[0] # weighted probabilties for biological reality
+        index = random.randint(0, len(string) - 1)
+
+        if muttype == 1:  # Substitution
+            # Handle transition/transversion probabilities
+            purines = ['A', 'G']
+            pyrimidines = ['C', 'T']
+            if string[index] in purines: # transititions are 2x more likely than transversions
+                new_base = random.choices(purines + pyrimidines, weights=[2, 2, 1, 1], k=1)[0]
+            else:
+                new_base = random.choices(pyrimidines + purines, weights=[2, 2, 1, 1], k=1)[0]
+            mutated = string[:index] + new_base + string[index + 1:]
+        elif muttype == 5:  # Deletion
+            del_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1–3 bases)
+            del_length = min(del_length, len(string) - index) # avoid index out of range
+            mutated = string[:index] + string[index + del_length:]
+
+        elif muttype == 6:  # Insertion
+            insert_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1-3 bases)
+            insert_bases = ''.join(random.choices(bases, k=insert_length))
+            mutated = string[:index] + insert_bases + string[index:]
+
+        # Break the loop if the mutation differs from the original
+        if mutated != string:
+            break
+
     return mutated
 
 def iterate(strings, functions, filepath=dirpath):
