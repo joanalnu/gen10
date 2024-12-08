@@ -196,7 +196,7 @@ def iterate(strings, functions, filepath=dirpath, filename="Results.csv"):
         df = pd.concat([df ,pd.DataFrame([memory], columns=columns)], ignore_index=True)
 
     # df.to_csv(filepath.join(filename), index=False)
-    df.to_csv(f'{filepath}/{filename}')
+    df.to_csv(f'{filepath}/{filename}', index=False)
     return df
 
 def tosingle(sin):

@@ -133,7 +133,7 @@ def test_iterate_multiplefunction_multiplestring():
     functions = ['dna2rna', 'dna2amino']
     gen_api.iterate(strings, functions)
 
-    with open('.tests/iterate_result/Results.csv', 'r') as f:
+    with open('./gen_api/Results.csv', 'r') as f:
         content = f.readlines()
         assert content == [
             'input,dna2rna,dna2amino\n',
@@ -159,7 +159,7 @@ def test_iterate_empty_input():
     strings = ['TACCACGTGGACTGAGGACTCCTCATT']
     functions = ['dna2rna','coolfunction', 'dna2amino']
     gen_api.iterate(strings, functions)
-    with open('.gen_api/Results.csv', 'r') as f:
+    with open('./gen_api/Results.csv', 'r') as f:
         content = f.readlines()
         assert content == [
             'input,dna2rna,coolfunction,dna2amino\n',
