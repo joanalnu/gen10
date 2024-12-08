@@ -1,3 +1,5 @@
+from os import supports_dir_fd
+
 import pytest
 import gen_api
 from build.lib.gen_api import dna_schneiden
@@ -115,3 +117,51 @@ def test_repair_dna_error():
     # HDR repair without repair_sequence input
     with pytest.raises(ValueError, match='Invalid repair type or missing repair sequence for HDR.'):
         gen_api.repair_dna('TACCACGTGGAC|TGAGGACTCCTCATT', 12, 'HDR')
+
+def test_iterate_singlefunction_singlestring():
+    strings = ['TACCACGTGGACTGAGGACTCCTCATT']
+    functions = ['dna2rna']
+    gen_api.iterate(strings, functions)
+
+    with open('./gen_api/Results.csv', 'r') as f:
+        content = f.readlines()
+        print(content)
+        assert content == ['input,dna2rna\n', 'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA\n']
+
+def test_iterate_multiplefunction_multiplestring():
+    strings = ['TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTCTGAGGACTCCTCATT', 'TACGTGGACTGAGGACTCATT']
+    functions = ['dna2rna', 'dna2amino']
+    gen_api.iterate(strings, functions)
+
+    with open('./gen_api/Results.csv', 'r') as f:
+        content = f.readlines()
+        assert content == [
+            'input,dna2rna,dna2amino\n',
+            'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA, Met Val His Leu Thr Pro Glu Glu\n',
+            'TACCACGTCTGAGGACTCCTCATT,AUGGUGCAGACUCCUGAGGAGUAA, Met Val Gln Thr Pro Glu Glu\n',
+            'TACGTGGACTGAGGACTCATT,AUGCACCUGACUCCUGAGUAA, Met His Leu Thr Pro Glu\n',
+        ]
+    return
+
+def test_iterate_empty_input():
+    # empty sequences
+    strings = []
+    functions = ['dna2rna', 'createmutation']
+    with pytest.raises(ValueError, match="No input sequences provided, check your input."):
+        gen_api.iterate(strings, functions)
+
+    strings = ['TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTCTGAGGACTCCTCATT', 'TACGTGGACTGAGGACTCATT']
+    functions = []
+    with pytest.raises(ValueError, match="No functions provided, check your input."):
+        gen_api.iterate(strings, functions)
+
+    # inputing non-existent function
+    strings = ['TACCACGTGGACTGAGGACTCCTCATT']
+    functions = ['dna2rna','coolfunction', 'dna2amino']
+    gen_api.iterate(strings, functions)
+    with open('./gen_api/Results.csv', 'r') as f:
+        content = f.readlines()
+        assert content == [
+            'input,dna2rna,coolfunction,dna2amino\n',
+            'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA,Function not available, Met Val His Leu Thr Pro Glu Glu\n'
+        ]

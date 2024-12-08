@@ -174,20 +174,29 @@ def createmutation(string):
 
     return mutated
 
-def iterate(strings, functions, filepath=dirpath):
+def iterate(strings, functions, filepath=dirpath, filename="Results.csv"):
     """Creates a CSV file in your directory with the information you request."""
     """The argument consits of a list of strings and a list of functions"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
 
+    if not strings:
+        raise ValueError("No input sequences provided, check your input.")
+    if not functions:
+        raise ValueError("No functions provided, check your input.")
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(function)(memory[-1])
+            method = globals().get(function)
+            if method:
+                result = method(string)
+            else:
+                result = "Function not available"
             memory.append(result)
-        df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
+        df = pd.concat([df ,pd.DataFrame([memory], columns=columns)], ignore_index=True)
 
-    df.to_csv(f'{filepath}/Results.csv', index=False)
+    # df.to_csv(filepath.join(filename), index=False)
+    df.to_csv(f'{filepath}/{filename}', index=False)
     return df
 
 def tosingle(sin):
