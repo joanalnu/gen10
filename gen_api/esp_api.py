@@ -9,6 +9,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.colors import Normalize
 from matplotlib import cm
 
+import random
+#
+
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
 def adn2arn(dna):
@@ -171,20 +174,29 @@ def crearmutacion(string):
 
     return mutated
 
-def iterar(strings, functions, filepath=dirpath):
+def iterar(strings, functions, filepath=dirpath, filename="resultados.csv"):
     """Crea un archivo CSV en tu directorio con la información que solicites"""
     """El argumento consiste en una lista de secuencias y una lista de funciones"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
 
+    if not strings:
+        raise ValueError("No hay secuencias, comprueba el input.")
+    if not functions:
+        raise ValueError("No hay funciones, comprueba el input.")
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(function)(memory[-1])
+            method = globals().get(function)
+            if method:
+                result = method(string)
+            else:
+                result = "Function not available"
             memory.append(result)
-        df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
+        df = pd.concat([df ,pd.DataFrame([memory], columns=columns)], ignore_index=True)
 
-    df.to_csv(f'{filpath}/resultados.csv', index=False)
+    # df.to_csv(filepath.join(filename), index=False)
+    df.to_csv(f'{filepath}/{filename}', index=False)
     return df
 
 def asencillo(sin):
@@ -258,21 +270,21 @@ def cortar_adn(dna, cut_pos):
         raise ValueError('La posicion especificada está fuera del ADN.')
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def reparar_adn(dna, cut_pos, repair_type, nueva_secuencia=None):
+def reparar_adn(dna, repair_type, pos_corte=None, nueva_secuencia=None):
     """Repara el ADN después de un corte."""
 
-    if '|' in dna: # ignorar la posición especificada
-        cut_pos = dna.index('|')
-        if repair_type=='NHEJ': # Simular supresión
-            return dna[:cut_pos] + dna[cut_pos+2:] # Eliminar una base
-        elif repair_type=='HDR' and nueva_secuencia: # Simular inserción
-            return dna[:cut_pos] + nueva_secuencia + dna[cut_pos:]
+    if '|' in dna:
+        pos_corte = dna.index('|')  # Set cut position from the cut marker '|'
+        dna = dna.replace('|', '')  # Remove the cut marker from the DNA sequence
 
-    elif '|' not in dna: # usar cut_pos
-        if repair_type=='NHEJ': # Simular supresión
-            return dna[:cut_pos] + dna[cut_pos+2:] # Eliminar una base
-        elif repair_type=='HDR' and nueva_secuencia: # Simular inserción
-            return dna[:cut_pos] + nueva_secuencia + dna[cut_pos:]
+    # Check if repair_type and repair_sequence are valid
+    if repair_type == 'NHEJ':
+        # Simulate deletion: remove one base from the cut position
+        return dna[:pos_corte] + dna[pos_corte+1:]
+
+    elif repair_type == 'HDR' and nueva_secuencia:
+        # Simulate insertion: insert the repair sequence at the cut position
+        return dna[:pos_corte] + nueva_secuencia + dna[pos_corte:]
 
     else:
-        raise ValueError('Tipo de reparación invalida o falta la nueva secuencia para HDR.')
+        raise ValueError("Tipo de reparación inválido o falta la secuencia para el HDR.")

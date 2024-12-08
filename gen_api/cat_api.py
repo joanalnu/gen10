@@ -174,26 +174,35 @@ def crearmutacio(string):
 
     return mutated
 
-def iterar(strings, functions, filepath=dirpath):
+def iterar(strings, functions, filepath=dirpath, filename="resultats.csv"):
     """Crea un document CSV en aquesta carpeta amb la informació que demanis."""
     """L'argument consisteix d'una llista d'entrades i una llista de funcions"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
 
+    if not strings:
+        raise ValueError("No hi ha seqüències, comprova l'input..")
+    if not functions:
+        raise ValueError("No hi ha funcions, comprova l'input.")
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(function)(memory[-1])
+            method = globals().get(function)
+            if method:
+                result = method(string)
+            else:
+                result = "Function not available"
             memory.append(result)
-        df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
+        df = pd.concat([df ,pd.DataFrame([memory], columns=columns)], ignore_index=True)
 
-    df.to_csv(f'{filepath}/resultats.csv', index=False)
+    # df.to_csv(filepath.join(filename), index=False)
+    df.to_csv(f'{filepath}/{filename}', index=False)
     return df
 
 def asenzill(sin):
     inp = sin.split()
     sout=''
-    for banse in inp:
+    for base in inp:
         sout+=base[0]
     return sout
 

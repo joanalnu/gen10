@@ -174,7 +174,7 @@ def createmutation(string):
 
     return mutated
 
-def iterate(strings, functions, filepath=dirpath, filename="Results.csv"):
+def iterate(strings, functions, filepath=dirpath, filename="results.csv"):
     """Creates a CSV file in your directory with the information you request."""
     """The argument consits of a list of strings and a list of functions"""
     columns = ['input']+[function for function in functions]

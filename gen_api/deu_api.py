@@ -174,20 +174,29 @@ def mutation_erstellen(string):
 
     return mutated
 
-def iterieren(strings, functions, filepath=dirpath):
+def iterieren(strings, functions, filepath=dirpath, filename="ergebnisse.csv"):
     """Erstellt eine CSV-Datei in Ihrem Verzeichnis mit den von Ihnen angeforderten Informationen."""
     """Das Argument besteht aus einer Liste von Zeichenketten und einer Liste von Funktionen"""
     columns = ['input']+[function for function in functions]
     df = pd.DataFrame(columns=columns)
 
+    if not strings:
+        raise ValueError("Keine Eingabesequenzen vorhanden, überprüfen Sie Ihre Eingabe.")
+    if not functions:
+        raise ValueError("Keine Funktionen vorhanden, überprüfen Sie Ihre Eingabe.")
     for string in strings:
         memory = [string]
         for function in functions:
-            result = getattr(function)(memory[-1])
+            method = globals().get(function)
+            if method:
+                result = method(string)
+            else:
+                result = "Function not available"
             memory.append(result)
-        df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
+        df = pd.concat([df ,pd.DataFrame([memory], columns=columns)], ignore_index=True)
 
-    df.to_csv(f'{filepath}/Ergebnis.csv', index=False)
+    # df.to_csv(filepath.join(filename), index=False)
+    df.to_csv(f'{filepath}/{filename}', index=False)
     return df
 
 def zueinfach(sin):
