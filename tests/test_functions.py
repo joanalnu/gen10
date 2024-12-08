@@ -88,33 +88,29 @@ def test_cut_dna_raise_error():
             gen_api.cut_dna(dna, cut_pos)
 
 def test_repair_dna():
-    dna = "TACCACGTGGACTGAGGACTCCTCATT"
     cut_pos = 12
     test_cases = [ # (dna, repair_type, repair_sequence, expected)
-        ('TACCACGTGGACTGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGACTGAGGACTCCTCATT'), # NHEJ + no marker
+        ('TACCACGTGGACTGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGACGAGGACTCCTCATT'), # NHEJ + no marker
         ('TACCACGTGGACTGAGGACTCCTCATT', 'HDR', 'AGCT', 'TACCACGTGGACAGCTTGAGGACTCCTCATT'), # HDR + no marker + repair sequence
-        ('TACCACGTGGAC|TGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGAC|TGAGGACTCCTCATT'), #NHEJ + marker
+        ('TACCACGTGGAC|TGAGGACTCCTCATT', 'NHEJ', None, 'TACCACGTGGACGAGGACTCCTCATT'), #NHEJ + marker
         ('TACCACGTGGAC|TGAGGACTCCTCATT', 'HDR', 'AGCT', 'TACCACGTGGACAGCTTGAGGACTCCTCATT'), # HDR + marker + repair sequence
-
     ]
 
-    for repair_type, repair_sequence, expected in test_cases:
-        assert expected == gen_api.repair_dna(dna, cut_pos, repair_type, repair_sequence)
+    for dna, repair_type, repair_sequence, expected in test_cases:
+        assert expected == gen_api.repair_dna(dna, repair_type, cut_pos, repair_sequence)
 
 def test_repair_dna_extreme():
     dna = "TACCACGTGGACTGAGGACTCCTCATT"
     repair_type = "NHEJ"
     extreme_cases = [ # (cut_pos, expected)
-        (0, 'TACCACGTGGACTGAGGACTCCTCATT'),
-        (26, 'TACCACGTGGACTGAGGACTCCTCATT')
+        (0, 'ACCACGTGGACTGAGGACTCCTCATT'), # falta una 'A' al principio
+        (26, 'TACCACGTGGACTGAGGACTCCTCAT')
     ]
 
     for cut_pos, expected in extreme_cases:
-        assert expected == gen_api.repair_dna(dna, cut_pos, repair_type)
+        assert expected == gen_api.repair_dna(dna, repair_type, cut_pos)
 
 def test_repair_dna_error():
     # HDR repair without repair_sequence input
     with pytest.raises(ValueError, match='Invalid repair type or missing repair sequence for HDR.'):
-        gen_api.repair_dna('TACCACGTGGAC|TGAGGACTCCTCATT', )
-# raises ValueError
-# ('TACCACGTGGAC|TGAGGACTCCTCATT', 'HDR', None, )
+        gen_api.repair_dna('TACCACGTGGAC|TGAGGACTCCTCATT', 12, 'HDR')

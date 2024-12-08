@@ -91,11 +91,11 @@ The available functions are the following:
     Argument: ```string and integer```\
     Output: ```string``` Original DNA with a marked cut
 
-13. ```repair_dna(string, integer, string, string)```
+13. ```repair_dna(string, string, integer, string)```
     Repairs a cut DNA string by either deleting a base (NHEJ) or adding specific bases at the specified location (HDR).\
     Argument: ```string``` DNA string\
-            ```integer``` cut position\
             ```string``` type of repair (NHEJ or HDR)\
+            ```integer``` Optional: cut position\
             ```string``` Optional: string to insert by HDR repair\
     Output: ```string``` Repaired DNA
 
