@@ -9,6 +9,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.colors import Normalize
 from matplotlib import cm
 
+import random
+#
+
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
 def adn2arn(dna):
@@ -258,21 +261,21 @@ def tallar_adn(dna, cut_pos):
         raise ValueError('Posició especificada fora de l\'ADN')
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def reparar_adn(dna, cut_pos, repair_type, nova_sequencia=None):
+def reparar_adn(dna, repair_type, pos_tall=None, nova_sequencia=None):
     """Repara l'ADN tallat."""
 
-    if '|' in dna: # ignora posició i reparar al tall existent
-        cut_pos = dna.index('|')
-        if repair_type=='NHEJ': # Simular eliminació
-            return dna[:cut_pos] + dna[cut_pos+2:] # Eliminant una base
-        elif repair_type=='HDR' and nova_sequencia: # Simular inserció
-            return dna[:cut_pos] + nova_sequencia + dna[cut_pos:]
+    if '|' in dna:
+        pos_corte = dna.index('|')  # Set cut position from the cut marker '|'
+        dna = dna.replace('|', '')  # Remove the cut marker from the DNA sequence
 
-    elif '|' not in dna: # utilitzar cut_pos
-        if repair_type=='NHEJ': # Simular eliminació
-            return dna[:cut_pos] + dna[cut_pos+2:] # Eliminant una base
-        elif repair_type=='HDR' and nova_sequencia: # Simular inserció
-            return dna[:cut_pos] + nova_sequencia + dna[cut_pos:]
+    # Check if repair_type and repair_sequence are valid
+    if repair_type == 'NHEJ':
+        # Simulate deletion: remove one base from the cut position
+        return dna[:pos_tall] + dna[pos_tall+1:]
+
+    elif repair_type == 'HDR' and nova_sequencia:
+        # Simulate insertion: insert the repair sequence at the cut position
+        return dna[:pos_tall] + nova_sequencia + dna[pos_tall:]
 
     else:
-        raise ValueError('Tipus de reparació o seqüència de reparació de missions no vàlids per a HDR.')
+        raise ValueError('Tipus de reparació invàlida o falta la nova seqüència per a HDR.')
