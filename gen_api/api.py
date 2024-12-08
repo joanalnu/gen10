@@ -174,33 +174,7 @@ def createmutation(string):
 
     return mutated
 
-def iterate(strings, functions, filepath=dirpath):
-    """Creates a CSV file in your directory with the information you request."""
-    """The argument consits of a list of strings and a list of functions"""
-    columns = ['input']+[function for function in functions]
-    df = pd.DataFrame(columns=columns)
-
-    if not strings:
-        raise ValueError("No input sequences provided, check your input.")
-    if not functions:
-        raise ValueError("No functions provided, check your input.")
-    for string in strings:
-        memory = [string]
-        print(memory)
-        for function in functions:
-            method = globals().get(function)
-            if method:
-                result = method(memory[-1])
-                print(memory[-1])
-            else:
-                result = "Function not available"
-            memory.append(result)
-        df = pd.concat([df, pd.DataFrame([memory], columns=columns)], ignore_index=True)
-
-    df.to_csv(f'{filepath}/Results.csv', index=False)
-    return df
-
-def alternative_iterate(strings, functions, filepath=dirpath, filename="Results.csv"):
+def iterate(strings, functions, filepath=dirpath, filename="Results.csv"):
     """Creates a CSV file in your directory with the information you request."""
     """The argument consits of a list of strings and a list of functions"""
     columns = ['input']+[function for function in functions]

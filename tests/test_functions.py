@@ -137,9 +137,9 @@ def test_iterate_multiplefunction_multiplestring():
         content = f.readlines()
         assert content == [
             'input,dna2rna,dna2amino\n',
-            'TACCACGTGGACTGAGGACTCCTCATT,\n',
-            'TACCACGTCTGAGGACTCCTCATT,\n',
-            'TACGTGGACTGAGGACTCATT,\n',
+            'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA, Met Val His Leu Thr Pro Glu Glu\n',
+            'TACCACGTCTGAGGACTCCTCATT,AUGGUGCAGACUCCUGAGGAGUAA, Met Val Gln Thr Pro Glu Glu\n',
+            'TACGTGGACTGAGGACTCATT,AUGCACCUGACUCCUGAGUAA, Met His Leu Thr Pro Glu\n',
         ]
     return
 
