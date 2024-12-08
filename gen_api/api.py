@@ -253,21 +253,21 @@ def cut_dna(dna, cut_pos):
         raise ValueError("Cut position is out of bounds.")
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def repair_dna(dna, cut_pos, repair_type, repair_sequence=None):
+def repair_dna(dna, repair_type, cut_pos=None, repair_sequence=None):
     """Repairs the DNA after a cut."""
 
-    if '|' in dna: # ignore cut_pos and repair on existing cut
-        cut_pos = dna.index('|')
-        if repair_type=='NHEJ': # Simulate deletion
-            return dna[:cut_pos] + dna[cut_pos+2:] # Deleting one base
-        elif repair_type=='HDR' and repair_sequence: # Simulate insertion
-            return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
+    if '|' in dna:
+        cut_pos = dna.index('|')  # Set cut position from the cut marker '|'
+        dna = dna.replace('|', '')  # Remove the cut marker from the DNA sequence
 
-    elif '|' not in dna: # use cut_pos
-        if repair_type=='NHEJ': # Simulate deletion
-            return dna[:cut_pos] + dna[cut_pos+2:] # Deleting one base
-        elif repair_type=='HDR' and repair_sequence: # Simulate insertion
-            return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
+    # Check if repair_type and repair_sequence are valid
+    if repair_type == 'NHEJ':
+        # Simulate deletion: remove one base from the cut position
+        return dna[:cut_pos] + dna[cut_pos+1:]
+
+    elif repair_type == 'HDR' and repair_sequence:
+        # Simulate insertion: insert the repair sequence at the cut position
+        return dna[:cut_pos] + repair_sequence + dna[cut_pos:]
 
     else:
-        raise ValueError("Invalid repair type or missiogn repair sequence for HDR.")
+        raise ValueError("Invalid repair type or missing repair sequence for HDR.")
