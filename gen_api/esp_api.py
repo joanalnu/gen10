@@ -119,6 +119,8 @@ def comprobar(string):
             return 'Secuencia de ARN válida'
         else:
             raise ValueError('Secuencia inválida (codones iniciales/finales no encontrados)')
+    else:
+        raise ValueError('La secuencia no puede ser divida en codones.')
 
 def leer_input(path):
     """Si es una secuencia devuelve la secuencia; si es un nombre de archivo txt devuelve una lista de secuencias del archivo"""
@@ -131,33 +133,42 @@ def leer_input(path):
             return contents
         except OSError or KeyError:
             raise ValueError('No se pudo abrir el archivo. ¿Está en la misma carpeta que este documento?')
+    elif path[-3:]=='pdf' or path[-3:]=='doc' or path[-4:]=='docx' or path[-3:]=='csv' or path[-4:]=='xlsx' or path[-4:]=='html':
+        raise ValueError("El documento tiene que ser formato 'txt'.")
     else:
         return path
 
 def crearmutacion(string):
+    bases = ['A', 'T', 'C', 'G']
     mutated = ""
-    muttype = randint(1, 6)
-    index = randint(0, len(string)-1)
-    for i in range(len(string)):
-        if i == index:
-            if muttype==1: # change for A
-                mutated+='A'
-            elif muttype==2: # change for T
-                mutated+='T'
-            elif muttype==3: # change for C
-                mutated+='C'
-            elif muttype==4: # change for G
-                mutated+='G'
-            elif muttype==5: # remove base
-                continue
-            elif muttype==6: # add random base
-                base = randint(1, 4)
-                if base==1: mutated+='A'
-                elif base==2: mutated+='T'
-                elif base==3: mutated+='C'
-                elif base==4: mutated+='G'
-        else:
-            mutated+=string[i]
+
+    while True:
+        muttype = random.choices([1, 5, 6], weights=[75, 15, 10], k=1)[0] # weighted probabilties for biological reality
+        index = random.randint(0, len(string) - 1)
+
+        if muttype == 1:  # Substitution
+            # Handle transition/transversion probabilities
+            purines = ['A', 'G']
+            pyrimidines = ['C', 'T']
+            if string[index] in purines: # transititions are 2x more likely than transversions
+                new_base = random.choices(purines + pyrimidines, weights=[2, 2, 1, 1], k=1)[0]
+            else:
+                new_base = random.choices(pyrimidines + purines, weights=[2, 2, 1, 1], k=1)[0]
+            mutated = string[:index] + new_base + string[index + 1:]
+        elif muttype == 5:  # Deletion
+            del_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1–3 bases)
+            del_length = min(del_length, len(string) - index) # avoid index out of range
+            mutated = string[:index] + string[index + del_length:]
+
+        elif muttype == 6:  # Insertion
+            insert_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1-3 bases)
+            insert_bases = ''.join(random.choices(bases, k=insert_length))
+            mutated = string[:index] + insert_bases + string[index:]
+
+        # Break the loop if the mutation differs from the original
+        if mutated != string:
+            break
+
     return mutated
 
 def iterar(strings, functions, filepath=dirpath):

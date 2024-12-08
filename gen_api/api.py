@@ -10,7 +10,7 @@ from matplotlib.colors import Normalize
 from matplotlib import cm
 
 import random
-import webbrowser
+import webbrowser # not sure if using it
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 

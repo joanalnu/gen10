@@ -9,6 +9,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.colors import Normalize
 from matplotlib import cm
 
+import random
+#
+
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
 def dna2rna(dna):
@@ -119,6 +122,8 @@ def checken(string):
             return 'Gültiger RNA-String'
         else:
             raise ValueError('Ungültiger String (Start-/Endcodons nicht gefunden)')
+    else:
+        raise ValueError('String könnte nicht in Codonen dividiert werden.')
 
 def input_lesen(path):
     """Wenn string, wird string zurückgegeben; wenn ein txt-Dateipfad, wird string in file zurückgegeben"""
@@ -131,33 +136,42 @@ def input_lesen(path):
             return contents
         except OSError or KeyError:
             raise ValueError('Die Datei konnte nicht geöffnet werden, bitte sehen Sie im Benutzerhandbuch nach.')
+    elif path[-3:]=='pdf' or path[-3:]=='doc' or path[-4:]=='docx' or path[-3:]=='csv' or path[-4:]=='xlsx' or path[-4:]=='html':
+        raise ValueError("Die Datei muss 'txt' sein.")
     else:
         return path
 
 def mutation_erstellen(string):
+    bases = ['A', 'T', 'C', 'G']
     mutated = ""
-    muttype = randint(1, 6)
-    index = randint(0, len(string)-1)
-    for i in range(len(string)):
-        if i == index:
-            if muttype==1: # change for A
-                mutated+='A'
-            elif muttype==2: # change for T
-                mutated+='T'
-            elif muttype==3: # change for C
-                mutated+='C'
-            elif muttype==4: # change for G
-                mutated+='G'
-            elif muttype==5: # remove base
-                continue
-            elif muttype==6: # add random base
-                base = randint(1, 4)
-                if base==1: mutated+='A'
-                elif base==2: mutated+='T'
-                elif base==3: mutated+='C'
-                elif base==4: mutated+='G'
-        else:
-            mutated+=string[i]
+
+    while True:
+        muttype = random.choices([1, 5, 6], weights=[75, 15, 10], k=1)[0] # weighted probabilties for biological reality
+        index = random.randint(0, len(string) - 1)
+
+        if muttype == 1:  # Substitution
+            # Handle transition/transversion probabilities
+            purines = ['A', 'G']
+            pyrimidines = ['C', 'T']
+            if string[index] in purines: # transititions are 2x more likely than transversions
+                new_base = random.choices(purines + pyrimidines, weights=[2, 2, 1, 1], k=1)[0]
+            else:
+                new_base = random.choices(pyrimidines + purines, weights=[2, 2, 1, 1], k=1)[0]
+            mutated = string[:index] + new_base + string[index + 1:]
+        elif muttype == 5:  # Deletion
+            del_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1–3 bases)
+            del_length = min(del_length, len(string) - index) # avoid index out of range
+            mutated = string[:index] + string[index + del_length:]
+
+        elif muttype == 6:  # Insertion
+            insert_length = random.choices([1, 2, 3], weights=[70, 20, 10], k=1)[0] # weighted random selection for length (1-3 bases)
+            insert_bases = ''.join(random.choices(bases, k=insert_length))
+            mutated = string[:index] + insert_bases + string[index:]
+
+        # Break the loop if the mutation differs from the original
+        if mutated != string:
+            break
+
     return mutated
 
 def iterieren(strings, functions, filepath=dirpath):
@@ -247,20 +261,20 @@ def dna_schneiden(dna, cut_pos):
         raise ValueError('Die Schnittposition befindet sich außerhalb des Strings.')
     return dna[:cut_pos] + '|' + dna[cut_pos:]
 
-def dna_reparieren(dna, cut_pos, repair_type, neue_string=None):
+def dna_reparieren(dna, repair_type, schneid_pos=None, neue_string=None):
     """Repariert DNA nach den Schnitt."""
-    if '|' in dna: # Schnitt_pos ignorieren und auf vorhandenem Schnitt reparieren
-        cut_pos = dna.index('|')
-        if repair_type=='NHEJ': # Löschung simulieren
-            return dna[:cut_pos] + dna[cut_pos+2:] # Löschen einer Basis
-        elif repair_type=='HDR' and neue_string: # Einfügung simulieren
-            return dna[:cut_pos] + neue_string + dna[cut_pos:]
+    if '|' in dna:
+        cut_pos = dna.index('|')  # Set cut position from the cut marker '|'
+        dna = dna.replace('|', '')  # Remove the cut marker from the DNA sequence
 
-    elif '|' not in dna: # cut_pos verwenden
-        if repair_type=='NHEJ': # Löschung simulieren
-            return dna[:cut_pos] + dna[cut_pos+2:] # Löschen einer Basis
-        elif repair_type=='HDR' and neue_string: # Einfügung simulieren
-            return dna[:cut_pos] + neue_string + dna[cut_pos:]
+    # Check if repair_type and repair_sequence are valid
+    if repair_type == 'NHEJ':
+        # Simulate deletion: remove one base from the cut position
+        return dna[:schneid_pos] + dna[schneid_pos+1:]
+
+    elif repair_type == 'HDR' and neue_string:
+        # Simulate insertion: insert the repair sequence at the cut position
+        return dna[:schneid_pos] + neue_string + dna[schneid_pos:]
 
     else:
         raise ValueError('Ungültiger Reparaturtyp oder falsche Reparatursequenz für HDR.')
