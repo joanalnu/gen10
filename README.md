@@ -5,7 +5,7 @@
 ![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
 [![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
 
-![Build Status](https://github.com/joanalnu/gen_api/actions/workflows/ci.yml/badge.svg)
+![Build Status](https://github.com/joanalnu/gen_api/actions/workflows/python-tests.yml/badge.svg)
 ![Open Issues](https://img.shields.io/github/issues/joanalnu/gen_api)
 
 
