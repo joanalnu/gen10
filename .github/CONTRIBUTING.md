@@ -15,24 +15,24 @@ Thank you for your interest in contributing to this project! To align with our c
   ```bash
   git clone https://github.com/your-user-name/gen_api.git
   ```
-4. Access the repository (```cd gen_api```) and create a new branch:
+3. Access the repository (```cd gen_api```) and create a new branch:
   ```bash
   git checkout -b <your-name>/<new-feature>
   ```
-5. Install the requirements. Consider creating a new conda environment to avoid problems with libraries and versions.
+4. Install the requirements. Consider creating a new conda environment to avoid problems with libraries and versions.
   ```bash
   pip install -r requirements.txt
   ```
-6. Make sure the testing pass on your machine by running `pytest`.
-7. Develop your code and run the integrated testing (see point 6) and add new testing if needed.
-8. Once you have finished and passed all tests, stage, commit, and push to your fork:
+5. Make sure the testing pass on your machine by running `pytest`.
+6. Develop your code and run the integrated testing (see point 6) and add new testing if needed.
+7. Once you have finished and passed all tests, stage, commit, and push to your fork:
   ```bash
   git add .
   git commit -m "Brief description of your changes"
   git push origin <name>/<new_feature>
   ```
-9. Open the repository in the browser and create and submit a pull request. Describe you changes in a clear comment.
-10. The pull request will be reviewed and tested by the owners of the repository and approved or closed with feedback.
+8. Open the repository in the browser and create and submit a pull request. Describe you changes in a clear comment.
+9. The pull request will be reviewed and tested by the owners of the repository and approved or closed with feedback.
 
 Remember this good practices:
 - Follow the standards for style and code quality.
