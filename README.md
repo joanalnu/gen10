@@ -16,6 +16,12 @@ The API allows you to translate DNA sequences into RNA or amino acid sequences, 
 
 [(jump to the info for educators below)](#info-for-educators)
 
+## Read the documentation in your language
+- [English](https://github.com/joanalnu/gen_api/blob/main/READMES/ENGLISH.md)
+- [Español](https://github.com/joanalnu/gen_api/blob/main/READMES/ESPANOL.md)
+- [Deutsch](https://github.com/joanalnu/gen_api/blob/main/READMES/DEUTSCH.md)
+- [Català](https://github.com/joanalnu/gen_api/blob/main/READMES/CATALA.md)
+
 ## Installation
 You can install the API by cloning this repository to your local machine by running the following command in your terminal:
 ```bash
