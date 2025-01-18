@@ -57,52 +57,57 @@ The available functions are the following:
    Argument: ```string```\
    Output: ```string```
 
-4. ```compare()```\
-    Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ.\
+4. ```rna2dna()```\
+    Transcribes RNA strings back into DNA strings.
+    Argument: ```string```\
+    Output: ```string```
+
+5. ```compare()```\
+   Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ.\
    Argument: ```string1, string2```\
    Output: ```boolean, string```
 
-5. ```check()```\
-    It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings.\
+6. ```check()```\
+   It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings.\
    Argument: ```string```\
    Output: ```string```
 
-6. ```read_input()```\
-    Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence.\
-    Argument: ```string```\
-    Output: ```string```
+7. ```read_input()```\
+   Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence.\
+   Argument: ```string```\
+   Output: ```string```
 
-7. ```createmutation()```\
-    Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position.\
-    Argument: ```string```\
-    Output: ```string```
+8. ```createmutation()```\
+   Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position.\
+   Argument: ```string```\
+   Output: ```string```
 
-8. ```iterate()```\
-    By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input.
-    Argument: ```list, list```
-    Outpu  ```dataframe``` (table)
+9. ```iterate()```\
+   By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input.
+   Argument: ```list, list```
+   Output: ```dataframe``` (table)
 
-9. ```tosingle()```\
+10. ```tosingle()```\
     Transcribes an aminoacid string from three-letter code to single-letter code.\
     Argument: ```string```\
     Output: ```string```
 
-10. ```alphafold_prediction()```\
-   By inputting a UniProt ID $^1$ , it returns a url to the ```pbd``` file of the predicted protein's structure.\
-   Argument: ```string```\
-   Output: ```dictionary```\
+11. ```alphafold_prediction()```\
+    By inputting a UniProt ID $^1$ , it returns a url to the ```pbd``` file of the predicted protein's structure.\
+    Argument: ```string```\
+    Output: ```dictionary```\
 
-11. ```generate_protein()```\
+12. ```generate_protein()```\
      By inputing the resulting dictionary of ```alphafold_prediction()``` it returns a visualization of the predicted protein's strucutre.\
     Argument: ```dictionary```\
     Output: ```None```
 
-12. ```cut_dna(string, integer)```\
+13. ```cut_dna(string, integer)```\
     Cuts the DNA string into two parts at the specified position.\
     Argument: ```string and integer```\
     Output: ```string``` Original DNA with a marked cut
 
-13. ```repair_dna(string, string, integer, string)```
+14. ```repair_dna(string, string, integer, string)```
     Repairs a cut DNA string by either deleting a base (NHEJ) or adding specific bases at the specified location (HDR).\
     Argument: ```string``` DNA string\
             ```string``` type of repair (NHEJ or HDR)\
@@ -110,12 +115,12 @@ The available functions are the following:
             ```string``` Optional: string to insert by HDR repair\
     Output: ```string``` Repaired DNA
 
-14. ```find(string, sequence)```\
+15. ```find(string, sequence)```\
     Finds a local sequence in a larger, global sequence.\
     Argument: ```string, string``` (global, local)\
-    Output: ```[int, int]``` indexes of the found position\
+    Output: ```[(int, int)]``` indexes of the found position\
 
-15. ```check_codon(string)```\
+16. ```check_codon(string)```\
     Checks for non-existing codons in a dna or rna sequence.\
     Argument: ```string```\
     Output: ```['ABC']``` list of non-existing codons\

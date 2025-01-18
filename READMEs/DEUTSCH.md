@@ -44,65 +44,70 @@ Geben Sie ```gen_api.function()``` ein, um eine beliebige Funktion aufzurufen. D
 Die verfügbaren Funktionen sind die folgenden:
 1. ```dna2rna()```\
     Transkribiert die angegebene DNA-Zeichenkette in eine RNA-Zeichenkette, indem die Basen (A->U, T-> A, C->G, G->C) geändert werden.\
-   Argument: ```string```\
-   Ausgabe: ```string```
+    Argument: ```string```\
+    Ausgabe: ```string```
 
 2. ```rna2amino()```\
     Transkribiert die angegebene DNA-Zeichenkette in eine Aminosäure-Zeichenkette, indem Codons (3x Basen) gelesen und der Katalog verwendet werden.\
-   Argument: ```string```\
-   Ausgabe: ```string```
+    Argument: ```string```\
+    Ausgabe: ```string```
 
 3. ```dna2amino()```\
     Transkribiert DNA-Zeichenketten direkt in Aminosäure-Zeichenketten, es ist eine Kombination der dna2rna- und rna2amino-Methoden.\
-   Argument: ```string```\
-   Ausgabe: ```string```
+    Argument: ```string```\
+    Ausgabe: ```string```
 
-4. ```compare()```\
+4. ```rna2dna()```\
+    Transkribiert RNA-Zeichenketten in RNA-Zeichenkentten.\
+    Argument: ```string```\
+    Ausgabe: ```string```
+
+5. ```compare()```\
     Vergleicht die Zeichenketten (unabhängig davon, ob DNA, RNA oder Aminosäuren), es gibt immer einen booleschen Wert und eine Zeichenkette zurück. True, wenn beide Zeichenketten identisch sind, oder False und wo sich die Zeichenketten unterscheiden.\
    Argument: ```string1, string2```\
    Ausgabe: ```boolean, string```
 
-5. ```check()```\
+6. ```check()```\
     Überprüft, ob die angegebene Zeichenkette eine gültige DNA- oder RNA-Zeichenkette ist. Es überprüft nicht auf Aminosäure-Zeichenketten.\
    Argument: ```string```\
    Ausgabe: ```string```
 
-6. ```read_input()```\
+7. ```read_input()```\
     Wird verwendet, um Dateien zu öffnen. Der vollständige Pfad zur Datei muss im gleichen Verzeichnis wie diese Datei gespeichert sein und darf nur eine Sequenz enthalten.\
     Argument: ```string```\
     Ausgabe: ```string```
 
-7. ```createmutation()```\
+8. ```createmutation()```\
     Gibt eine neue Zeichenkette mit einer Mutation (nur 1 pro Durchlauf) zurück. Die Mutation kann eine Basis ändern, eine Basis löschen oder eine neue Basis an einer beliebigen Position hinzufügen.\
     Argument: ```string```\
     Ausgabe: ```string```
 
-8. ```iterate()```\
+9. ```iterate()```\
     Durch Eingabe einer Liste von Eingaben und einer Liste von Funktionen gibt es eine Tabelle mit allen Ergebnissen für jede Funktion und Eingabe zurück.
     Argument: ```list, list```
     Ausgabe: ```dataframe``` (Tabelle)
 
-9. ```tosingle()```\
+10. ```tosingle()```\
     Transkribiert eine Aminosäure-Zeichenkette vom Dreibuchstaben-Code in den Einbuchstaben-Code.\
     Argument: ```string```\
     Ausgabe: ```string```
 
-10. ```alphafold_prediction()```\
-   Durch Eingabe einer UniProt-ID $^1$ gibt es eine URL zur ```pbd```-Datei der vorhergesagten Proteinstruktur zurück.\
-   Argument: ```string```\
-   Ausgabe: ```dictionary```\
+11. ```alphafold_prediction()```\
+    Durch Eingabe einer UniProt-ID $^1$ gibt es eine URL zur ```pbd```-Datei der vorhergesagten Proteinstruktur zurück.\
+    Argument: ```string```\
+    Ausgabe: ```dictionary```\
 
-11. ```generate_protein()```\
-     Durch Eingabe des resultierenden Dictionarys von ```alphafold_prediction()``` gibt es eine Visualisierung der vorhergesagten Proteinstruktur zurück.\
+12. ```generate_protein()```\
+    Durch Eingabe des resultierenden Dictionarys von ```alphafold_prediction()``` gibt es eine Visualisierung der vorhergesagten Proteinstruktur zurück.\
     Argument: ```dictionary```\
     Ausgabe: ```None```
 
-12. ```cut_dna(string, integer)```\
+13. ```cut_dna(string, integer)```\
     Teilt die DNA-Zeichenkette an der angegebenen Position in zwei Teile auf.\
     Argument: ```string und integer```\
     Ausgabe: ```string``` Ursprüngliche DNA mit einem markierten Schnitt
 
-13. ```repair_dna(string, string, integer, string)```
+14. ```repair_dna(string, string, integer, string)```
     Repariert eine geschnittene DNA-Zeichenkette, indem entweder eine Basis gelöscht (NHEJ) oder spezifische Basen an der angegebenen Position hinzugefügt werden (HDR).\
     Argument: ```string``` DNA-Zeichenkette\
             ```string``` Reparaturtyp (NHEJ oder HDR)\
@@ -110,12 +115,12 @@ Die verfügbaren Funktionen sind die folgenden:
             ```string``` Optional: Zeichenkette zum Einfügen bei der HDR-Reparatur\
     Ausgabe: ```string``` Reparierte DNA
 
-14. ```finden(string, sequence)```\
+15. ```finden(string, sequence)```\
     Um eine lokale string in einer globale string zu finden.\
     Argument: ```string, string``` (global, local)\
     Ausgabe: ```[int, int]``` Indizes der gefundenen Position\
 
-15. ```codon_checken(string)```\
+16. ```codon_checken(string)```\
     Prüft auf falsche Codons in einer DNA- oder RNA-Sequenz.\
     Argument: ```string```\
     Ausgabe: ```['ABC']``` liste von falschen Codons\

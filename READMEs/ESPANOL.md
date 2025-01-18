@@ -44,65 +44,70 @@ Escribe ```gen_api.función()``` para llamar a cualquier función. Recuerda prop
 Las funciones disponibles son las siguientes:
 1. ```dna2rna()```\
     Transcribe la cadena de ADN proporcionada en una cadena de ARN cambiando las bases (A->U, T-> A, C->G, G->C).\
-   Argumento: ```cadena```\
-   Salida: ```cadena```
+    Argumento: ```cadena```\
+    Salida: ```cadena```
 
 2. ```rna2amino()```\
     Transcribe la cadena de ADN proporcionada en una cadena de aminoácidos leyendo codones (3x bases) y utilizando el catálogo.\
-   Argumento: ```cadena```\
-   Salida: ```cadena```
+    Argumento: ```cadena```\
+    Salida: ```cadena```
 
 3. ```dna2amino()```\
     Transcribe cadenas de ADN directamente en cadenas de aminoácidos, es una combinación de los métodos dna2rna y rna2amino.\
-   Argumento: ```cadena```\
-   Salida: ```cadena```
+    Argumento: ```cadena```\
+    Salida: ```cadena```
 
-4. ```comparar()```\
+4. ```rna2dna()```\
+    Transcribe cadenas de ARN en cadenas de ADN.
+    Argumento: ```cadena```\
+    Salida: ```cadena```
+
+5. ```comparar()```\
     Compara las cadenas (independientemente de si son ADN, ARN o aminoácidos), siempre devuelve un booleano y una cadena. Verdadero si ambas cadenas son idénticas, o Falso y dónde difieren las cadenas.\
    Argumento: ```cadena1, cadena2```\
    Salida: ```booleano, cadena```
 
-5. ```comprobar()```\
+6. ```comprobar()```\
     Comprueba si la cadena proporcionada es una cadena de ADN o ARN válida. No comprueba cadenas de aminoácidos.\
    Argumento: ```cadena```\
    Salida: ```cadena```
 
-6. ```leer_entrada()```\
+7. ```leer_entrada()```\
     Se utiliza para abrir archivos. La ruta completa al archivo debe estar guardada en la misma carpeta que este archivo y solo puede tener una secuencia.\
     Argumento: ```cadena```\
     Salida: ```cadena```
 
-7. ```crear_mutación()```\
+8. ```crear_mutación()```\
     Devuelve una nueva cadena con una mutación (solo una por ejecución). La mutación puede cambiar una base, eliminar una base o agregar una nueva en cualquier posición.\
     Argumento: ```cadena```\
     Salida: ```cadena```
 
-8. ```iterar()```\
+9. ```iterar()```\
     Al ingresar una lista de entradas y una lista de funciones, devuelve una tabla con todos los resultados para cada función y entrada.
     Argumento: ```lista, lista```
     Salida: ```dataframe``` (tabla)
 
-9. ```a_una_letra()```\
+10. ```a_una_letra()```\
     Transcribe una cadena de aminoácidos del código de tres letras al código de una letra.\
     Argumento: ```cadena```\
     Salida: ```cadena```
 
-10. ```predicción_alphafold()```\
+11. ```predicción_alphafold()```\
    Al ingresar un ID de UniProt $^1$ , devuelve una URL al archivo ```pbd``` de la estructura predicha de la proteína.\
    Argumento: ```cadena```\
    Salida: ```diccionario```\
 
-11. ```generar_proteína()```\
+12. ```generar_proteína()```\
      Al ingresar el diccionario resultante de ```predicción_alphafold()``` devuelve una visualización de la estructura predicha de la proteína.\
     Argumento: ```diccionario```\
     Salida: ```Ninguno```
 
-12. ```cortar_adn(cadena, entero)```\
+13. ```cortar_adn(cadena, entero)```\
     Corta la cadena de ADN en dos partes en la posición especificada.\
     Argumento: ```cadena y entero```\
     Salida: ```cadena``` ADN original con un corte marcado
 
-13. ```reparar_adn(cadena, cadena, entero, cadena)```
+14. ```reparar_adn(cadena, cadena, entero, cadena)```
     Repara una cadena de ADN cortada utilizando NHEJ (eliminación) o agregando bases específicas en la posición especificada (HDR).\
     Argumento: ```cadena``` cadena de ADN\
             ```cadena``` tipo de reparación (NHEJ o HDR)\
@@ -110,12 +115,12 @@ Las funciones disponibles son las siguientes:
             ```cadena``` Opcional: cadena para insertar mediante reparación HDR\
     Salida: ```cadena``` ADN reparado
 
-14. ```buscar(string, sequence)```\
+15. ```buscar(string, sequence)```\
     Para buscar una secuencia local and una global.\
     Argumento: ```string, string``` (global, local)\
     Salida: ```[(int, int)]``` índices de la posición encontrada\
 
-15. ```comprueba_codon(string)```\
+16. ```comprueba_codon(string)```\
     Comprueba si hay codones inexistentes en una secuencia de ADN o ARN.\
     Argumento: ```string```\
     Salida: ```['ABC']``` lista de codons inexistentes\
