@@ -201,4 +201,4 @@ def test_check_codon():
             gen_api.check_codon(string)
 
 def test_rna2dna():
-    assert gen_api.dna2rna("AUGGUGCACCUGACUCCUGAGGAGUAA") == "TACCACGTGGACTGAGGACTCCTCATT"
+    assert gen_api.rna2dna("AUGGUGCACCUGACUCCUGAGGAGUAA") == "TACCACGTGGACTGAGGACTCCTCATT"

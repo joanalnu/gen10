@@ -73,7 +73,7 @@ def adn2amino(dna):
         elif base=='G' or base=='g':
             rna+='C'
         else:
-            raise ValueError('Error: no se pudo leer la secuencia de ADN')
+            raise ValueError('Error: no se pudo leer la secuencia de ADN.')
 
     amino=''
 
