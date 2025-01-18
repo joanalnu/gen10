@@ -47,52 +47,57 @@ Les funcions disponibles són les següents:
    Argument: ```string```\
    Sortida: ```string```
 
-4. ```compare()```\
+4. ```rna2dna()```\
+    Transcriu les cadenes d'ARN en cadenes d'ADN.\
+    Argument: ```string```\
+    Sortida: ```string```
+
+5. ```compare()```\
     Compara les cadenes (tant si són d'ADN, ARN o aminoàcids), sempre retorna un booleà i una cadena. Cert si les dues cadenes són idèntiques, o Fals i on difereixen les cadenes.\
    Argument: ```string1, string2```\
    Sortida: ```booleà, string```
 
-5. ```check()```\
+6. ```check()```\
     Comprova si la cadena proporcionada és una cadena d'ADN o ARN vàlida. No comprova les cadenes d'aminoàcids.\
    Argument: ```string```\
    Sortida: ```string```
 
-6. ```read_input()```\
+7. ```read_input()```\
     S'utilitza per obrir fitxers. La ruta completa al fitxer ha de estar guardada al mateix directori que aquest fitxer i només pot tenir 1 seqüència.\
     Argument: ```string```\
     Sortida: ```string```
 
-7. ```createmutation()```\
+8. ```createmutation()```\
     Retorna una nova cadena amb una mutació (només 1 per execució). La mutació pot canviar una base, esborrar una base o afegir una nova en qualsevol posició.\
     Argument: ```string```\
     Sortida: ```string```
 
-8. ```iterate()```\
+9. ```iterate()```\
     En introduir una llista d'entrades i una llista de funcions retorna una taula amb tots els resultats per a cada funció i entrada.
     Argument: ```llista, llista```
     Sortida  ```dataframe``` (taula)
 
-9. ```tosingle()```\
+10. ```tosingle()```\
     Transcriu una cadena d'aminoàcids del codi de tres lletres al codi de lletra única.\
     Argument: ```string```\
     Sortida: ```string```
 
-10. ```alphafold_prediction()```\
-   En introduir un ID d'UniProt $^1$ , retorna una URL al fitxer ```pbd``` de la predicció de l'estructura de la proteïna.\
-   Argument: ```string```\
-   Sortida: ```diccionari```\
+11. ```alphafold_prediction()```\
+    En introduir un ID d'UniProt $^1$ , retorna una URL al fitxer ```pbd``` de la predicció de l'estructura de la proteïna.\
+    Argument: ```string```\
+    Sortida: ```diccionari```\
 
-11. ```generate_protein()```\
-     En introduir el diccionari resultant de ```alphafold_prediction()``` retorna una visualització de la predicció de l'estructura de la proteïna.\
+12. ```generate_protein()```\
+    En introduir el diccionari resultant de ```alphafold_prediction()``` retorna una visualització de la predicció de l'estructura de la proteïna.\
     Argument: ```diccionari```\
     Sortida: ```None```
 
-12. ```cut_dna(string, integer)```\
+13. ```cut_dna(string, integer)```\
     Tallar la cadena d'ADN en dues parts a la posició especificada.\
     Argument: ```string i integer```\
     Sortida: ```string``` ADN original amb una tallada marcada
 
-13. ```repair_dna(string, string, integer, string)```
+14. ```repair_dna(string, string, integer, string)```
     Reparar una cadena d'ADN tallada eliminant una base (NHEJ) o afegint bases específiques a la posició especificada (HDR).\
     Argument: ```string``` cadena d'ADN\
             ```string``` tipus de reparació (NHEJ o HDR)\
@@ -100,12 +105,12 @@ Les funcions disponibles són les següents:
             ```string``` Opcional: cadena per inserir en la reparació HDR\
     Sortida: ```string``` ADN reparat
 
-14. ```buscar(string, sequence)```\
+15. ```buscar(string, sequence)```\
     Per trobar una seqüència local en una global.\
     Argument: ```string, string``` (global, local)\
     Sortida: ```[int, int]``` índexes de la posició trobada\
 
-15. ```comprova_codo(string)```\
+16. ```comprova_codo(string)```\
     Comprova si hi ha codons inexistents en una seqüència d'ADN o ARN.\
     Argument: ```string```\
     Output: ```['ABC']``` llista de codons inexistents\

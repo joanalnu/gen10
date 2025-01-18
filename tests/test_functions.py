@@ -198,4 +198,7 @@ def test_check_codon():
     ]
     for string, error_message in zip(test_strings, expected_results):
         with pytest.raises(ValueError, match=error_message):
-            gen_api.check_codon(string)
+          gen_api.check_codon(string)
+
+def test_rna2dna():
+    assert gen_api.rna2dna("AUGGUGCACCUGACUCCUGAGGAGUAA") == "TACCACGTGGACTGAGGACTCCTCATT"

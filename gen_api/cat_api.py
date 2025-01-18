@@ -27,7 +27,7 @@ def adn2arn(dna):
         elif base=='G' or base=='g':
             rna+='C'
         else:
-            raise ValueError("Error: no s'ha pogut llegir la cadena d'ADN")
+            raise ValueError("Error: no s'ha pogut llegir la cadena d'ADN.")
     return rna
 
 def arn2amino(rna):
@@ -103,6 +103,22 @@ def adn2amino(dna):
         else:
             raise ValueError(f'Error: códo invàlid {codon}')
     return amino
+
+def rna2dna(rna):
+    """Returns DNA string by inputting a DNA string"""
+    dna = ""
+    for base in rna:
+        if base == 'U' or base == 'u':
+            dna += 'A'
+        elif base == 'A' or base == 'a':
+            dna += 'T'
+        elif base == 'G' or base == 'g':
+            dna += 'C'
+        elif base == 'C' or base == 'c':
+            dna += 'G'
+        else:
+            raise ValueError("No s'ha pogut llegir la cadena d'ARN.")
+    return dna
 
 def compara(original, copy):
     """Compara dues cadenes (original, copy) i retorna la diferència"""

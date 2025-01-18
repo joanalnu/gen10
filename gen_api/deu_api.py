@@ -104,6 +104,22 @@ def dna2amino(dna):
             raise ValueError(f'Fehler: ungültiges Codon {codon}')
     return amino
 
+def rna2dna(rna):
+    """Returns DNA string by inputting a DNA string"""
+    dna = ""
+    for base in rna:
+        if base == 'U' or base == 'u':
+            dna += 'A'
+        elif base == 'A' or base == 'a':
+            dna += 'T'
+        elif base == 'G' or base == 'g':
+            dna += 'C'
+        elif base == 'C' or base == 'c':
+            dna += 'G'
+        else:
+            raise ValueError('Fehler: Die angegebene DNA-Zeichenkette konnte nicht gelesen werden.')
+    return dna
+
 def vergleichen(original, copy):
     """Vergleicht zwei verschiedene Zeichenketten (Original, Kopie) und gibt die Unterschiede"""
     if len(original) != len(copy):
