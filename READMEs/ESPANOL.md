@@ -115,6 +115,11 @@ Las funciones disponibles son las siguientes:
     Argumento: ```string, string``` (global, local)\
     Salida: ```[(int, int)]``` índices de la posición encontrada\
 
+15. ```comprueba_codon(string)```\
+    Comprueba si hay codones inexistentes en una secuencia de ADN o ARN.\
+    Argumento: ```string```\
+    Salida: ```['ABC']``` lista de codons inexistentes\
+
 $^1$ La API de AlphaFold solo admite IDs de UniProt como entrada. Puedes encontrar el ID de UniProt de una proteína o gen en la web. Recomendamos las siguientes bases de datos.
 1. Sitio web oficial de UniProt: [https://www.uniprot.org](https://www.uniprot.org)
 2. Para genes: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)

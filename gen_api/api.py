@@ -12,6 +12,8 @@ from matplotlib import cm
 import random
 import webbrowser # not sure if using it
 
+import gen_api
+
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
 def dna2rna(dna):
@@ -315,3 +317,72 @@ def find(string, sequence):
         start_index += 1  # Move to the next possible starting position
 
     return occurrences
+
+def check_codon(string):
+
+    # add internal dna2rna function (only for github CI testing)
+    def dna2rna(dna):
+        rna = ""
+        for base in dna:
+            if base == 'A' or base == 'a':
+                rna += 'U'
+            elif base == 'T' or base == 't':
+                rna += 'A'
+            elif base == 'C' or base == 'c':
+                rna += 'G'
+            elif base == 'G' or base == 'g':
+                rna += 'C'
+            else:
+                raise ValueError('Could not read provided DNA string')
+        return rna
+
+    if string=='':
+        raise ValueError("The provided string is empty, check your input.")
+
+    # Check if string length is divisible by 3
+    if len(string) % 3 != 0:
+        if len(string) < 3:
+            raise ValueError(f"String couldn't be divided into codons: {string}")
+        if len(string) % 2 == 0:
+            resting = string[-1]
+        else:
+            resting = string[-2:]
+        raise ValueError(f"String couldn't be divided into codons without the following rest: {resting}")
+
+    if 'u' not in string or 'U' not in string:
+        stringmem = string
+        string = ''
+        for letter in stringmem:
+            try:
+                string += dna2rna(letter)
+            except ValueError:
+                string += letter
+
+    # Define codon catalog
+    codon_catalog = {
+        'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu',
+        'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser',
+        'UAU': 'Tyr', 'UAC': 'Tyr', 'UAA': 'STOP', 'UAG': 'STOP',
+        'UGU': 'Cys', 'UGC': 'Cys', 'UGA': 'STOP', 'UGG': 'Trp',
+        'CUU': 'Leu', 'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu',
+        'CCU': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
+        'CAU': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln',
+        'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg',
+        'AUU': 'Ile', 'AUC': 'Ile', 'AUA': 'Ile', 'AUG': 'Met',
+        'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
+        'AAU': 'Asn', 'AAC': 'Asn', 'AAA': 'Lys', 'AAG': 'Lys',
+        'AGU': 'Ser', 'AGC': 'Ser', 'AGA': 'Arg', 'AGG': 'Arg',
+        'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
+        'GCU': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala',
+        'GAU': 'Asp', 'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu',
+        'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly'
+    }
+
+    # Find invalid codons
+    invalid_codons = []
+    for i in range(0, len(string), 3):
+        codon = string[i:i+3]
+        if codon not in codon_catalog:
+            invalid_codons.append(codon)
+
+    return invalid_codons

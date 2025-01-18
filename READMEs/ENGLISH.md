@@ -115,6 +115,11 @@ The available functions are the following:
     Argument: ```string, string``` (global, local)\
     Output: ```[int, int]``` indexes of the found position\
 
+15. ```check_codon(string)```\
+    Checks for non-existing codons in a dna or rna sequence.\
+    Argument: ```string```\
+    Output: ```['ABC']``` list of non-existing codons\
+
 $^1$ The Alphafold API only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
 2. For genes: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
