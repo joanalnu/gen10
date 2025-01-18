@@ -321,7 +321,7 @@ def find(string, sequence):
 def check_codon(string):
 
     # add internal dna2rna function (only for github CI testing)
-    def dna2rna():
+    def dna2rna(dna):
         rna = ""
         for base in dna:
             if base == 'A' or base == 'a':
