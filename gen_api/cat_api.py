@@ -314,7 +314,7 @@ def buscar(string, sequence):
 
     return occurrences
 
-def check_codon(string):
+def comprova_codo(string):
     if string=='':
         raise ValueError("La seqüència és buida, comprova el teu input.")
 

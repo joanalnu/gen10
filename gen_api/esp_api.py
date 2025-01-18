@@ -314,7 +314,7 @@ def buscar(string, sequence):
 
     return occurrences
 
-def check_codon(string):
+def comprueba_codon(string):
     if string=='':
         raise ValueError("La cadena está vacía, compruebe su input.")
 
