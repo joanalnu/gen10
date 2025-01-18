@@ -110,6 +110,11 @@ Die verfügbaren Funktionen sind die folgenden:
             ```string``` Optional: Zeichenkette zum Einfügen bei der HDR-Reparatur\
     Ausgabe: ```string``` Reparierte DNA
 
+14. ```finden(string, sequence)```\
+    Um eine lokale string in einer globale string zu finden.\
+    Argument: ```string, string``` (global, local)\
+    Ausgabe: ```(int, int)``` Indizes der gefundenen Position\
+
 $^1$ Die Alphafold-API akzeptiert nur UniProt-IDs als Eingabe. Sie können die UniProt-ID eines Proteins oder Gens im Internet finden. Wir empfehlen die folgenden Datenbanken.
 1. Offizielle UniProt-Website: [https://www.uniprot.org](https://www.uniprot.org)
 2. Für Gene: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)

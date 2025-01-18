@@ -100,6 +100,11 @@ Les funcions disponibles són les següents:
             ```string``` Opcional: cadena per inserir en la reparació HDR\
     Sortida: ```string``` ADN reparat
 
+14. ```buscar(string, sequence)```\
+    Per trobar una seqüència local en una global.\
+    Argument: ```string, string``` (global, local)\
+    Sortida: ```(int, int)``` índexes de la posició trobada\
+
 $^1$ L'API d'AlphaFold només admet ID d'UniProt com a entrada. Podeu trobar l'ID d'UniProt d'una proteïna o gen a la web. Recomanem les següents bases de dades.
 1. Lloc web oficial d'UniProt: [https://www.uniprot.org](https://www.uniprot.org)
 2. Per a gens: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
