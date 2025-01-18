@@ -300,8 +300,16 @@ def buscar(string, sequence):
 
     if sequence not in string:
         raise ValueError("La seqüència no és a la string global.")
-    else:
-        first_index = string.find(sequence)
-        last_index = first_index + len(sequence)-1
+    
+    # Find all occurrences of the sequence
+    occurrences = []
+    start_index = 0
+    while start_index < len(string):
+        start_index = string.find(sequence, start_index)
+        if start_index == -1:  # No more occurrences
+            break
+        end_index = start_index + len(sequence) - 1
+        occurrences.append((start_index, end_index))
+        start_index += 1  # Move to the next possible starting position
 
-    return (first_index, last_index)
+    return occurrences
