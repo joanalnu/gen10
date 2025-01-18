@@ -288,3 +288,20 @@ def reparar_adn(dna, repair_type, pos_corte=None, nueva_secuencia=None):
 
     else:
         raise ValueError("Tipo de reparación inválido o falta la secuencia para el HDR.")
+
+def buscar(string, sequence):
+
+    # check both are strings
+    if not isinstance(string, str) or not isinstance(sequence, str):
+        raise TypeError("Ambas secuencias deben ser del tipo 'string'.")
+    # check string is longer than sequence
+    if len(string) < len(sequence):
+        raise ValueError('La segunda secuencia as más larga que la primera. Comprueba tus datos, asegúrate que la secuencia global es la primera.')
+
+    if sequence not in string:
+        raise ValueError('La secuencia no se encontró en tu secuencia global.')
+    else:
+        first_index = string.find(sequence)
+        last_index = first_index + len(sequence)-1
+
+    return (first_index, last_index)

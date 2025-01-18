@@ -288,3 +288,21 @@ def repair_dna(dna, repair_type, cut_pos=None, repair_sequence=None):
 
     else:
         raise ValueError("Invalid repair type or missing repair sequence for HDR.")
+
+
+def find(string, sequence):
+
+    # check both are strings
+    if not isinstance(string, str) or not isinstance(sequence, str):
+        raise TypeError("Both 'string' and 'sequence' must be of type str.")
+    # check string is longer than sequence
+    if len(string) < len(sequence):
+        raise ValueError("Second string is longer than first one. Check you input, ensure your global string is the first.")
+
+    if sequence not in string:
+        raise ValueError("Sequence could not be found in your global string.")
+    else:
+        first_index = string.find(sequence)
+        last_index = first_index + len(sequence)-1
+
+    return (first_index, last_index)
