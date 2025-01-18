@@ -290,7 +290,6 @@ def repair_dna(dna, repair_type, cut_pos=None, repair_sequence=None):
         raise ValueError("Invalid repair type or missing repair sequence for HDR.")
 
 
-# new function called "find" --> used to find a sequence/gene in a bigger string
 def find(string, sequence):
 
     # check both are strings

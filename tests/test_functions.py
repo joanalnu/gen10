@@ -167,16 +167,6 @@ def test_iterate_empty_input():
         ]
 
 def test_find():
-    """
-    1. find a sequence in string
-    2. sequence is longer than string Error longer
-    3. either of one is not a string Error string
-    4. neither of both is a string Error string
-    5. sequence is not in string Error not found
-    """
-    strings = ['TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT']
-    sequences =
-
     # find a sequence
     assert (6,15) == gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 'GTGGACTGAG')
 
@@ -199,4 +189,4 @@ def test_find():
         gen_api.find("TACCACGTGGACTGAGGACTCCTCATT", 'AGUGAGUGAGUGUGA')
 
     # sequences are the same length
-    assert (0, len("TACCACGTGGACTGAGGACTCCTCATT")) == gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT')
+    assert (0, len("TACCACGTGGACTGAGGACTCCTCATT")-1) == gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT')
