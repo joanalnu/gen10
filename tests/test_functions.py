@@ -165,3 +165,37 @@ def test_iterate_empty_input():
             'input,dna2rna,coolfunction,dna2amino\n',
             'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA,Function not available, Met Val His Leu Thr Pro Glu Glu\n'
         ]
+
+def test_check_codon():
+    test_strings = [
+        "ATGCGATAA",  # Test Case 1: Valid DNA string, divisible by 3
+        "ATGXXXATA",  # Test Case 2: Contains an invalid codon (`XXX`)
+        "TAA",  # Test Case 8: Contains only a stop codon
+        "ATGCGATAA" * 1000  # Test Case 9: Large sequence repeated
+    ]
+    expected_results = [
+        [],  # Test Case 1: No invalid codons
+        ["XXX"],  # Test Case 2: `XXX` is an invalid codon
+        [],  # Test Case 8: No invalid codons (stop codons are valid)
+        []  # Test Case 9: No invalid codons in the large string
+    ]
+    for string, expectation in zip(test_strings, expected_results):
+        assert expectation == gen_api.check_codon(string)
+
+    test_strings = [
+        "ATGCGATAAG",  # Test Case 3: Not divisible by 3, rest is `G`
+        "ATGCGATAAGT",  # Test Case 4: Not divisible by 3, rest is `GT`
+        "ATGXZCGT",  # Test Case 5: Contains invalid characters `X` and `Z`
+        "",  # Test Case 6: Empty string
+        "AT",  # Test Case 7: Too short for a single codon
+    ]
+    expected_results = [
+        "String couldn't be divided into codons without the following rest: G",
+        "String couldn't be divided into codons without the following rest: GT",
+        "String couldn't be divided into codons without the following rest: T",
+        "The provided string is empty, check your input.",
+        "String couldn't be divided into codons: AT",
+    ]
+    for string, error_message in zip(test_strings, expected_results):
+        with pytest.raises(ValueError, match=error_message):
+            gen_api.check_codon(string)

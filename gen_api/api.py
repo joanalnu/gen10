@@ -319,16 +319,27 @@ def find(string, sequence):
     return occurrences
 
 def check_codon(string):
+    if string=='':
+        raise ValueError("The provided string is empty, check your input.")
+
     # Check if string length is divisible by 3
     if len(string) % 3 != 0:
+        if len(string) < 3:
+            raise ValueError(f"String couldn't be divided into codons: {string}")
         if len(string) % 2 == 0:
-            resting = string[-2:]
-        else:
             resting = string[-1]
+        else:
+            resting = string[-2:]
         raise ValueError(f"String couldn't be divided into codons without the following rest: {resting}")
 
     if 'u' not in string or 'U' not in string:
-        string = gen_api.dna2rna(string)
+        stringmem = string
+        string = ''
+        for letter in stringmem:
+            try:
+                string += gen_api.dna2rna(letter)
+            except ValueError:
+                string += letter
 
     # Define codon catalog
     codon_catalog = {
