@@ -106,6 +106,22 @@ def dna2amino(dna):
             raise ValueError(f'Error: invalid codon {codon}')
     return amino
 
+def rna2dna(rna):
+    """Returns DNA string by inputting a DNA string"""
+    dna = ""
+    for base in rna:
+        if base=='U' or base=='u':
+            dna+='A'
+        elif base=='A' or base=='a':
+            dna+='T'
+        elif base=='G' or base=='g':
+            dna+='C'
+        elif base=='C' or base=='c':
+            dna+='G'
+        else:
+            raise ValueError('Could not read provided RNA string')
+    return dna
+
 def compare(original, copy):
     """Compares two different string (original, copy) and return True or False with the reason"""
     if len(original) != len(copy):
