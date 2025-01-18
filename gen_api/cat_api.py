@@ -300,7 +300,7 @@ def buscar(string, sequence):
 
     if sequence not in string:
         raise ValueError("La seqüència no és a la string global.")
-
+    
     # Find all occurrences of the sequence
     occurrences = []
     start_index = 0
@@ -312,4 +312,4 @@ def buscar(string, sequence):
         occurrences.append((start_index, end_index))
         start_index += 1  # Move to the next possible starting position
 
-        return occurrences
+    return occurrences

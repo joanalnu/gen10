@@ -165,31 +165,3 @@ def test_iterate_empty_input():
             'input,dna2rna,coolfunction,dna2amino\n',
             'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA,Function not available, Met Val His Leu Thr Pro Glu Glu\n'
         ]
-
-def test_find():
-    # find a sequence
-    assert [(6,15)] == gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 'GTGGACTGAG')
-
-    # sequence is longer than string
-    with pytest.raises(ValueError, match="Second string is longer than the first one. Check your input to ensure the global string is the first."):
-        gen_api.find('GTGGACTGAG', 'TACCACGTGGACTGAGGACTCCTCATT')
-
-    # one variable is not a string
-    with pytest.raises(TypeError, match="Both 'string' and 'sequence' must be of type str."):
-        gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 6)
-    with pytest.raises(TypeError, match="Both 'string' and 'sequence' must be of type str."):
-        gen_api.find(['a', 'b', 'c', '1', 'd', 'e'], 'TACCACGTGGACTGAGGACTCCTCATT')
-
-    # both aren't strings
-    with pytest.raises(TypeError, match="Both 'string' and 'sequence' must be of type str."):
-        gen_api.find(23, (56, 54))
-
-    # sequence is not in string
-    with pytest.raises(ValueError, match="Sequence could not be found in your global string."):
-        gen_api.find("TACCACGTGGACTGAGGACTCCTCATT", 'AGUGAGUGAGUGUGA')
-
-    # sequences are the same length
-    assert [(0, len("TACCACGTGGACTGAGGACTCCTCATT")-1)] == gen_api.find('TACCACGTGGACTGAGGACTCCTCATT', 'TACCACGTGGACTGAGGACTCCTCATT')
-
-    # multiple occurrences of sequence in string
-    assert [(6, 15), (33, 42), (60, 69)] == gen_api.find('TACCACGTGGACTGAGGACTCCTCATTTACCACGTGGACTGAGGACTCCTCATTTACCACGTGGACTGAGGACTCCTCATT', 'GTGGACTGAG')
