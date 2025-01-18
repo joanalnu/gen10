@@ -312,4 +312,3 @@ def finden(string, sequence):
         start_index += 1  # Move to the next possible starting position
 
     return occurrences
-
