@@ -113,7 +113,7 @@ Las funciones disponibles son las siguientes:
 14. ```buscar(string, sequence)```\
     Para buscar una secuencia local and una global.\
     Argumento: ```string, string``` (global, local)\
-    Salida: ```(int, int)``` índices de la posición encontrada\
+    Salida: ```[(int, int)]``` índices de la posición encontrada\
 
 $^1$ La API de AlphaFold solo admite IDs de UniProt como entrada. Puedes encontrar el ID de UniProt de una proteína o gen en la web. Recomendamos las siguientes bases de datos.
 1. Sitio web oficial de UniProt: [https://www.uniprot.org](https://www.uniprot.org)

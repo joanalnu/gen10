@@ -113,7 +113,7 @@ The available functions are the following:
 14. ```find(string, sequence)```\
     Finds a local sequence in a larger, global sequence.\
     Argument: ```string, string``` (global, local)\
-    Output: ```(int, int)``` indexes of the found position\
+    Output: ```[(int, int)]``` indexes of the found position\
 
 $^1$ The Alphafold API only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
