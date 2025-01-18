@@ -313,7 +313,7 @@ def finden(string, sequence):
 
     return occurrences
 
-def check_codon(string):
+def codon_checken(string):
     if string=='':
         raise ValueError("Die string ist leer, überprüfen Sie ihren input.")
 

@@ -319,6 +319,23 @@ def find(string, sequence):
     return occurrences
 
 def check_codon(string):
+
+    # add internal dna2rna function (only for github CI testing)
+    def dna2rna():
+        rna = ""
+        for base in dna:
+            if base == 'A' or base == 'a':
+                rna += 'U'
+            elif base == 'T' or base == 't':
+                rna += 'A'
+            elif base == 'C' or base == 'c':
+                rna += 'G'
+            elif base == 'G' or base == 'g':
+                rna += 'C'
+            else:
+                raise ValueError('Could not read provided DNA string')
+        return rna
+
     if string=='':
         raise ValueError("The provided string is empty, check your input.")
 
@@ -337,7 +354,7 @@ def check_codon(string):
         string = ''
         for letter in stringmem:
             try:
-                string += gen_api.dna2rna(letter)
+                string += dna2rna(letter)
             except ValueError:
                 string += letter
 

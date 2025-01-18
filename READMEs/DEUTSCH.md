@@ -115,7 +115,7 @@ Die verfügbaren Funktionen sind die folgenden:
     Argument: ```string, string``` (global, local)\
     Ausgabe: ```[int, int]``` Indizes der gefundenen Position\
 
-15. ```check_codon(string)```\
+15. ```codon_checken(string)```\
     Prüft auf falsche Codons in einer DNA- oder RNA-Sequenz.\
     Argument: ```string```\
     Ausgabe: ```['ABC']``` liste von falschen Codons\
