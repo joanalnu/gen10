@@ -12,7 +12,7 @@ with open("gen_api/_version.py") as version_file:
             __version__ = line.split()[-1].replace('"', "")
 
 setup(
-    name="gen_api",
+    name="gen10",
     version="1.2",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
