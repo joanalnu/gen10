@@ -25,7 +25,7 @@ setup(
     install_requires=requirements,
     classifiers=[
         'Programming Language :: Python :: 3',
-        'License :: MIT License',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: UNIX-based',
     ],
     package_data={"gen_api": ["static/*"]},
