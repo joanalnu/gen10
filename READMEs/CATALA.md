@@ -1,23 +1,23 @@
-# GEN-API
+# gen10
 
-GEN_API és una API per utilitzar les eines de [genetics10](https://joanalnu.github.io/genetics10) integrades als vostres scripts de python. És senzill d'instal·lar i fàcil d'utilitzar en el vostre codi actual, incorporant funcions útils quan es treballa amb dades genètiques.
+`gen10` és una API per utilitzar les eines de [genetics10](https://joanalnu.github.io/genetics10) integrades als vostres scripts de python. És senzill d'instal·lar i fàcil d'utilitzar en el vostre codi actual, incorporant funcions útils quan es treballa amb dades genètiques.
 
-L'API permet traduir seqüències d'ADN a seqüències d'ARN o aminoàcids, comparar seqüències, generar mutacions i iteració integrada per a grans conjunts de dades. A més, hi ha una integració amb l'API d'AlphaFold, que permet als usuaris visualitzar estructures de proteïnes predites, així com funcions per simular l'acció de l'edició genètica CRISPR-Cas9. Gen_api també és una eina poderosa per als estudiants per experimentar, aprendre i crear el seu propi codi.
+L'API permet traduir seqüències d'ADN a seqüències d'ARN o aminoàcids, comparar seqüències, generar mutacions i iteració integrada per a grans conjunts de dades. A més, hi ha una integració amb l'API d'AlphaFold, que permet als usuaris visualitzar estructures de proteïnes predites, així com funcions per simular l'acció de l'edició genètica CRISPR-Cas9. gen10 també és una eina poderosa per als estudiants per experimentar, aprendre i crear el seu propi codi.
 
 [(anar a la informació per a educadors a continuació)](#info-per-a-educadors)
 
 ## Llegeix la documentació en el teu idioma
-- [Anglès](https://github.com/joanalnu/gen_api/blob/main/READMES/ENGLISH.md)
-- [Espanyol](https://github.com/joanalnu/gen_api/blob/main/READMES/ESPANOL.md)
-- [Alemany](https://github.com/joanalnu/gen_api/blob/main/READMES/DEUTSCH.md)
-- [Català](https://github.com/joanalnu/gen_api/blob/main/READMES/CATALA.md)
+- [Anglès](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+- [Espanyol](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
+- [Alemany](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
+- [Català](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Instal·lació
 Podeu instal·lar l'API clonant aquest repositori al vostre ordinador local executant el següent comandament al vostre terminal:
 ```bash
-git clone https://github.com/joanalnu/gen_api.git
+git clone https://github.com/joanalnu/gen10.git
 ```
-Navegueu fins al directori clonat utilitzant ```cd gen_api/``` i instaleu l'API al vostre entorn actual utilitzant pip:
+Navegueu fins al directori clonat utilitzant ```cd gen10/``` i instaleu l'API al vostre entorn actual utilitzant pip:
 ```bash
 pip install .
 ```
@@ -25,11 +25,11 @@ pip install .
 ## Ús
 Per utilitzar l'API, podeu importar-la al vostre script de python:
 ```python
-import gen_api
+import gen10
 ```
 Recordeu que heu d'executar el script de python en l'entorn on heu instal·lat l'API prèviament (si utilitzeu entorns de codi).
 
-Escriviu ```gen_api.function()``` per cridar qualsevol funció. Recordeu que heu de proporcionar l'argument adequat dins dels parèntesis. El fragment de codi de l'exemple anterior crida la funció ```dna2rna()```. Li proporciona la cadena ```dna``` com a entrada, i la funció retorna la sortida anomenada ```rna```.
+Escriviu ```gen10.function()``` per cridar qualsevol funció. Recordeu que heu de proporcionar l'argument adequat dins dels parèntesis. El fragment de codi de l'exemple anterior crida la funció ```dna2rna()```. Li proporciona la cadena ```dna``` com a entrada, i la funció retorna la sortida anomenada ```rna```.
 
 Les funcions disponibles són les següents:
 1. ```dna2rna()```\
@@ -130,11 +130,11 @@ Si us plau, noteu que una guia pas a pas sobre com accedir als ID d'UniProt est�
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona la cadena d'ADN
 
 # obtenir la cadena d'ARN
-my_rna = gen_api.dna2rna(my_dna)
+my_rna = gen10.dna2rna(my_dna)
 print(my_rna)
 
 # obtenir la cadena d'aminoàcids
-my_amino = gen_api.rna2amino(my_rna)
+my_amino = gen10.rna2amino(my_rna)
 print(my_amino)
 ```
 
@@ -144,20 +144,20 @@ print(my_amino)
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona la cadena d'ADN
 
 # crear mutació
-mutacio = gen_api.createmutation(my_dna)
+mutacio = gen10.createmutation(my_dna)
 print(mutacio)
 
 # obtenir la posició on va succeir la mutació
-index = gen_api.compare(my_dna, mutacio)
+index = gen10.compare(my_dna, mutacio)
 print(index)
 ```
 
 ### Obrir un fitxer txt i utilitzar iteració
 ```python
 # llegir fitxer d'entrada
-dnas = gen_api.read_input('/examples/my_dnas.txt') # noteu que heu de tenir un fitxer anomenat així al mateix directori que aquest fitxer
+dnas = gen10.read_input('/examples/my_dnas.txt') # noteu que heu de tenir un fitxer anomenat així al mateix directori que aquest fitxer
 funcions = ['createmutation', 'dna2rna', 'rna2amino'] # quines funcions voleu executar
-sortida = gen_api.iterate(dnas, funcions) # cridar funcions d'iteració
+sortida = gen10.iterate(dnas, funcions) # cridar funcions d'iteració
 print(sortida) # mostrar sortida de iterate()
 ```
 
@@ -171,10 +171,10 @@ amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYD
 uniprot_id = 'Q8W3K0'
 
 # Ara fem la predicció de l'estructura d'AlphaFold
-estructura = gen_api.alphafold_prediction(uniprot_id)
+estructura = gen10.alphafold_prediction(uniprot_id)
 
 # Finalment cridem generate_protein() per mostrar la predicció
-proteina = gen_api.generate_protein(estructura)
+proteina = gen10.generate_protein(estructura)
 ```
 
 ### Simulació de CRISPR Cas
@@ -184,15 +184,15 @@ print('ADN original:', my_dna)
 
 # Tallar l'ADN a la posició 16
 cut_position = 16
-cut_dna = gen_api.cut_dna(my_dna, cut_position)
+cut_dna = gen10.cut_dna(my_dna, cut_position)
 print('ADN tallat: ', cut_dna)
 
 # Reparar l'ADN utilitzant NHEJ (esborrany)
-nhej_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'NHEJ')
+nhej_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'NHEJ')
 print('ADN reparat NHEJ: ', nhej_repaired_dna)
 
 # Reparar l'ADN utilitzant HDR (inserció de 'XYZ')
-hdr_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
+hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
 print('ADN reparat HDR: ', hdr_repaired_dna)
 ```
 
@@ -207,7 +207,7 @@ Si feu ús d'aquest codi, si us plau citeu-lo:
     publisher = {Zenodo},
     version = {1.0},
     doi = {10.5281/zenodo.14059749},
-    url = {https://github.com/joanalnu/gen_api},
+    url = {https://github.com/joanalnu/gen10},
 }
 ```
 
