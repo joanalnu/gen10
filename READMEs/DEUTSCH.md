@@ -1,33 +1,33 @@
-# GEN-API
+# gen10
 
-[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen_api-blue.svg?style=flat)](https://github.com/joanalnu/gen_api)
-[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen_api/LICENSE)
+[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen10-blue.svg?style=flat)](https://github.com/joanalnu/gen10)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen10/LICENSE)
 ![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
 [![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
 
-![Build Status](https://github.com/joanalnu/gen_api/actions/workflows/python-tests.yml/badge.svg)
-![Open Issues](https://img.shields.io/github/issues/joanalnu/gen_api)
+![Build Status](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
+![Open Issues](https://img.shields.io/github/issues/joanalnu/gen10)
 
 
 
-GEN_API ist eine API zum Einsatz der [genetics10](https://joanalnu.github.io/genetics10)-Tools in Ihren Python-Skripten. Sie ist einfach zu installieren und leicht zu verwenden in Ihrem aktuellen Code, indem sie nützliche Funktionen bei der Arbeit mit genetischen Daten integriert.
+`gen10` ist eine API zum Einsatz der [genetics10](https://joanalnu.github.io/genetics10)-Tools in Ihren Python-Skripten. Sie ist einfach zu installieren und leicht zu verwenden in Ihrem aktuellen Code, indem sie nützliche Funktionen bei der Arbeit mit genetischen Daten integriert.
 
-Die API ermöglicht es Ihnen, DNA-Sequenzen in RNA- oder Aminosäuresequenzen zu übersetzen, Sequenzen zu vergleichen, Mutationen zu erzeugen und eine integrierte Iteration für große Datenmengen durchzuführen. Darüber hinaus gibt es eine Integration mit der AlphaFold-API, die es Benutzern ermöglicht, vorhergesagte Proteinstrukturen zu visualisieren, sowie Funktionen zum Simulieren der Wirkung von CRISPR-Cas9-Genschere. Gen_api ist auch ein leistungsstarkes Tool für Studenten, um damit zu experimentieren, zu lernen und eigenen Code zu erstellen.
+Die API ermöglicht es Ihnen, DNA-Sequenzen in RNA- oder Aminosäuresequenzen zu übersetzen, Sequenzen zu vergleichen, Mutationen zu erzeugen und eine integrierte Iteration für große Datenmengen durchzuführen. Darüber hinaus gibt es eine Integration mit der AlphaFold-API, die es Benutzern ermöglicht, vorhergesagte Proteinstrukturen zu visualisieren, sowie Funktionen zum Simulieren der Wirkung von CRISPR-Cas9-Genschere. gen10 ist auch ein leistungsstarkes Tool für Studenten, um damit zu experimentieren, zu lernen und eigenen Code zu erstellen.
 
 [(Zum Info für Lehrkräfte springen)](#info-für-lehrkräfte)
 
 ## Lesen Sie die Dokumentation in Ihrer Sprache
-- [Englisch](https://github.com/joanalnu/gen_api/blob/main/READMES/ENGLISH.md)
-- [Spanisch](https://github.com/joanalnu/gen_api/blob/main/READMES/ESPANOL.md)
-- [Deutsch](https://github.com/joanalnu/gen_api/blob/main/READMES/DEUTSCH.md)
-- [Katalanisch](https://github.com/joanalnu/gen_api/blob/main/READMES/CATALA.md)
+- [Englisch](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+- [Spanisch](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
+- [Deutsch](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
+- [Katalanisch](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Installation
 Sie können die API durch Klonen dieses Repositorys auf Ihrem lokalen Computer installieren, indem Sie den folgenden Befehl in Ihrem Terminal ausführen:
 ```bash
-git clone https://github.com/joananlu/gen_api.git
+git clone https://github.com/joananlu/gen10.git
 ```
-Navigieren Sie zum Klon-Verzeichnis mit ```cd gen_api/``` und installieren Sie die API in Ihrer aktuellen Umgebung mit pip:
+Navigieren Sie zum Klon-Verzeichnis mit ```cd gen10/``` und installieren Sie die API in Ihrer aktuellen Umgebung mit pip:
 ```bash
 pip install .
 ```
@@ -35,11 +35,11 @@ pip install .
 ## Verwendung
 Um die API zu verwenden, können Sie sie in Ihrem Python-Skript importieren:
 ```python
-import gen_api
+import gen10
 ```
 Denken Sie daran, das Python-Skript in der Umgebung auszuführen, in der Sie zuvor die Installation durchgeführt haben (falls Sie Umgebungen verwenden).
 
-Geben Sie ```gen_api.function()``` ein, um eine beliebige Funktion aufzurufen. Denken Sie daran, das entsprechende Argument innerhalb der Klammern anzugeben. Der Codeausschnitt im obigen Beispiel ruft die Funktion ```dna2rna()``` auf. Er gibt die Zeichenkette ```dna``` als Eingabe an und die Funktion gibt die Ausgabe ```rna``` zurück.
+Geben Sie ```gen10.function()``` ein, um eine beliebige Funktion aufzurufen. Denken Sie daran, das entsprechende Argument innerhalb der Klammern anzugeben. Der Codeausschnitt im obigen Beispiel ruft die Funktion ```dna2rna()``` auf. Er gibt die Zeichenkette ```dna``` als Eingabe an und die Funktion gibt die Ausgabe ```rna``` zurück.
 
 Die verfügbaren Funktionen sind die folgenden:
 1. ```dna2rna()```\
@@ -140,11 +140,11 @@ Bitte beachten Sie, dass ein Schritt-für-Schritt-Leitfaden zur Erlangung von Un
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # geben Sie eine DNA-Zeichenkette ein
 
 # erhalten Sie die RNA-Zeichenkette
-my_rna = gen_api.dna2rna(my_dna)
+my_rna = gen10.dna2rna(my_dna)
 print(my_rna)
 
 # erhalten Sie die Aminosäure-Zeichenkette
-my_amino = gen_api.rna2amino(my_rna)
+my_amino = gen10.rna2amino(my_rna)
 print(my_amino)
 ```
 
@@ -154,20 +154,20 @@ print(my_amino)
 my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # geben Sie eine DNA-Zeichenkette ein
 
 # erstellen Sie eine Mutation
-mutation = gen_api.createmutation(my_dna)
+mutation = gen10.createmutation(my_dna)
 print(mutation)
 
 # erhalten Sie den Ort, an dem die Mutation stattgefunden hat
-index = gen_api.compare(my_dna, mutation)
+index = gen10.compare(my_dna, mutation)
 print(index)
 ```
 
 ### Öffnen einer txt-Datei und Verwendung von Iteration
 ```python
 # lesen Sie die Eingabedatei
-dnas = gen_api.read_input('/examples/my_dnas.txt') # beachten Sie, dass Sie eine Datei mit diesem Namen im gleichen Verzeichnis wie diese Datei gespeichert haben müssen
+dnas = gen10.read_input('/examples/my_dnas.txt') # beachten Sie, dass Sie eine Datei mit diesem Namen im gleichen Verzeichnis wie diese Datei gespeichert haben müssen
 functions = ['createmutation', 'dna2rna', 'rna2amino'] # welche Funktionen möchten Sie ausführen
-output = gen_api.iterate(dnas, functions) # rufen Sie die Iterationsfunktionen auf
+output = gen10.iterate(dnas, functions) # rufen Sie die Iterationsfunktionen auf
 print(output) # zeigen Sie die Ausgabe von iterate()
 ```
 
@@ -181,10 +181,10 @@ amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYD
 uniprot_id = 'Q8W3K0'
 
 # Jetzt holen wir die AlphaFold-Strukturvorhersage
-structure = gen_api.alphafold_prediction(uniprot_id)
+structure = gen10.alphafold_prediction(uniprot_id)
 
 # Schließlich rufen wir generate_protein() auf, um die Vorhersage anzuzeigen
-protein = gen_api.generate_protein(structure)
+protein = gen10.generate_protein(structure)
 ```
 
 ### Simulation von CRISPR Cas
@@ -194,15 +194,15 @@ print('Ursprüngliche DNA:', my_dna)
 
 # Schneiden Sie die DNA an Position 16
 cut_position = 16
-cut_dna = gen_api.cut_dna(my_dna, cut_position)
+cut_dna = gen10.cut_dna(my_dna, cut_position)
 print('Geschnittene DNA: ', cut_dna)
 
 # Reparieren Sie die DNA mit NHEJ (Löschung)
-nhej_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'NHEJ')
+nhej_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'NHEJ')
 print('NHEJ reparierte DNA: ', nhej_repaired_dna)
 
 # Reparieren Sie die DNA mit HDR (Einfügen von 'XYZ')
-hdr_repaired_dna = gen_api.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
+hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
 print('HDR reparierte DNA: ', hdr_repaired_dna)
 ```
 
@@ -217,7 +217,7 @@ Wenn Sie diesen Code verwenden, zitieren Sie ihn bitte:
     publisher = {Zenodo},
     version = {1.0},
     doi = {10.5281/zenodo.14059749},
-    url = {https://github.com/joanalnu/gen_api},
+    url = {https://github.com/joanalnu/gen10},
 }
 ```
 

@@ -1,33 +1,33 @@
-# GEN-API
+# gen10
 
-[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen_api-blue.svg?style=flat)](https://github.com/joanalnu/gen_api)
-[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen_api/LICENSE)
+[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen10-blue.svg?style=flat)](https://github.com/joanalnu/gen10)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen10/LICENSE)
 ![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
 [![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
 
-![Build Status](https://github.com/joanalnu/gen_api/actions/workflows/python-tests.yml/badge.svg)
-![Open Issues](https://img.shields.io/github/issues/joanalnu/gen_api)
+![Build Status](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
+![Open Issues](https://img.shields.io/github/issues/joanalnu/gen10)
 
 
 
-GEN-API es una API para utilizar las herramientas de [genetics10](https://joanalnu.github.io/genetics10) integradas en tus scripts de python. Es fácil de instalar y usar en tu código actual, incorporando funciones útiles al trabajar con datos genéticos.
+`gen10` es una API para utilizar las herramientas de [genetics10](https://joanalnu.github.io/genetics10) integradas en tus scripts de python. Es fácil de instalar y usar en tu código actual, incorporando funciones útiles al trabajar con datos genéticos.
 
-La API te permite traducir secuencias de ADN a ARN o aminoácidos, comparar secuencias, generar mutaciones y tiene una iteración integrada para grandes datos. Además, hay una integración con la API de AlphaFold, lo que permite a los usuarios visualizar la estructura predicha de las proteínas, así como funciones para simular la acción de la edición genética CRISPR-Cas9. Gen_api también es una herramienta poderosa para que los estudiantes experimenten, aprendan y creen su propio código.
+La API te permite traducir secuencias de ADN a ARN o aminoácidos, comparar secuencias, generar mutaciones y tiene una iteración integrada para grandes datos. Además, hay una integración con la API de AlphaFold, lo que permite a los usuarios visualizar la estructura predicha de las proteínas, así como funciones para simular la acción de la edición genética CRISPR-Cas9. gen10 también es una herramienta poderosa para que los estudiantes experimenten, aprendan y creen su propio código.
 
 [(Ir a la información para educadores debajo)](#info-para-educadores)
 
 ## Lee la documentación en tu idioma
-- [Inglés](https://github.com/joanalnu/gen_api/blob/main/READMES/ENGLISH.md)
-- [Español](https://github.com/joanalnu/gen_api/blob/main/READMES/ESPANOL.md)
-- [Alemán](https://github.com/joanalnu/gen_api/blob/main/READMES/DEUTSCH.md)
-- [Catalán](https://github.com/joanalnu/gen_api/blob/main/READMES/CATALA.md)
+- [Inglés](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+- [Español](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
+- [Alemán](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
+- [Catalán](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Instalación
 Puedes instalar la API clonando este repositorio en tu máquina local ejecutando el siguiente comando en tu terminal:
 ```bash
-git clone https://github.com/joananlu/gen_api.git
+git clone https://github.com/joananlu/gen10.git
 ```
-Navega al directorio clonado utilizando ```cd gen_api/``` e instala la API en tu entorno actual utilizando pip:
+Navega al directorio clonado utilizando ```cd gen10/``` e instala la API en tu entorno actual utilizando pip:
 ```bash
 pip install .
 ```
@@ -35,11 +35,11 @@ pip install .
 ## Uso
 Para usar la API, puedes importarla en tu script de python:
 ```python
-import gen_api
+import gen10
 ```
 Recuerda ejecutar el script de python en el entorno donde has instalado previamente la API (si usas entornos de conda).
 
-Escribe ```gen_api.función()``` para llamar a cualquier función. Recuerda proporcionar el argumento apropiado dentro de los corchetes. El código de ejemplo anterior llama a la función ```dna2rna()```. Le da la cadena ```dna``` como entrada, y la función devuelve la salida llamada ```rna```.
+Escribe ```gen10.función()``` para llamar a cualquier función. Recuerda proporcionar el argumento apropiado dentro de los corchetes. El código de ejemplo anterior llama a la función ```dna2rna()```. Le da la cadena ```dna``` como entrada, y la función devuelve la salida llamada ```rna```.
 
 Las funciones disponibles son las siguientes:
 1. ```dna2rna()```\
@@ -140,11 +140,11 @@ Por favor, ten en cuenta que se está trabajando en una guía paso a paso sobre 
 mi_adn = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona cadena de ADN
 
 # obtener cadena de ARN
-mi_arn = gen_api.dna2rna(mi_adn)
+mi_arn = gen10.dna2rna(mi_adn)
 print(mi_arn)
 
 # obtener cadena de aminoácidos
-mi_amino = gen_api.rna2amino(mi_arn)
+mi_amino = gen10.rna2amino(mi_arn)
 print(mi_amino)
 ```
 
@@ -154,20 +154,20 @@ print(mi_amino)
 mi_adn = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona cadena de ADN
 
 # crear mutación
-mutación = gen_api.crear_mutación(mi_adn)
+mutación = gen10.crear_mutación(mi_adn)
 print(mutación)
 
 # obtener lugar donde ocurrió la mutación
-índice = gen_api.comparar(mi_adn, mutación)
+índice = gen10.comparar(mi_adn, mutación)
 print(índice)
 ```
 
 ### Abriendo un archivo txt y utilizando iteración
 ```python
 # leer archivo de entrada
-adns = gen_api.leer_entrada('/ejemplos/mis_adns.txt') # nota que debes haber guardado un archivo con este nombre en la misma carpeta que este archivo
+adns = gen10.leer_entrada('/ejemplos/mis_adns.txt') # nota que debes haber guardado un archivo con este nombre en la misma carpeta que este archivo
 funciones = ['crear_mutación', 'dna2rna', 'rna2amino'] # qué funciones deseas ejecutar
-salida = gen_api.iterar(adns, funciones) # llamar funciones de iteración
+salida = gen10.iterar(adns, funciones) # llamar funciones de iteración
 print(salida) # mostrar salida de iterar()
 ```
 
@@ -181,10 +181,10 @@ amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYD
 id_uniprot = 'Q8W3K0'
 
 # Ahora obtenemos la predicción de la estructura de la proteína
-estructura = gen_api.predicción_alphafold(id_uniprot)
+estructura = gen10.predicción_alphafold(id_uniprot)
 
 # Finalmente llamamos a generar_proteína() para mostrar la predicción
-proteína = gen_api.generar_proteína(estructura)
+proteína = gen10.generar_proteína(estructura)
 ```
 
 ### Simulación de CRISPR Cas
@@ -194,15 +194,15 @@ print('ADN original:', mi_adn)
 
 # Cortar ADN en la posición 16
 posición_corte = 16
-adn_cortado = gen_api.cut_dna(mi_adn, posición_corte)
+adn_cortado = gen10.cut_dna(mi_adn, posición_corte)
 print('ADN cortado: ', adn_cortado)
 
 # Reparar el ADN utilizando NHEJ (eliminación)
-adn_reparado_nhej = gen_api.repair_dna(mi_adn, posición_corte, 'NHEJ')
+adn_reparado_nhej = gen10.repair_dna(mi_adn, posición_corte, 'NHEJ')
 print('ADN reparado NHEJ: ', adn_reparado_nhej)
 
 # Reparar el ADN utilizando HDR (inserción de 'XYZ')
-adn_reparado_hdr = gen_api.repair_dna(mi_adn, posición_corte, 'HDR', repair_sequence='XYZ')
+adn_reparado_hdr = gen10.repair_dna(mi_adn, posición_corte, 'HDR', repair_sequence='XYZ')
 print('ADN reparado HDR: ', adn_reparado_hdr)
 ```
 
@@ -218,7 +218,7 @@ Si utiliza este código, por favor, citelo:
     publisher = {Zenodo},
     version = {1.0},
     doi = {10.5281/zenodo.14059749},
-    url = {https://github.com/joanalnu/gen_api},
+    url = {https://github.com/joanalnu/gen10},
 }
 ```
 
