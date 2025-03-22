@@ -26,7 +26,7 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: UNIX-based',
+        'Operating System :: Unix'
     ],
     package_data={"gen_api": ["static/*"]},
     include_package_data=True,
