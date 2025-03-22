@@ -1,4 +1,3 @@
-import setuptools
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as readme_file:
@@ -12,8 +11,8 @@ with open("gen_api/_version.py") as version_file:
         if "__version__" in line:
             __version__ = line.split()[-1].replace('"', "")
 
-setuptools.setup(
-    name="Gen API",
+setup(
+    name="gen_api",
     version="1.2",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
@@ -22,7 +21,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/joanalnu/gen_api',
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     python_requires=">=3.9",
     install_requires=requirements,
     classifiers=[
