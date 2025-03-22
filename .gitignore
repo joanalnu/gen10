@@ -4,8 +4,11 @@ deprecated/
 # build
 build/
 Gen_API.egg-info
+gen__api.egg-info
+gen_api.egg-info
 .venv
 gen_api/__pycache__
+dist/
 
 # IDE
 .idea/
