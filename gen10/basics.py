@@ -12,7 +12,7 @@ from matplotlib import cm
 import random
 import webbrowser # not sure if using it
 
-import gen_api
+import gen10
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 

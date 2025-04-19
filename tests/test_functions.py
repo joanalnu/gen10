@@ -2,7 +2,6 @@ from os import supports_dir_fd
 
 import pytest
 import gen10
-from build.lib.gen10 import dna_schneiden
 
 
 def test_dna2rna():

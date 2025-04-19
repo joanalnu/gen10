@@ -1,12 +1,12 @@
 import gen10
 from unipressed import UniprotkbClient
 
-def get_uniprot_id()
+def get_uniprot_id():
     """
     This function retrieves the UniProt ID for a given protein sequence.
     It uses the gen10 library to perform the retrieval.
     """
-    record = 
+    record = 0
     
     
     record = UniprotkbClient.fetch_one("Q96RW7")
