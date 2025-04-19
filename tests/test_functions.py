@@ -2,7 +2,7 @@ from os import supports_dir_fd
 
 import pytest
 import gen10
-from build.lib.gen_api import dna_schneiden
+from build.lib.gen10 import dna_schneiden
 
 
 def test_dna2rna():
@@ -44,7 +44,7 @@ def test_check_incorrect():
 #     bases = ['TAACACGTGGACTGAGGACTCCTCATT', 'UGAGUGCACCUGACUCCUGAGGAGUAG', 'TACCACGTGGACTGAGGACTCCTCACU']
 #     for seq in bases:
 #         with pytest.raises(ValueError, match="Invalid string (starting/ending codons not found)"):
-#             gen_api.check(seq)
+#             gen10.check(seq)
 
 def test_read_input_file():
     # Test reading from file
@@ -123,7 +123,7 @@ def test_iterate_singlefunction_singlestring():
     functions = ['dna2rna']
     gen10.iterate(strings, functions)
 
-    with open('./gen_api/results.csv', 'r') as f:
+    with open('./gen10/results.csv', 'r') as f:
         content = f.readlines()
         print(content)
         assert content == ['input,dna2rna\n', 'TACCACGTGGACTGAGGACTCCTCATT,AUGGUGCACCUGACUCCUGAGGAGUAA\n']
@@ -133,7 +133,7 @@ def test_iterate_multiplefunction_multiplestring():
     functions = ['dna2rna', 'dna2amino']
     gen10.iterate(strings, functions)
 
-    with open('./gen_api/results.csv', 'r') as f:
+    with open('./gen10/results.csv', 'r') as f:
         content = f.readlines()
         assert content == [
             'input,dna2rna,dna2amino\n',
@@ -159,7 +159,7 @@ def test_iterate_empty_input():
     strings = ['TACCACGTGGACTGAGGACTCCTCATT']
     functions = ['dna2rna','coolfunction', 'dna2amino']
     gen10.iterate(strings, functions)
-    with open('./gen_api/results.csv', 'r') as f:
+    with open('./gen10/results.csv', 'r') as f:
         content = f.readlines()
         assert content == [
             'input,dna2rna,coolfunction,dna2amino\n',
