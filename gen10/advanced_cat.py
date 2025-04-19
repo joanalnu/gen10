@@ -1,0 +1,33 @@
+import gen10
+
+def complementaria(dna):
+    """
+    Aquesta funció calcula la seqüència complementària d'una seqüència d'ADN donada.
+    """
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+    reverse_comp = ''.join(complement[base] for base in reversed(dna))
+    return reverse_comp
+
+def contingut_gc(dna):
+    """
+    Aquesta funció calcula el contingut de GC d'una seqüència d'ADN donada.
+    """
+    g_count = dna.count('G')
+    c_count = dna.count('C')
+    total_count = len(dna)
+    gc_content = (g_count + c_count) / total_count * 100
+    return gc_content
+
+def temperatura_fusio(dna):
+    """
+    Calcula la temperatura de fusió (Tm) d'una seqüència curta d'ADN utilitzant la regla de Wallace.
+    Assumeix que l'ADN té <=14 bases i consisteix només en A, T, G i C.
+    """
+    dna = dna.upper()
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    g_count = dna.count('G')
+    c_count = dna.count('C')
+
+    tm = 2 * (a_count + t_count) + 4 * (g_count + c_count)
+    return tm

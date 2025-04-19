@@ -1,16 +1,44 @@
 import gen10
-from unipressed import UniprotkbClient
 
-def get_uniprot_id():
+def reverse_complement(dna):
     """
-    This function retrieves the UniProt ID for a given protein sequence.
-    It uses the gen10 library to perform the retrieval.
+    This function computes the reverse complement of a given DNA sequence.
     """
-    record = 0
-    
-    
-    record = UniprotkbClient.fetch_one("Q96RW7")
-    print(record)
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+    reverse_comp = ''.join(complement[base] for base in reversed(dna))
+    return reverse_comp
+
+def gc_content(dna):
+    """
+    This function calculates the GC content of a given DNA sequence.
+    """
+    g_count = dna.count('G')
+    c_count = dna.count('C')
+    total_count = len(dna)
+    gc_content = (g_count + c_count) / total_count * 100
+    return gc_content
+
+def melting_temperature(dna):
+    """
+    Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule.
+    Assumes DNA is <=14 bases and consists only of A, T, G, and C.
+    """
+    dna = dna.upper()
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    g_count = dna.count('G')
+    c_count = dna.count('C')
+
+    tm = 2 * (a_count + t_count) + 4 * (g_count + c_count)
+    return tm
+
+
+
+
+
+
+
+
 
 
 # conversion tools
