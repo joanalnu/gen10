@@ -5,7 +5,7 @@ deprecated/
 build/
 gen10.egg-info
 .venv
-gen_api/__pycache__
+gen10/__pycache__
 dist/
 
 # IDE
@@ -14,7 +14,7 @@ dist/
 # testing
 .pytest_cache
 tests/__pycache__
-.gen_api/Results.csv
+.gen10/Results.csv
 
 .DS_Store
 gen_api/.DS_Store
