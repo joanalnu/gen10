@@ -44,3 +44,27 @@ def stelle_mutieren(sequence, pos, new_base):
     mutated_sequence = list(sequence)
     mutated_sequence[pos] = new_base
     return ''.join(mutated_sequence)
+
+def pcr_simulieren(sequence, fwd_primer, rev_primer):
+    """
+    Simulates a basic PCR reaction on a DNA template.
+    """
+    # Find the forward primer on the template
+    fwd_start = sequence.find(fwd_primer)
+    if fwd_start == -1:
+        return ""
+
+    # Find the reverse primer's reverse complement on the template
+    rev_comp = komplementare(rev_primer)
+    rev_start = sequence.find(rev_comp)
+    if rev_start == -1:
+        return ""
+
+    # Make sure primers are in correct orientation and not overlapping
+    if fwd_start >= rev_start:
+        return ""
+
+    # Calculate the end of the amplified region
+    rev_end = rev_start + len(rev_primer)
+
+    return sequence[fwd_start:rev_end]

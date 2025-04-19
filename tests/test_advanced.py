@@ -1,5 +1,5 @@
 import pytest
-from gen10.advanced import reverse_complement, gc_content, melting_temperature, mutate_site
+from gen10.advanced import reverse_complement, gc_content, melting_temperature, mutate_site, simulate_pcr
 
 def test_reverse_complement():
     assert reverse_complement("ATGC") == "GCAT"
@@ -42,3 +42,33 @@ def test_mutate_site():
     # Edge case: empty sequence
     with pytest.raises(ValueError):
         mutate_site("", 0, "A")
+
+def test_simulate_pcr_basic():
+    sequence = "ATGCGTACGTTAGCTAGCTAGCTAGCGTACGATCG"
+    fwd_primer = "ATGCGTACG"
+    rev_primer = "CGATCGTAC"
+    # The reverse complement of rev_primer is GTACGATCG
+    expected_product = sequence[0:sequence.find("GTACGATCG") + len(rev_primer)]
+    result = simulate_pcr(sequence, fwd_primer, rev_primer)
+    assert result == expected_product
+
+def test_simulate_pcr_primer_not_found():
+    sequence = "ATGCGTACGTTAGCTAGCTAGCTAGCGTACGATCG"
+    fwd_primer = "AAAAAAA"
+    rev_primer = "TTTTTTT"
+    result = simulate_pcr(sequence, fwd_primer, rev_primer)
+    assert result == ""
+
+def test_simulate_pcr_primers_wrong_order():
+    sequence = "ATGCGTACGTTAGCTAGCTAGCTAGCGTACGATCG"
+    fwd_primer = "CGATCGTAC"  # This primer is actually reverse primer sequence
+    rev_primer = "ATGCGTACG"  # This primer is actually forward primer sequence
+    result = simulate_pcr(sequence, fwd_primer, rev_primer)
+    assert result == ""
+
+def test_simulate_pcr_partial_match():
+    sequence = "ATGCGTACGTTAGCTAGCTAGCTAGCGTACGATCG"
+    fwd_primer = "ATGCGTACG"
+    rev_primer = "CGATCGTAA"  # last base different, no exact match
+    result = simulate_pcr(sequence, fwd_primer, rev_primer)
+    assert result == ""
