@@ -32,7 +32,18 @@ def melting_temperature(dna):
     tm = 2 * (a_count + t_count) + 4 * (g_count + c_count)
     return tm
 
-
+def mutate_site(sequence, pos, new_base):
+    """
+    This function mutates a specific site in a DNA sequence.
+    """
+    if pos < 0 or pos >= len(sequence):
+        raise ValueError("Position out of range")
+    if new_base not in ['A', 'T', 'C', 'G']:
+        raise ValueError("Invalid base")
+    
+    mutated_sequence = list(sequence)
+    mutated_sequence[pos] = new_base
+    return ''.join(mutated_sequence)
 
 
 

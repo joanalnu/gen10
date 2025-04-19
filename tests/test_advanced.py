@@ -1,5 +1,5 @@
 import pytest
-from gen10.advanced import reverse_complement, gc_content, melting_temperature
+from gen10.advanced import reverse_complement, gc_content, melting_temperature, mutate_site
 
 def test_reverse_complement():
     assert reverse_complement("ATGC") == "GCAT"
@@ -20,3 +20,25 @@ def test_melting_temperature():
     assert melting_temperature("GGGG") == 4*4
     assert melting_temperature("ATATAT") == 2*6
     assert melting_temperature("") == 0  # Edge case: empty string
+
+def test_mutate_site():
+    # Normal mutation
+    assert mutate_site("ATGC", 1, "G") == "AGGC"
+    assert mutate_site("ATGC", 0, "T") == "TTGC"
+    assert mutate_site("ATGC", 3, "A") == "ATGA"
+    
+    # Invalid position: negative
+    with pytest.raises(ValueError):
+        mutate_site("ATGC", -1, "A")
+    
+    # Invalid position: out of range
+    with pytest.raises(ValueError):
+        mutate_site("ATGC", 4, "A")
+    
+    # Invalid new_base
+    with pytest.raises(ValueError):
+        mutate_site("ATGC", 2, "X")
+    
+    # Edge case: empty sequence
+    with pytest.raises(ValueError):
+        mutate_site("", 0, "A")

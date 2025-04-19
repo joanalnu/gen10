@@ -59,27 +59,28 @@ If you are completely new to coding or to Python, you can start with the above m
 ## Methods
 The currently available methods are the following. Note that we are always updating the methods and adding new ones!
 
-| Name | Description | Arguments | Outputs |
-| --- | --- | --- | --- |
-| dna2rna() | Transcribes the provided DNA string into a RNA string by changing the bases (A->U, T-> A, C->G, G->C). | string | string |
-| rna2amino() | Transcribes the provided DNA string into an aminoacid string by reading codons (3x bases) and using the catalog. | string | string |
-| dna2amino() | Transcribes DNA strings directly into aminoacids strings, it's a merge of the dna2rna and rna2amino methods. | string | string |
-| rna2dna() | Transcribes RNA strings back into DNA strings. | string | string |
-| compare() | Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ. | string1, string2 | boolean, string |
-| check() | It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings. | string | string |
-| read_input() | Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence. | string | string |
-| createmutation() | Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position. | string | string |
-| iterate() | By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input. | list, list | dataframe (table) |
-| tosingle() | Transcribes an aminoacid string from three-letter code to single-letter code. | string | string |
-| alphafold_prediction() | By inputting a UniProt ID $^1$ , it returns a url to the `pbd` file of the predicted protein's structure. | string | dictionary |
-| generate_protein() | By inputing the resulting dictionary of `alphafold_prediction()` it returns a visualization of the predicted protein's strucutre. | dictionary | None |
-| cut_dna(string, integer) | Cuts the DNA string into two parts at the specified position. | string and integer | string Original DNA with a marked cut |
-| repair_dna(string, string, integer, string) | Repairs a cut DNA string by either deleting a base (NHEJ) or adding specific bases at the specified location (HDR). | string DNA string, string type of repair (NHEJ or HDR), integer Optional: cut position, string Optional: string to insert by HDR repair | string Repaired DNA |
-| find(string, sequence) | Finds a local sequence in a larger, global sequence. | string, string (global, local) | [(int, int)] indexes of the found position |
-| check_codon(string) | Checks for non-existing codons in a dna or rna sequence. | string | ['ABC'] list of non-existing codons |
-| reverse_complement(dna) | Computes the reverse complement of a given DNA sequence. | string | string |
-| gc_content(dna) | Calculates the GC content (percentage) of a given DNA sequence. | string | float |
-| melting_temperature(dna) | Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule. | string | float |
+| # | Name | Description | Arguments | Outputs |
+| --- | --- | --- | --- | --- |
+| 1 | dna2rna() | Transcribes the provided DNA string into a RNA string by changing the bases (A->U, T-> A, C->G, G->C). | string | string |
+| 2 | rna2amino() | Transcribes the provided DNA string into an aminoacid string by reading codons (3x bases) and using the catalog. | string | string |
+| 3 | dna2amino() | Transcribes DNA strings directly into aminoacids strings, it's a merge of the dna2rna and rna2amino methods. | string | string |
+| 4 | rna2dna() | Transcribes RNA strings back into DNA strings. | string | string |
+| 5 | compare() | Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ. | string1, string2 | boolean, string |
+| 6 | check() | It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings. | string | string |
+| 7 | read_input() | Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence. | string | string |
+| 8 | createmutation() | Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position. | string | string |
+| 9 | iterate() | By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input. | list, list | dataframe (table) |
+| 10 | tosingle() | Transcribes an aminoacid string from three-letter code to single-letter code. | string | string |
+| 11 | alphafold_prediction() | By inputting a UniProt ID $^1$ , it returns a url to the `pbd` file of the predicted protein's structure. | string | dictionary |
+| 12 | generate_protein() | By inputing the resulting dictionary of `alphafold_prediction()` it returns a visualization of the predicted protein's strucutre. | dictionary | None |
+| 13 | cut_dna(string, integer) | Cuts the DNA string into two parts at the specified position. | string and integer | string Original DNA with a marked cut |
+| 14 | repair_dna(string, string, integer, string) | Repairs a cut DNA string by either deleting a base (NHEJ) or adding specific bases at the specified location (HDR). | string DNA string, string type of repair (NHEJ or HDR), integer Optional: cut position, string Optional: string to insert by HDR repair | string Repaired DNA |
+| 15 | find(string, sequence) | Finds a local sequence in a larger, global sequence. | string, string (global, local) | [(int, int)] indexes of the found position |
+| 16 | check_codon(string) | Checks for non-existing codons in a dna or rna sequence. | string | ['ABC'] list of non-existing codons |
+| 17 | reverse_complement(dna) | Computes the reverse complement of a given DNA sequence. | string | string |
+| 18 | gc_content(dna) | Calculates the GC content (percentage) of a given DNA sequence. | string | float |
+| 19 | melting_temperature(dna) | Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule. | string | float |
+| 20 | mutate_site(sequence, pos, new_base) | This function mutates a specific site in a DNA sequence. | string, int, string | string |
 
 $^1$ The Alphafold package only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)

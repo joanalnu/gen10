@@ -31,3 +31,16 @@ def temperatura_fusio(dna):
 
     tm = 2 * (a_count + t_count) + 4 * (g_count + c_count)
     return tm
+
+def mutar_lloc(sequence, pos, new_base):
+    """
+    Aquesta funció muta un lloc específic en una seqüència d'ADN.
+    """
+    if pos < 0 or pos >= len(sequence):
+        raise ValueError("Posició fora de rang")
+    if new_base not in ['A', 'T', 'C', 'G']:
+        raise ValueError("Base invàlida")
+    
+    mutated_sequence = list(sequence)
+    mutated_sequence[pos] = new_base
+    return ''.join(mutated_sequence)
