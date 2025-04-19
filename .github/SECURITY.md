@@ -1,11 +1,11 @@
 # Security Policy
 
 ## Reporting a Vulnerability  
-GEN-API doesn't handle sensitive files of your operating system or its crucial components. However, you may be working with sensitive information (e.g., DNA sequences). For privacy reasons, GEN-API does not store any input information except when using the **iterate** or **alphafold_prediction** features.  
+`gen10` doesn't handle sensitive files of your operating system or its crucial components. However, you may be working with sensitive information (e.g., DNA sequences). For privacy reasons, `gen10` does not store any input information except when using the **iterate** or **alphafold_prediction** features.  
 
 Please note that the integration with AlphaFold involves sending information via requests to the remote AlphaFold 2.0 API. For more details, please refer to their [official website](https://alphafold.ebi.ac.uk/api-docs).  
 
-The GEN-API community takes security bugs seriously. We appreciate your efforts to responsibly disclose your findings and report any security issues to the code owner.  
+The `gen10` community takes security bugs seriously. We appreciate your efforts to responsibly disclose your findings and report any security issues to the code owner.  
 
 To report a security issue, please use the GitHub Security Advisory **"Report a Vulnerability"** tab.  
 
