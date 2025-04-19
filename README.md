@@ -10,9 +10,9 @@
 
 
 
-`gen10` is an API for using the [genetics10](https://joanalnu.github.io/genetics10) tools integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
+`gen10` is an package for using the [genetics10](https://joanalnu.github.io/genetics10) tools integrated in your python scripts. It is straightforward to install and easy to use in your current code, incorporating useful functions when working with genetic data.
 
-The API allows you to translate DNA sequences into RNA or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold API, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. gen10 is also a powerful tool for students to experiment with, learn from, and create their own code.
+The package allows you to translate DNA sequences into RNA or amino acid sequences, compare sequences, generating mutations, and built-in iteration for big data. Furthermore, there is an integration with the AlphaFold package, allowing users to visualize predicted protein strucures, as well as functions to simulate the action of CRISPR-Cas9 gene editing. gen10 is also a powerful tool for students to experiment with, learn from, and create their own code.
 
 [(jump to the info for educators below)](#info-for-educators)
 
@@ -23,17 +23,17 @@ The API allows you to translate DNA sequences into RNA or amino acid sequences, 
 - [Català](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Installation
-You can install the API by cloning this repository to your local machine by running the following command in your terminal:
+You can install the package by cloning this repository to your local machine by running the following command in your terminal:
 ```bash
 git clone https://github.com/joananlu/gen10.git
 ```
-Navigate to the clone directory using ```cd gen10/``` and install the API to your current environment using pip:
+Navigate to the clone directory using ```cd gen10/``` and install the package to your current environment using pip:
 ```bash
 pip install .
 ```
 
 ## Usage
-To use the API, you can import it in your python script:
+To use the package, you can import it in your python script:
 ```python
 import gen10
 ```
@@ -125,7 +125,7 @@ The available functions are the following:
     Argument: ```string```\
     Output: ```['ABC']``` list of non-existing codons\
 
-$^1$ The Alphafold API only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
+$^1$ The Alphafold package only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
 2. For genes: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
 3. UniProt are available in the alpahfold website itself: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
@@ -206,12 +206,12 @@ hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence
 print('HDR Repaired DNA: ', hdr_repaired_dna)
 ```
 
-## Citing gen API
+## Citing gen package
 If you make use of this code please cite it:
 ```bibtex
 @software{joanalnu_2024b,
     author = [Alcaide-Núñez, Joan],
-    title = {GEN API},
+    title = {GEN package},
     month = november,
     year = {2024},
     publisher = {Zenodo},
@@ -225,7 +225,7 @@ If you make use of this code please cite it:
 Please contact me via [email](mailto:joanalnu@outlook.com) or send pull requests.
 
 ## Info for educators
-This is the formal API for the [genetic10](https://joanalnu.github.io/genetics10) educational software. While the jupyter notebook is a beginner-friendly interface and does not require installation, making it ideal for school-managed devices, the API is designed to be used in a more professional environment. It is up to you to decide whether to use the API or the jupyter notebook, considering your alumns' level of expertise and the resources available.
+This is the formal package for the [genetics10](https://joanalnu.github.io/genetics10) educational software. While the jupyter notebook is a beginner-friendly interface and does not require installation, making it ideal for school-managed devices, the package is designed to be used in a more professional environment. It is up to you to decide whether to use the package or the jupyter notebook, considering your alumns' level of expertise and the resources available.
 
 ### How can I use this in my class?
 First, identify in your curriculum where you can integrate the software, which is already built aligned with the general education guidelines. Then you should start by explaining the fundamental concepts of genomics in your biology or science class, as you would do normally. Then you can introduce this tool to students and explain how to use it.
