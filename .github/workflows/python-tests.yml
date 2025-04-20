@@ -2,7 +2,7 @@ name: Python CI
 
 on:
   push:
-    branches: [main]  # or other branches you want to trigger the CI on
+    branches: [main, fusion]  # or other branches you want to trigger the CI on
   pull_request:
     branches: [main]
 
