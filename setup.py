@@ -13,7 +13,7 @@ with open("gen_api/_version.py") as version_file:
 
 setup(
     name="gen10",
-    version="1.3",
+    version="1.4",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
     description="API to use the functions of the Genetics10 project",
