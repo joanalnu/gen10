@@ -1,245 +1,141 @@
 # gen10
+---
 
-`gen10` és una API per utilitzar les eines de [genetics10](https://joanalnu.github.io/genetics10) integrades als vostres scripts de python. És senzill d'instal·lar i fàcil d'utilitzar en el vostre codi actual, incorporant funcions útils quan es treballa amb dades genètiques.
+[![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen10-blue.svg?style=flat)](https://github.com/joanalnu/gen10)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen10/LICENSE)
+![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
+[![DOI](https://zenodo.org/badge/885760467.svg)](https://doi.org/10.5281/zenodo.14059748)
 
-L'API permet traduir seqüències d'ADN a seqüències d'ARN o aminoàcids, comparar seqüències, generar mutacions i iteració integrada per a grans conjunts de dades. A més, hi ha una integració amb l'API d'AlphaFold, que permet als usuaris visualitzar estructures de proteïnes predites, així com funcions per simular l'acció de l'edició genètica CRISPR-Cas9. gen10 també és una eina poderosa per als estudiants per experimentar, aprendre i crear el seu propi codi.
+![Build Status](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
+![Open Issues](https://img.shields.io/github/issues/joanalnu/gen10)
 
-[(anar a la informació per a educadors a continuació)](#info-per-a-educadors)
+### Índex
+- [Introducció](#introducció)
+- [Altres idiomes](#llegeix-la-documentació-en-el-teu-idioma)
+- [Instal·lació](#instal·lació)
+- [Ús](#ús)
+- [Mètodes](#mètodes)
+- [Citant aquest paquet](#citant-el-paquet-gen10)
+- [Contribuir](#contribuir)
+- [Informació per a educadors](#informació-per-a-educadors)
+- [Contacta amb mi!](#contacta-amb-mi)
+
+
+---
+
+## Introducció
+
+*`gen10`* és un paquet per a l'anàlisi i visualització de dades genòmiques, que proporciona les eines adequades integrades en el teu codi Python. L'objectiu original d'aquest paquet és oferir suport i eines per a l'educació a l'institut o a la universitat, però es pot utilitzar per a qualsevol propòsit aplicable.
+
+El paquet `gen10` et permet realitzar una gran i creixent varietat de tasques, des de traduir ADN a ARN o seqüències de proteïnes, fins a recuperar prediccions d'estructura d'Alphafold, simular mutacions i molt més! `gen10` és una eina potent i alhora fàcil d'utilitzar perquè els estudiants puguin experimentar, aprendre i crear el seu propi codi. No necessita cap instal·lació de programari i es pot utilitzar directament des d'un navegador web.
+
+Si ets un educador, pots veure per què has d'incorporar això a la teva classe a la [secció d'informació per a educadors](#informació-per-a-educadors).
 
 ## Llegeix la documentació en el teu idioma
-- [Anglès](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
-- [Espanyol](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
-- [Alemany](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
-- [Català](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
+- [Llegeix la documentació en el teu idioma](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+- [Lee la documentación en tu lenguaje](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
+- [Lesen Sie das Dokument in ihrer Sprache](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
+- [Llegeix la documentació en el seu idioma](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Instal·lació
-Podeu instal·lar l'API clonant aquest repositori al vostre ordinador local executant el següent comandament al vostre terminal:
+Pots instal·lar el paquet utilitzant pip:
 ```bash
-git clone https://github.com/joanalnu/gen10.git
-```
-Navegueu fins al directori clonat utilitzant ```cd gen10/``` i instaleu l'API al vostre entorn actual utilitzant pip:
-```bash
-pip install .
+pip install gen10
 ```
 
+Alternativament, pots utilitzar un notebook basat en navegador per interactuar amb el paquet i executar el teu codi per cel·les. Aquesta és una eina molt útil per a l'educació. Hem preparat un tutorial pas a pas en un Google Colab Notebook [aquí](https://joanalnu.github.io/help).
+
 ## Ús
-Per utilitzar l'API, podeu importar-la al vostre script de python:
+`gen10` funciona com qualsevol altre paquet `pip`. Pots importar-lo al teu codi afegint
 ```python
 import gen10
 ```
-Recordeu que heu d'executar el script de python en l'entorn on heu instal·lat l'API prèviament (si utilitzeu entorns de codi).
+i després utilitzar els mètodes proporcionats pel paquet. Recorda que per utilitzar un mètode d'un paquet en Python has d'escriure:
+```python
+sortida = gen10.nom_metode(arguments)
+```
+Si ets completament nou en la programació o en Python, pots començar amb el tutorial esmentat anteriorment en Google Colab Notebook.
 
-Escriviu ```gen10.function()``` per cridar qualsevol funció. Recordeu que heu de proporcionar l'argument adequat dins dels parèntesis. El fragment de codi de l'exemple anterior crida la funció ```dna2rna()```. Li proporciona la cadena ```dna``` com a entrada, i la funció retorna la sortida anomenada ```rna```.
+## Mètodes
+Els mètodes disponibles actualment són els següents. Tingues en compte que sempre estem actualitzant els mètodes i afegint-ne de nous!
 
-Les funcions disponibles són les següents:
-1. ```dna2rna()```\
-    Transcriu la cadena d'ADN proporcionada en una cadena d'ARN canviant les bases (A->U, T-> A, C->G, G->C).\
-   Argument: ```string```\
-   Sortida: ```string```
+| # | Nom | Descripció | Arguments | Sortides |
+| --- | --- | --- | --- | --- |
+| 1 | adn2arn() | Transcriu la cadena d'ADN proporcionada en una cadena d'ARN canviant les bases (A->U, T->A, C->G, G->C). | string | string |
+| 2 | arn2amino() | Transcriu la cadena d'ARN proporcionada en una cadena d'aminoàcids llegint codons (3 bases) i utilitzant el catàleg. | string | string |
+| 3 | adn2amino() | Transcriu directament cadenes d'ADN en cadenes d'aminoàcids, és una fusió dels mètodes dna2rna i rna2amino. | string | string |
+| 4 | arn2adn() | Transcriu cadenes d'ARN de nou a cadenes d'ADN. | string | string |
+| 5 | compara() | Compara les cadenes (independentment si són ADN, ARN o aminoàcids), sempre retorna un booleà i una cadena. True si ambdues cadenes són idèntiques, o False i on difereixen les cadenes. | string1, string2 | boolean, string |
+| 6 | comprova() | Comprova si la cadena proporcionada és un ADN o ARN vàlid. No comprova cadenes d'aminoàcids. | string | string |
+| 7 | llegir_input() | S'utilitza per obrir fitxers. El camí complet al fitxer ha d'estar guardat a la mateixa carpeta que aquest fitxer i només pot tenir 1 seqüència. | string | string |
+| 8 | crear_mutacio() | Retorna una nova cadena amb una mutació (només 1 per execució). La mutació pot canviar una base, esborrar una base o afegir-ne una nova en qualsevol posició. | string | string |
+| 9 | iterar() | Introduint una llista d'entrades i una llista de funcions retorna una taula amb tots els resultats per a cada funció i entrada. | list, list | dataframe (taula) |
+| 10 | asenzill() | Transcriu una cadena d'aminoàcids del codi de tres lletres al codi d'una sola lletra. | string | string |
+| 11 | alphafold() | Introduint un ID UniProt $^1$, retorna una URL al fitxer `pdb` de l'estructura de la proteïna predicha. | string | diccionari |
+| 12 | generar_proteina() | Introduint el diccionari resultant de `alphafold()` retorna una visualització de l'estructura de la proteïna predicha. | diccionari | Cap |
+| 13 | tallar_adn(string, integer) | Talla la cadena d'ADN en dues parts en la posició especificada. | string i integer | cadena original d'ADN amb un tall marcat |
+| 14 | reparar_adn(string, string, integer, string) | Repara una cadena d'ADN tallada eliminant una base (NHEJ) o afegint bases específiques a la posició especificada (HDR). | cadena d'ADN, tipus de reparació (NHEJ o HDR), integer Opcional: posició del tall, string Opcional: cadena a inserir per reparació HDR | cadena d'ADN reparada |
+| 15 | buscar(string, sequence) | Troba una seqüència local dins d'una seqüència més gran, global. | string, string (global, local) | [(int, int)] índexs de la posició trobada |
+| 16 | comprova_codo(string) | Comprova codons no existents en una seqüència d'ADN o ARN. | string | ['ABC'] llista de codons no existents |
+| 17 | complementaria(dna) | Calcula el complement invers d'una seqüència d'ADN donada. | string | string |
+| 18 | contingut_gc(dna) | Calcula el contingut de GC (percentatge) d'una seqüència d'ADN donada. | string | float |
+| 19 | temperatura_fusio(dna) | Calcula la temperatura de fusió (Tm) d'una seqüència curta d'ADN utilitzant la regla de Wallace. | string | float |
+| 20 | mutar_lloc(sequence, pos, new_base) | Aquesta funció muta un lloc específic en una seqüència d'ADN. | string, int, string | string |
+| 21 | simular_pcr(sequence, fwd_primer, rev_primer) | Aquesta funció simula una reacció de PCR utilitzant la seqüència proporcionada, primers endavant i endarrere. | string, string, string | string |
+| 22 | identificador(sequence) | Genera un identificador únic per a la seqüència comprovant si és ADN, ARN o proteïna. | string | string |
+| 23 | escriure_fasta(sequences, identifiers=None, filename="output.fasta") | Escriu una o diverses seqüències en un fitxer FASTA, separades per una línia buida. | string o llista de strings, string o llista de strings (opcional), string (opcional) | Cap (fitxer escrit) |
+| 24 | llegir_fasta(filename) | Llegeix un fitxer FASTA i retorna llistes d'identificadors de seqüències i seqüències. | string | identificadors (llista), seqüències (llistes) |
+| 25 | llegir_genbank(filename) | Analitza les dades d'un fitxer GenBank en un diccionari usable. | nom del fitxer (str) | diccionari |
 
-2. ```rna2amino()```\
-    Transcriu la cadena d'ADN proporcionada en una cadena d'aminoàcids llegint codons (3x bases) i utilitzant el catàleg.\
-   Argument: ```string```\
-   Sortida: ```string```
-
-3. ```dna2amino()```\
-    Transcriu les cadenes d'ADN directament en cadenes d'aminoàcids, és una fusió dels mètodes dna2rna i rna2amino.\
-   Argument: ```string```\
-   Sortida: ```string```
-
-4. ```rna2dna()```\
-    Transcriu les cadenes d'ARN en cadenes d'ADN.\
-    Argument: ```string```\
-    Sortida: ```string```
-
-5. ```compare()```\
-    Compara les cadenes (tant si són d'ADN, ARN o aminoàcids), sempre retorna un booleà i una cadena. Cert si les dues cadenes són idèntiques, o Fals i on difereixen les cadenes.\
-   Argument: ```string1, string2```\
-   Sortida: ```booleà, string```
-
-6. ```check()```\
-    Comprova si la cadena proporcionada és una cadena d'ADN o ARN vàlida. No comprova les cadenes d'aminoàcids.\
-   Argument: ```string```\
-   Sortida: ```string```
-
-7. ```read_input()```\
-    S'utilitza per obrir fitxers. La ruta completa al fitxer ha de estar guardada al mateix directori que aquest fitxer i només pot tenir 1 seqüència.\
-    Argument: ```string```\
-    Sortida: ```string```
-
-8. ```createmutation()```\
-    Retorna una nova cadena amb una mutació (només 1 per execució). La mutació pot canviar una base, esborrar una base o afegir una nova en qualsevol posició.\
-    Argument: ```string```\
-    Sortida: ```string```
-
-9. ```iterate()```\
-    En introduir una llista d'entrades i una llista de funcions retorna una taula amb tots els resultats per a cada funció i entrada.
-    Argument: ```llista, llista```
-    Sortida  ```dataframe``` (taula)
-
-10. ```tosingle()```\
-    Transcriu una cadena d'aminoàcids del codi de tres lletres al codi de lletra única.\
-    Argument: ```string```\
-    Sortida: ```string```
-
-11. ```alphafold_prediction()```\
-    En introduir un ID d'UniProt $^1$ , retorna una URL al fitxer ```pbd``` de la predicció de l'estructura de la proteïna.\
-    Argument: ```string```\
-    Sortida: ```diccionari```\
-
-12. ```generate_protein()```\
-    En introduir el diccionari resultant de ```alphafold_prediction()``` retorna una visualització de la predicció de l'estructura de la proteïna.\
-    Argument: ```diccionari```\
-    Sortida: ```None```
-
-13. ```cut_dna(string, integer)```\
-    Tallar la cadena d'ADN en dues parts a la posició especificada.\
-    Argument: ```string i integer```\
-    Sortida: ```string``` ADN original amb una tallada marcada
-
-14. ```repair_dna(string, string, integer, string)```
-    Reparar una cadena d'ADN tallada eliminant una base (NHEJ) o afegint bases específiques a la posició especificada (HDR).\
-    Argument: ```string``` cadena d'ADN\
-            ```string``` tipus de reparació (NHEJ o HDR)\
-            ```integer``` Opcional: posició de tallada\
-            ```string``` Opcional: cadena per inserir en la reparació HDR\
-    Sortida: ```string``` ADN reparat
-
-15. ```buscar(string, sequence)```\
-    Per trobar una seqüència local en una global.\
-    Argument: ```string, string``` (global, local)\
-    Sortida: ```[int, int]``` índexes de la posició trobada\
-
-16. ```comprova_codo(string)```\
-    Comprova si hi ha codons inexistents en una seqüència d'ADN o ARN.\
-    Argument: ```string```\
-    Output: ```['ABC']``` llista de codons inexistents\
-
-$^1$ L'API d'AlphaFold només admet ID d'UniProt com a entrada. Podeu trobar l'ID d'UniProt d'una proteïna o gen a la web. Recomanem les següents bases de dades.
-1. Lloc web oficial d'UniProt: [https://www.uniprot.org](https://www.uniprot.org)
+$^1$ El paquet Alphafold només admet IDs UniProt com a entrada. Pots trobar l'ID UniProt d'una proteïna o gen a la web. Recomanem les següents bases de dades.
+1. Pàgina oficial de UniProt: [https://www.uniprot.org](https://www.uniprot.org)
 2. Per a gens: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
-3. ID d'UniProt disponibles al lloc web d'AlphaFold: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
+3. UniProt està disponible també a la pàgina d'Alphafold: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
 
-Si us plau, noteu que una guia pas a pas sobre com accedir als ID d'UniProt està en desenvolupament.
-
-## Exemples per a principiants
-
-### Traduir ADN a ARN i aminoàcids
-```python
-# entrada
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona la cadena d'ADN
-
-# obtenir la cadena d'ARN
-my_rna = gen10.dna2rna(my_dna)
-print(my_rna)
-
-# obtenir la cadena d'aminoàcids
-my_amino = gen10.rna2amino(my_rna)
-print(my_amino)
-```
-
-### Crear una mutació
-```python
-# entrada
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona la cadena d'ADN
-
-# crear mutació
-mutacio = gen10.createmutation(my_dna)
-print(mutacio)
-
-# obtenir la posició on va succeir la mutació
-index = gen10.compare(my_dna, mutacio)
-print(index)
-```
-
-### Obrir un fitxer txt i utilitzar iteració
-```python
-# llegir fitxer d'entrada
-dnas = gen10.read_input('/examples/my_dnas.txt') # noteu que heu de tenir un fitxer anomenat així al mateix directori que aquest fitxer
-funcions = ['createmutation', 'dna2rna', 'rna2amino'] # quines funcions voleu executar
-sortida = gen10.iterate(dnas, funcions) # cridar funcions d'iteració
-print(sortida) # mostrar sortida de iterate()
-```
-
-### Visualitzar una proteïna
-```python
-# aquesta és la seqüència d'aminoàcids per a la proteïna
-# Aquí la seqüència d'aminoàcids està representada amb la primera lletra de cada aminoàcid (en comptes de les tres lletres anteriors)
-amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYDAEDVLETFVQKEKLGTTSGIRKHIKRLTCIVPDRREIALYIGHVSKRITRVIRDMQSFGVQQMIVDDYMHPLRNREREIRRTFPKDNESGFVALEENVKKLVGYFVEEDNYQVVSITGMGGLGKTTLARQVFNHDMVTKKFDKLAWVSVSQDFTLKNVWQNILGDLKPKEEETKEEEKKILEMTEYTLQRELYQLLEMSKSLIVLDDIWKKEDWEVIKPIFPPTKGWKLLLTSRNESIVAPTNTKYFNFKPECLKTDDSWKLFQRIAFPINDASEFEIDEEMEKLGEKMIEHCGGLPLAIKVLGGMLAEKYTSHDWRRLSENIGSHLVGGRTNFNDDNNNSCNYVLSLSFEELPSYLKHCFLYLAHFPEDYEIKVENLSYYWAAEEIFQPRHYDGEIIRDVGDVYIEELVRRNMVISERDVKTSRFETCHLHDMMREVCLLKAKEENFLQITSNPPSTANFQSTVTSRRLVYQYPTTLHVEKDINNPKLRSLVVVTLGSWNMAGSSFTRLELLRVLDLVQAKLKGGKLASCIGKLIHLRYLSLEYAEVTHIPYSLGNLKLLIYLNLHISLSSRSNFVPNVLMGMQELRYLALPSLIERKTKLELSNLVKLETLENFSTKNSSLEDLRGMVRLRTLTIELIEETSLETLAASIGGLKYLEKLEIDDLGSKMRTKEAGIVFDFVHLKRLRLELYMPRLSKEQHFPSHLTTLYLQHCRLEEDPMPILEKLLQLKELELGHKSFSGKKMVCSSCGFPQLQKLSISGLKEWEDWKVEESSMPLLLTLNIFDCRKLKQLPDEHLPSHLTAISLKKCGLEDPIPTLERLVHLKELSLSELCGRIMVCTGGGFPQLHKLDLSELDGLEEWIVEDGSMPRLHTLEIRRCLKLKKLPNGFPQLQNLHLTEVEEWEEGMIVKQGSMPLLHTLYIWHCPKLPGEQHFPSHLTTVFLLGMYVEEDPMRILEKLLHLKNVSLFQSFSGKRMVCSGGGFPQLQKLSIREIEWEEWIVEQGSMPLLHTLYIGVCPNLKELPDGLRFIYSLKNLIVSKRWKKRLSEGGEDYYKVQHIPSVEFDD'
-
-# Aquest és l'ID d'UniProt per a aquesta proteïna
-uniprot_id = 'Q8W3K0'
-
-# Ara fem la predicció de l'estructura d'AlphaFold
-estructura = gen10.alphafold_prediction(uniprot_id)
-
-# Finalment cridem generate_protein() per mostrar la predicció
-proteina = gen10.generate_protein(estructura)
-```
-
-### Simulació de CRISPR Cas
-```python
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # proporciona la cadena d'ADN
-print('ADN original:', my_dna)
-
-# Tallar l'ADN a la posició 16
-cut_position = 16
-cut_dna = gen10.cut_dna(my_dna, cut_position)
-print('ADN tallat: ', cut_dna)
-
-# Reparar l'ADN utilitzant NHEJ (esborrany)
-nhej_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'NHEJ')
-print('ADN reparat NHEJ: ', nhej_repaired_dna)
-
-# Reparar l'ADN utilitzant HDR (inserció de 'XYZ')
-hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
-print('ADN reparat HDR: ', hdr_repaired_dna)
-```
-
-## Citació de gen API
-Si feu ús d'aquest codi, si us plau citeu-lo:
+## Citant el paquet `gen10`
+Si fas ús d'aquest codi, si us plau cita'l:
 ```bibtex
 @software{joanalnu_2024b,
     author = [Alcaide-Núñez, Joan],
-    title = {GEN API},
-    month = november,
-    year = {2024},
+    title = {Paquet GEN10},
+    month = {Abril},
+    year = {2025},
     publisher = {Zenodo},
-    version = {1.0},
+    version = {1.4},
     doi = {10.5281/zenodo.14059749},
     url = {https://github.com/joanalnu/gen10},
 }
 ```
 
-## Contribuint
-Si us plau, contacteu-me via [correu electrònic](mailto:joanalnu@outlook.com) o envieu sol·licituds de pull.
+## Contribuir
+No dubtis a enviar qualsevol problema o fer pull requests al repositori!
 
 ## Informació per a educadors
-Aquesta és l'API formal per al programari educatiu [genetic10](https://joanalnu.github.io/genetics10). Mentre el quadern de jupyter és una interfície amigable per a principiants i no requereix instal·lació, fent-lo ideal per a dispositius gestionats per l'escola, l'API està dissenyada per ser utilitzada en un entorn més professional. Depèn de vosaltres decidir si utilitzar l'API o el quadern de jupyter, tenint en compte el nivell d'expertesa dels alumnes i els recursos disponibles.
+Un paquet és un codi Python que proporciona funcions (és a dir, mètodes) per ser utilitzades directament al teu codi només cridant-les, sense haver d'escriure res més. Els notebooks són fàcils d'utilitzar pels estudiants i, com que són basats en navegador, no requereixen cap instal·lació, fent-los ideals per a dispositius gestionats per escoles.
 
 ### Com puc utilitzar això a la meva classe?
-En primer lloc, identifiqueu en el vostre currículum on podeu integrar el programari, que ja està construït alineat amb les directrius generals d'educació. Després, heu de començar explicant els conceptes fonamentals de la genòmica en la vostra classe de biologia o ciències, com ho faríeu normalment. Després podeu presentar aquesta eina als alumnes i explicar com utilitzar-la.
+Primer, identifica al teu currículum on pots integrar el programari, que ja està construït alineat amb les directrius educatives generals. Després, hauries de començar explicant els conceptes fonamentals de la genòmica a la teva classe de biologia o ciències, com faries normalment. Després pots introduir aquesta eina als estudiants i explicar com utilitzar-la.
 
-Podeu utilitzar el programari per dissenyar reptes de resolució de problemes que requereixin que els alumnes utilitzin pensament crític i habilitats de codificació. Per exemple, un escenari en què una mutació genètica causa una malaltia, i demaneu als alumnes que escriguin codi que identifiqui i corregeixi la mutació. Aquest tipus d'activitats fomenten la creativitat i l'habilitat de resolució de problemes i porten a més ciència com CRIPSR-Cas9.
+Pots utilitzar el programari per dissenyar reptes de resolució de problemes que requereixin que els estudiants utilitzin el pensament crític i habilitats de programació. Per exemple, un escenari on una mutació genètica causa una malaltia, i demanar als estudiants que escriguin codi que identifiqui i corregeixi la mutació. Aquest tipus d'activitats fomenten la creativitat i les habilitats de resolució de problemes i condueixen a més ciència com CRISPR-Cas9.
 
-També, realitzeu activitats planificades on els alumnes apliquin el que han après en la vida real. Creeu assignacions on els alumnes escriguin codi simple utilitzant les funcions preestablertes per emular processos genètics com la transcripció i la traducció.
+També, realitza activitats planificades on els estudiants apliquin el que han après a la vida real. Crea tasques on els estudiants escriguin codi senzill utilitzant les funcions preestablertes per emular processos genètics com la transcripció i la traducció.
 
-Al proporcionar instruccions pas a pas, els alumnes tindran més oportunitats d'entendre el contingut biològic i una millor utilització del potencial complet d'eina. A més, al integrar exemples del món real i aplicacions en genòmica i biotecnologia, es pot augmentar la motivació i l'interès dels alumnes, i mostrar i discutir eines de recerca modernes.
+Proporcionant instruccions pas a pas, els estudiants tindran més possibilitats d'entendre el contingut biològic i un millor ús del potencial complet d'aquesta eina. A més, integrar exemples del món real i aplicacions en genòmica i biotecnologia pot augmentar la motivació i l'interès dels estudiants, i mostrar i discutir eines de recerca modernes.
 
-Finalment, també podeu adoptar un enfocament de classe invertida assignant tutorials de programari com a tasca i utilitzar el temps de classe per a l'aprenentatge interactiu i aplicat. Això permet una major participació a la classe i permet una instrucció més personalitzada.
+Finalment, també pots adoptar un enfocament de classe invertida assignant tutorials de programari com a deures i utilitzar el temps de classe per a un aprenentatge interactiu i aplicat. Això permet maximitzar la participació a classe i permet una instrucció més personalitzada.
 
-Fomentant la col·laboració planificant projectes de grup, els alumnes poden treballar junts per resoldre problemes més complexos. I els projectes col·laboratius fomenten el treball en equip i permeten que els alumnes aprenguin els uns dels altres.
+Fomentant la col·laboració mitjançant la planificació de projectes en grup, els estudiants poden treballar junts per resoldre problemes més complexos. I els projectes col·laboratius fomenten el treball en equip i permeten als estudiants aprendre els uns dels altres.
 
-Incorporant aquestes estratègies, podeu utilitzar eficaçment aquest programari per millorar el vostre currículum de biologia, involucrar els alumnes i fomentar una comprensió més profunda de la genòmica i la codificació.
+Incorporant aquestes estratègies, pots utilitzar efectivament aquest programari per millorar el teu currículum de biologia, implicar els estudiants i fomentar una comprensió més profunda tant de la genòmica com de la programació.
 
-### Per què hauria de fer servir això a la meva classe?
-Aquesta és una eina útil perquè els alumnes aprenguin genòmica i codificació bàsica. D'una banda, aquesta és una eina poderosa que permet als alumnes aplicar el que han après sobre biologia. Està dissenyada per ser interactiva i personalitzable, i qualsevol pot executar el seu propi codi sense coneixements de codificació. D'altra banda, els alumnes aprendran i tindran experiència pràctica amb bioinformàtica i computació. La codificació és una habilitat essencial per als treballadors del futur, independentment del seu camp.
+### Per què hauria d'utilitzar això a la meva classe?
+Aquesta és una eina útil perquè els estudiants aprenguin tant genòmica com programació bàsica. D'una banda, és una eina potent que permet als estudiants aplicar el que han après sobre biologia. Està feta per ser interactiva i personalitzable i qualsevol pot executar el seu propi codi sense coneixements de programació. D'altra banda, els estudiants aprendran i tindran experiència directa amb bioinformàtica i computació. La programació és una habilitat essencial per als treballadors del futur, independentment del seu camp.
 
-A més, el fet que sigui basada en web i no necessiti instal·lació la fa ideal per a dispositius gestionats per l'escola i permet l'ús independent del sistema operatiu. També fomenta les habilitats de treball en equip i comunicació, ja que els projectes es poden realitzar en col·laboració.
+A més, el fet que sigui basada en web i no necessiti cap instal·lació la fa perfecta per a dispositius gestionats per escoles i permet l'ús independentment del sistema operatiu. També fomenta habilitats de treball en equip i comunicació, ja que els projectes es poden fer en col·laboració.
 
-Addicionalment, les funcions del programari estan alineades amb el currículum escolar i mostren aplicacions pràctiques del contingut de la classe de manera immediata. També promou el pensament crític permetent als alumnes escriure el seu propi codi per resoldre problemes i involucrar-se activament. I no es requereix coneixement previ de codificació, ja que els alumnes utilitzaran les funcions preestablertes que permeten un ampli rang de possibilitats. A més, els alumnes poden adaptar el seu codi als seus problemes o escriure noves funcions. El codi és fàcilment escalable i té possibilitats infinites!
+A més, les característiques del programari estan alineades amb el currículum escolar i mostra aplicacions pràctiques del contingut de classe immediatament. També promou el pensament crític permetent als estudiants escriure el seu propi codi per resoldre problemes i participar activament. I no es requereix cap coneixement previ de programació, ja que els estudiants utilitzaran les funcions preestablertes que permeten una àmplia gamma de possibilitats. A més, els estudiants poden adaptar el seu codi als seus problemes o escriure noves funcions. El codi és fàcilment escalable i té possibilitats infinites!
 
-### Contacteu-me!
-Si teniu dubtes addicionals, no dubteu en contactar-me a [joanalnu@outlook.com](joanalnu@outlook.com). També estic obert a programar reunions o trucades.
+## Contacta amb mi!
+Si tens més dubtes, comentaris o suggeriments, si us plau contacta amb mi a [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
 
-Si us plau, noteu que està en marxa el treball per a més traduccions.
+Si us plau, tingues en compte que les traduccions a altres idiomes (del paquet, els tutorials dels notebooks, el README i altra documentació) són benvingudes. Estaré encantat de traduir-les a qualsevol idioma sota petició.

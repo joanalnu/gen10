@@ -81,7 +81,7 @@ The currently available methods are the following. Note that we are always updat
 | 18 | gc_content(dna) | Calculates the GC content (percentage) of a given DNA sequence. | string | float |
 | 19 | melting_temperature(dna) | Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule. | string | float |
 | 20 | mutate_site(sequence, pos, new_base) | This function mutates a specific site in a DNA sequence. | string, int, string | string |
-| 21. | simulate_pxr(sequence, fwd_primer, rev_primer) | This function simulates a PCR reaction using the provided sequence, forward and reverse primers. | string, string, string | string |
+| 21. | simulate_pcr(sequence, fwd_primer, rev_primer) | This function simulates a PCR reaction using the provided sequence, forward and reverse primers. | string, string, string | string |
 | 22 | get_identifier(sequence) | Generates a unique identifier for the sequence by checking if it is DNA, RNA, or protein. | string | string |
 | 23 | write_fasta(sequences, identifiers=None, filename="output.fasta") | Writes one or multiple sequences to a FASTA file, separated by an empty line. | string or list of strings, string or list of strings (optional), string (optional) | None (writen file) |
 | 24 | read_fasta(filename) | Reads a FASTA file and returns lists of sequence identifiers and sequences. | string | identifiers (list), sequences (lists) |
