@@ -10,10 +10,10 @@ def test_dna2rna():
 def test_compare():
     assert gen10.compare("TACCACGTGGACTGAGGACTCCTCATT", "TACCACGTGGAGTGAGGACTCCTCATT") == ("Difference in 12 base/aminoacid")
 
-def test_createmutation():
+def test_create_mutation():
     dna = "TACCACGTGGACTGAGGACTCCTCATT"
     for i in range(10):
-        mutation = gen10.createmutation(dna)
+        mutation = gen10.create_mutation(dna)
         assert dna != mutation  # Check mutation occurred
 
 def test_dna2amino():
