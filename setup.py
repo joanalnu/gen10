@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 with open("requirements.txt") as requirements_file:
     requirements = requirements_file.read().splitlines()
 
-with open("gen_api/_version.py") as version_file:
+with open("gen10/_version.py") as version_file:
     for line in version_file:
         if "__version__" in line:
             __version__ = line.split()[-1].replace('"', "")
@@ -16,7 +16,7 @@ setup(
     version="1.4",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
-    description="API to use the functions of the Genetics10 project",
+    description="Package for genetics and genomics related functions, mainly for educational purposes.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/joanalnu/gen10',
