@@ -97,3 +97,21 @@ def write_fasta(sequence, identifier=None, filename="output.fasta"):
         for i in range(0, len(sequence), 60):
             fasta_file.write(sequence[i:i+60] + "\n")
 
+def read_fasta(filename):
+    """
+    Read a FASTA file and return the sequence and identifier.
+    """
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+
+        if not lines:  # Check if the list of lines is empty
+            raise IndexError("File is empty")
+        if len(lines) < 2:  # Must have at least one identifier and one sequence
+            raise ValueError("FASTA file must contain at least an identifier and a sequence")
+        if not lines[0].startswith(">"):
+            raise ValueError("FASTA identifier must start with '>'")
+        
+        identifier = lines[0].strip()[1:]  # Remove '>' character
+        sequence = ''.join(line.strip() for line in lines[1:])  # Join remaining lines for sequence
+        
+    return identifier, sequence

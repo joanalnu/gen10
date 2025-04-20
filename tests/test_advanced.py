@@ -108,14 +108,62 @@ def test_write_fasta_default_identifier():
     with tempfile.NamedTemporaryFile(delete=False) as tmpfile:
         filename = tmpfile.name
     try:
-        # Call the write_fasta function with the identifier
-        adv.write_fasta(sequence, filename=filename)
+        adv.write_fasta(sequence, filename=filename) # call method without identifier
         
         with open(filename, 'r') as f:
             content = f.readlines()
         
         # The identifier should be RNA
-        assert content[0] == f">RNA_sequence\n"  # Check the header line
-        assert content[1].strip() == sequence[:60]  # Check the sequence line
+        assert content[0] == f">RNA_sequence\n"
+        assert content[1].strip() == sequence[:60]
     finally:
         os.remove(filename)
+
+
+def test_read_fasta_valid():
+    # Create a temporary FASTA file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
+        fasta_content = """>DNA_sequence\nATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGAT\nGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGC"""
+        temp_file.write(fasta_content.encode('utf-8'))
+        temp_file.close()  # Close the file to ensure it's written
+
+        identifier, sequence = adv.read_fasta(temp_file.name)
+        assert identifier == "DNA_sequence"
+        assert sequence == "ATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGC"
+
+    os.remove(temp_file.name)
+
+def test_read_fasta_empty_file():
+    # Create a temporary empty FASTA file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
+        temp_file.close()  # Close the file to ensure it's created
+
+        with pytest.raises(IndexError, match="File is empty"):
+            adv.read_fasta(temp_file.name)
+
+    os.remove(temp_file.name)
+
+def test_read_fasta_no_sequence():
+    # Create a temporary FASTA file with no sequence
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
+        no_sequence_content = """>seq2\n"""  # Only identifier, no sequence
+        temp_file.write(no_sequence_content.encode('utf-8'))
+        temp_file.close()  # Close the file to ensure it's written
+
+        # Check that reading this file raises a ValueError
+        with pytest.raises(ValueError, match="FASTA file must contain at least an identifier and a sequence"):
+            adv.read_fasta(temp_file.name)
+
+    os.remove(temp_file.name)  # Clean up the temporary file
+
+def test_read_fasta_invalid_format():
+    # Create a temporary file with invalid FASTA format
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
+        invalid_content = """seq3\nATCGATCGATCG"""
+        temp_file.write(invalid_content.encode('utf-8'))
+        temp_file.close()  # Close the file to ensure it's written
+
+        with pytest.raises(ValueError, match="FASTA identifier must start with '>'"):
+            adv.read_fasta(temp_file.name)
+
+    os.remove(temp_file.name)  # Clean up the temporary file
