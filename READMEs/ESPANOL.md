@@ -95,10 +95,10 @@ $^1$ El paquete Alphafold solo admite IDs UniProt como entrada. Puedes encontrar
 ## Citación del paquete `gen10`
 Si usas este código, por favor cítalo:
 ```bibtex
-@software{joanalnu_2024b,
+@software{joanalnu_2025,
     author = [Alcaide-Núñez, Joan],
-    title = {Paquete GEN10},
-    month = {Abril},
+    title = {GEN10 package},
+    month = {April},
     year = {2025},
     publisher = {Zenodo},
     version = {1.4},

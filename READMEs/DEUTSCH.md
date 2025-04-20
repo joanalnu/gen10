@@ -9,93 +9,93 @@
 ![Build Status](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
 ![Open Issues](https://img.shields.io/github/issues/joanalnu/gen10)
 
-### Index
-- [Introduction](#introduction)
-- [Other langauges](#read-the-documentation-in-your-language)
+### Inhaltsverzeichnis
+- [Einführung](#einführung)
+- [Andere Sprachen](#lesen-sie-die-dokumentation-in-ihrer-sprache)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Methods](#methods)
-- [Citing this package](#citing-gen10-package)
-- [Contributing](#contributing)
-- [Info for educators](#info-for-educators)
-- [Contact me!](#contact-me)
+- [Verwendung](#verwendung)
+- [Methoden](#methoden)
+- [Zitieren dieses Pakets](#zitieren-des-gen10-pakets)
+- [Mitwirken](#mitwirken)
+- [Informationen für Lehrkräfte](#informationen-für-lehrkräfte)
+- [Kontakt](#kontakt)
 
 
 ---
 
-## Introduction
+## Einführung
 
-*`gen10`* is a package for genomics data analysis and visualization, providing the right tools integrated into your Python code. The original goal of this package is to provide support and tools for education in high school or college, but it can be used for any applicable purpose.
+*`gen10`* ist ein Paket für Genomdatenanalyse und Visualisierung, das die richtigen Werkzeuge in Ihren Python-Code integriert. Das ursprüngliche Ziel dieses Pakets ist es, Unterstützung und Werkzeuge für den Unterricht in der Oberstufe oder Hochschule bereitzustellen, aber es kann für jeden anwendbaren Zweck verwendet werden.
 
-The `gen10` package allows to you perform a great and increasing variety of tasks from translating DNA into RNA or protein sequences, to retrieving alphafold structure predictions, simulating mutations and much more! `gen10`is a powerful tool and at the same time easy-to-use for students to experiment with, learn from and create their own code. it doesn't need any software installation and can be used directly from a web browser.
+Das `gen10`-Paket ermöglicht es Ihnen, eine große und wachsende Vielfalt von Aufgaben durchzuführen, von der Übersetzung von DNA in RNA- oder Proteinsequenzen bis hin zum Abrufen von Alphafold-Strukturvorhersagen, der Simulation von Mutationen und vielem mehr! `gen10` ist ein leistungsstarkes Werkzeug und gleichzeitig einfach zu bedienen, damit Schüler experimentieren, lernen und ihren eigenen Code erstellen können. Es benötigt keine Softwareinstallation und kann direkt aus einem Webbrowser verwendet werden.
 
-If you are an educator you can see why you need to incorporate this into you class in the [info for educators section](#info-for-educators).
+Wenn Sie Lehrkraft sind, können Sie im Abschnitt [Informationen für Lehrkräfte](#informationen-für-lehrkräfte) sehen, warum Sie dies in Ihren Unterricht integrieren sollten.
 
-## Read the documentation in your language
-- [Read the documentation in your language](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+## Lesen Sie die Dokumentation in Ihrer Sprache
+- [Lesen Sie die Dokumentation in Ihrer Sprache](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
 - [Lee la documentación en tu lenguaje](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
 - [Lesen Sie das Dokument in ihrer Sprache](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
 - [Llegeix la documentació en el seu idioma](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Installation
-You can install the package using pip:
+Sie können das Paket mit pip installieren:
 ```bash
 pip install gen10
 ```
 
-Alternatively, you can use a browser-based notebook to interact with the package and run your code by cells. This is a very useful tools for education. We have prepared a step-by-step tutorial in a Google Colab Notebook [here](https://joanalnu.github.io/help).
+Alternativ können Sie ein browserbasiertes Notebook verwenden, um mit dem Paket zu interagieren und Ihren Code zellenweise auszuführen. Dies ist ein sehr nützliches Werkzeug für den Unterricht. Wir haben ein Schritt-für-Schritt-Tutorial in einem Google Colab Notebook [hier](https://joanalnu.github.io/help) vorbereitet.
 
-## Usage
-`gen10` works as any other `pip` package. You can import it to your code by adding
+## Verwendung
+`gen10` funktioniert wie jedes andere `pip`-Paket. Sie können es in Ihren Code importieren, indem Sie
 ```python
 import gen10
 ```
-and then use the methods provided by the package. Remember to use a method from a package in Python you should write:
+hinzufügen und dann die vom Paket bereitgestellten Methoden verwenden. Denken Sie daran, um eine Methode aus einem Paket in Python zu verwenden, sollten Sie schreiben:
 ```python
 output = gen10.method_name(arguments)
 ```
-If you are completely new to coding or to Python, you can start with the above mentioned tutorial in Google Colab Notebook.
+Wenn Sie völlig neu im Programmieren oder in Python sind, können Sie mit dem oben genannten Tutorial im Google Colab Notebook beginnen.
 
-## Methods
-The currently available methods are the following. Note that we are always updating the methods and adding new ones!
+## Methoden
+Die derzeit verfügbaren Methoden sind die folgenden. Beachten Sie, dass wir die Methoden ständig aktualisieren und neue hinzufügen!
 
-| # | Name | Description | Arguments | Outputs |
+| # | Name | Beschreibung | Argumente | Ausgaben |
 | --- | --- | --- | --- | --- |
-| 1 | dna2rna() | Transcribes the provided DNA string into a RNA string by changing the bases (A->U, T-> A, C->G, G->C). | string | string |
-| 2 | rna2amino() | Transcribes the provided DNA string into an aminoacid string by reading codons (3x bases) and using the catalog. | string | string |
-| 3 | dna2amino() | Transcribes DNA strings directly into aminoacids strings, it's a merge of the dna2rna and rna2amino methods. | string | string |
-| 4 | rna2dna() | Transcribes RNA strings back into DNA strings. | string | string |
-| 5 | compare() | Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ. | string1, string2 | boolean, string |
-| 6 | check() | It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings. | string | string |
-| 7 | read_input() | Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence. | string | string |
-| 8 | create_mutation() | Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position. | string | string |
-| 9 | iterate() | By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input. | list, list | dataframe (table) |
-| 10 | tosingle() | Transcribes an aminoacid string from three-letter code to single-letter code. | string | string |
-| 11 | alphafold_prediction() | By inputting a UniProt ID $^1$ , it returns a url to the `pbd` file of the predicted protein's structure. | string | dictionary |
-| 12 | generate_protein() | By inputing the resulting dictionary of `alphafold_prediction()` it returns a visualization of the predicted protein's strucutre. | dictionary | None |
-| 13 | cut_dna(string, integer) | Cuts the DNA string into two parts at the specified position. | string and integer | string Original DNA with a marked cut |
-| 14 | repair_dna(string, string, integer, string) | Repairs a cut DNA string by either deleting a base (NHEJ) or adding specific bases at the specified location (HDR). | string DNA string, string type of repair (NHEJ or HDR), integer Optional: cut position, string Optional: string to insert by HDR repair | string Repaired DNA |
-| 15 | find(string, sequence) | Finds a local sequence in a larger, global sequence. | string, string (global, local) | [(int, int)] indexes of the found position |
-| 16 | check_codon(string) | Checks for non-existing codons in a dna or rna sequence. | string | ['ABC'] list of non-existing codons |
-| 17 | reverse_complement(dna) | Computes the reverse complement of a given DNA sequence. | string | string |
-| 18 | gc_content(dna) | Calculates the GC content (percentage) of a given DNA sequence. | string | float |
-| 19 | melting_temperature(dna) | Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule. | string | float |
-| 20 | mutate_site(sequence, pos, new_base) | This function mutates a specific site in a DNA sequence. | string, int, string | string |
-| 21. | simulate_pcr(sequence, fwd_primer, rev_primer) | This function simulates a PCR reaction using the provided sequence, forward and reverse primers. | string, string, string | string |
-| 22 | get_identifier(sequence) | Generates a unique identifier for the sequence by checking if it is DNA, RNA, or protein. | string | string |
-| 23 | write_fasta(sequences, identifiers=None, filename="output.fasta") | Writes one or multiple sequences to a FASTA file, separated by an empty line. | string or list of strings, string or list of strings (optional), string (optional) | None (writen file) |
-| 24 | read_fasta(filename) | Reads a FASTA file and returns lists of sequence identifiers and sequences. | string | identifiers (list), sequences (lists) |
-| 25 | genbank_parser(filename) | Parses the data from a GenBank file into a usable dictionary. | filename (str) | dictionary |
+| 1 | dna2rna() | Transkribiert den bereitgestellten DNA-String in einen RNA-String, indem die Basen geändert werden (A->U, T->A, C->G, G->C). | string | string |
+| 2 | rna2amino() | Transkribiert den bereitgestellten DNA-String in eine Aminosäurekette, indem Codons (3 Basen) gelesen und der Katalog verwendet wird. | string | string |
+| 3 | dna2amino() | Transkribiert DNA-Strings direkt in Aminosäureketten, es ist eine Kombination der Methoden dna2rna und rna2amino. | string | string |
+| 4 | rna2dna() | Transkribiert RNA-Strings zurück in DNA-Strings. | string | string |
+| 5 | vergleichen() | Vergleicht die Strings (unabhängig davon, ob DNA, RNA oder Aminosäuren), gibt immer einen Boolean und einen String zurück. True, wenn beide Strings identisch sind, oder False und wo die Strings sich unterscheiden. | string1, string2 | boolean, string |
+| 6 | checken() | Prüft, ob der bereitgestellte String eine gültige DNA- oder RNA-Sequenz ist. Prüft nicht auf Aminosäureketten. | string | string |
+| 7 | input_lesen() | Wird verwendet, um Dateien zu öffnen. Der vollständige Pfad zur Datei muss im selben Ordner wie diese Datei gespeichert sein und darf nur eine Sequenz enthalten. | string | string |
+| 8 | mutation_erstellen() | Gibt einen neuen String mit einer Mutation zurück (nur 1 pro Ausführung). Die Mutation kann eine Base ändern, eine Base löschen oder eine neue an einer beliebigen Position hinzufügen. | string | string |
+| 9 | iterieren() | Durch Eingabe einer Liste von Eingaben und einer Liste von Funktionen gibt es eine Tabelle mit allen Ergebnissen für jede Funktion und Eingabe zurück. | list, list | dataframe (Tabelle) |
+| 10 | zueinfach() | Transkribiert eine Aminosäurekette vom Drei-Buchstaben-Code in den Ein-Buchstaben-Code. | string | string |
+| 11 | alphafold_struktur() | Durch Eingabe einer UniProt-ID $^1$ gibt es eine URL zur `pdb`-Datei der vorhergesagten Proteinstruktur zurück. | string | dictionary |
+| 12 | protein_generieren() | Durch Eingabe des resultierenden Wörterbuchs von `alphafold_struktur()` gibt es eine Visualisierung der vorhergesagten Proteinstruktur zurück. | dictionary | None |
+| 13 | dna_scheiden(string, integer) | Schneidet den DNA-String an der angegebenen Position in zwei Teile. | string und integer | string Original-DNA mit markiertem Schnitt |
+| 14 | dna_reparieren(string, string, integer, string) | Repariert einen geschnittenen DNA-String, indem entweder eine Base gelöscht wird (NHEJ) oder spezifische Basen an der angegebenen Stelle hinzugefügt werden (HDR). | string DNA-String, string Reparaturtyp (NHEJ oder HDR), integer Optional: Schnittposition, string Optional: einzufügender String bei HDR-Reparatur | string Reparierte DNA |
+| 15 | finden(string, sequence) | Findet eine lokale Sequenz in einer größeren, globalen Sequenz. | string, string (global, lokal) | [(int, int)] Indizes der gefundenen Position |
+| 16 | codon_checken(string) | Prüft auf nicht existierende Codons in einer DNA- oder RNA-Sequenz. | string | ['ABC'] Liste nicht existierender Codons |
+| 17 | komplementare(dna) | Berechnet das reverse Komplement einer gegebenen DNA-Sequenz. | string | string |
+| 18 | gc_gehalt(dna) | Berechnet den GC-Gehalt (Prozentsatz) einer gegebenen DNA-Sequenz. | string | float |
+| 19 | schmelz_temperatur(dna) | Berechnet die Schmelztemperatur (Tm) einer kurzen DNA-Sequenz mit der Wallace-Regel. | string | float |
+| 20 | stelle_mutieren(sequence, pos, new_base) | Diese Funktion mutiert eine spezifische Stelle in einer DNA-Sequenz. | string, int, string | string |
+| 21 | pcr_simulieren(sequence, fwd_primer, rev_primer) | Diese Funktion simuliert eine PCR-Reaktion mit der bereitgestellten Sequenz, Vorwärts- und Rückwärtsprimern. | string, string, string | string |
+| 22 | typ_bestimmen(sequence) | Generiert eine eindeutige Kennung für die Sequenz, indem geprüft wird, ob es sich um DNA, RNA oder Protein handelt. | string | string |
+| 23 | fasta_schreiben(sequences, identifiers=None, filename="output.fasta") | Schreibt eine oder mehrere Sequenzen in eine FASTA-Datei, getrennt durch eine Leerzeile. | string oder Liste von Strings, string oder Liste von Strings (optional), string (optional) | None (geschriebene Datei) |
+| 24 | fasta_lesen(filename) | Liest eine FASTA-Datei und gibt Listen von Sequenzkennungen und Sequenzen zurück. | string | Kennungen (Liste), Sequenzen (Listen) |
+| 25 | lesen_genbank(filename) | Parst die Daten aus einer GenBank-Datei in ein verwendbares Wörterbuch. | Dateiname (str) | Wörterbuch |
 
-$^1$ The Alphafold package only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
-1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
-2. For genes: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
-3. UniProt are available in the alpahfold website itself: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
+$^1$ Das Alphafold-Paket akzeptiert nur UniProt-IDs als Eingabe. Sie können die UniProt-ID eines Proteins oder Gens im Web finden. Wir empfehlen die folgenden Datenbanken.
+1. Offizielle UniProt-Website: [https://www.uniprot.org](https://www.uniprot.org)
+2. Für Gene: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
+3. UniProt ist auch auf der Alphafold-Website verfügbar: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
 
-## Citing `gen10` package
-If you make use of this code, please cite it:
+## Zitieren des `gen10`-Pakets
+Wenn Sie diesen Code verwenden, zitieren Sie ihn bitte wie folgt:
 ```bibtex
-@software{joanalnu_2024b,
+@software{joanalnu_2025,
     author = [Alcaide-Núñez, Joan],
     title = {GEN10 package},
     month = {April},
@@ -107,35 +107,35 @@ If you make use of this code, please cite it:
 }
 ```
 
-## Contributing
-Feel free to submit any issues or send pull requests to the repository!
+## Mitwirken
+Sie können gerne Probleme melden oder Pull Requests an das Repository senden!
 
-## Info for educators
-A package is a Python code that provides functions (i.e. methods) to be used directly into your code only by calling them, without having to write any further. Notebooks are easily usable by students and, since they are browser-based, they do not require any installations, making it ideal for school-managed devices.
+## Informationen für Lehrkräfte
+Ein Paket ist ein Python-Code, der Funktionen (d.h. Methoden) bereitstellt, die direkt in Ihrem Code verwendet werden können, indem Sie sie einfach aufrufen, ohne weiteren Code schreiben zu müssen. Notebooks sind für Schüler leicht nutzbar und da sie browserbasiert sind, benötigen sie keine Installation, was sie ideal für schulisch verwaltete Geräte macht.
 
-### How can I use this in my class?
-First, identify in your curriculum where you can integrate the software, which is already built aligned with the general education guidelines. Then you should start by explaining the fundamental concepts of genomics in your biology or science class, as you would do normally. Then you can introduce this tool to students and explain how to use it.
+### Wie kann ich das in meinem Unterricht verwenden?
+Zuerst identifizieren Sie in Ihrem Lehrplan, wo Sie die Software integrieren können, die bereits an die allgemeinen Bildungsrichtlinien angepasst ist. Dann sollten Sie damit beginnen, die grundlegenden Konzepte der Genomik in Ihrem Biologie- oder Naturwissenschaftsunterricht zu erklären, wie Sie es normalerweise tun würden. Danach können Sie dieses Werkzeug den Schülern vorstellen und erklären, wie man es benutzt.
 
-You can use the software to design problem solving challenges that require students to use critical thinking and coding skills. For example, a scenario where a gene mutation causes a disease, and ask students to write code that identifies and corrects the mutation. This type of activities foster creativity and problem-solving skill and led further to more science like CRIPSR-Cas9.
+Sie können die Software verwenden, um Problemlösungsaufgaben zu entwerfen, die von den Schülern kritisches Denken und Programmierfähigkeiten erfordern. Zum Beispiel ein Szenario, in dem eine Genmutation eine Krankheit verursacht, und die Schüler sollen Code schreiben, der die Mutation identifiziert und korrigiert. Diese Art von Aktivitäten fördert Kreativität und Problemlösungsfähigkeiten und führt weiter zu wissenschaftlichen Themen wie CRISPR-Cas9.
 
-Also, perform planned activities where students apply what they've learned in real life. Create assignments where students write simple code using the pre-established functions to emulate genetic processes such as transcription and translation.
+Führen Sie auch geplante Aktivitäten durch, bei denen die Schüler das Gelernte in der Praxis anwenden. Erstellen Sie Aufgaben, bei denen die Schüler einfachen Code schreiben, der vorgefertigte Funktionen verwendet, um genetische Prozesse wie Transkription und Translation zu simulieren.
 
-By providing step-by-step instructions students will have better chances of understanding the biological content and a better usage of the full potential of this tool. Moreover, providing by integrating real-world examples and application in genomics and biotechnology can increase student motivation and interest, and show and discuss modern research tools.
+Durch Schritt-für-Schritt-Anleitungen haben die Schüler bessere Chancen, den biologischen Inhalt zu verstehen und das volle Potenzial dieses Werkzeugs zu nutzen. Außerdem kann die Integration von realen Beispielen und Anwendungen in Genomik und Biotechnologie die Motivation und das Interesse der Schüler steigern und moderne Forschungstools aufzeigen und diskutieren.
 
-Finally, you can also adopt a flipped classroom approach by assigning software tutorials as homework and use class time for interactive and applied learning. This allows for maximized classroom engagement and allows for more personalized instruction.
+Schließlich können Sie auch einen umgedrehten Unterrichtsansatz (Flipped Classroom) verwenden, indem Sie Software-Tutorials als Hausaufgaben aufgeben und die Unterrichtszeit für interaktives und angewandtes Lernen nutzen. Dies maximiert die Beteiligung im Unterricht und ermöglicht eine individuellere Betreuung.
 
-Encouraging collaboration by planning group projects, students can work together to solve more complex problem. And collaborative projects fosters teamwork and allow students to learn from each other.
+Durch die Förderung von Zusammenarbeit durch Gruppenprojekte können Schüler gemeinsam komplexere Probleme lösen. Kollaborative Projekte fördern Teamarbeit und ermöglichen es den Schülern, voneinander zu lernen.
 
-By incorporating these strategies, you can effectively use this software to enhance your biology curriculum, engage students, and foster a deeper understanding of both genomics and coding.
+Durch die Umsetzung dieser Strategien können Sie diese Software effektiv nutzen, um Ihren Biologieunterricht zu verbessern, Schüler zu engagieren und ein tieferes Verständnis sowohl der Genomik als auch des Programmierens zu fördern.
 
-### Why should I use this in my class?
-This is a useful resource for students to learn both genomics and basic coding. On the one hand, this is a powerful tool that enables students to apply what they have learned regarding biology. It is made to be interactive and customizable and anyone can run their own code without knowledge of coding. On the other hand, students will learn and get first-hand experience with bioinformatics and computation. Coding is an essential skill for future workers, regardless their field.
+### Warum sollte ich das in meinem Unterricht verwenden?
+Dies ist eine nützliche Ressource für Schüler, um sowohl Genomik als auch grundlegendes Programmieren zu lernen. Einerseits ist es ein leistungsstarkes Werkzeug, das es den Schülern ermöglicht, das Gelernte zur Biologie anzuwenden. Es ist interaktiv und anpassbar gestaltet, und jeder kann seinen eigenen Code ausführen, ohne Programmierkenntnisse zu haben. Andererseits lernen die Schüler erste Erfahrungen mit Bioinformatik und Computation. Programmieren ist eine wesentliche Fähigkeit für zukünftige Arbeitskräfte, unabhängig vom Fachgebiet.
 
-Further, the fact that it is web-based and does not need any installation makes it perfect for school managed devices and enables usage regardless of operating system. It also fosters a teamwork and communication skills, as projects can be done in collaboration.
+Außerdem ist es webbasiert und benötigt keine Installation, was es perfekt für schulisch verwaltete Geräte macht und die Nutzung unabhängig vom Betriebssystem ermöglicht. Es fördert auch Teamarbeit und Kommunikationsfähigkeiten, da Projekte in Zusammenarbeit durchgeführt werden können.
 
-Additionally, the features of the software are aligned with the scholar curriculum and it shows practical applications of classroom content right away. It also promotes critical thinking by allowing students to write their own code to solve problems and engage actively. And prior knowledge of coding is not required at all, as students will use the pre-established functions that enable a wide range of possibilities. Further, students can adapt their code to their problems or write new functions. The code is easily scalable and has endless possibilities!
+Zusätzlich sind die Funktionen der Software auf den Lehrplan abgestimmt und zeigen praktische Anwendungen des Unterrichtsinhalts sofort auf. Es fördert kritisches Denken, indem es den Schülern ermöglicht, eigenen Code zu schreiben, um Probleme zu lösen und sich aktiv zu beteiligen. Programmierkenntnisse sind nicht erforderlich, da die Schüler vorgefertigte Funktionen verwenden, die eine breite Palette von Möglichkeiten bieten. Außerdem können die Schüler ihren Code an ihre Probleme anpassen oder neue Funktionen schreiben. Der Code ist leicht skalierbar und bietet endlose Möglichkeiten!
 
-## Contact me!
-If you have further doubts, comments, or suggestions, please reach out to me at [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
+## Kontakt
+Wenn Sie weitere Fragen, Kommentare oder Vorschläge haben, erreichen Sie mich unter [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
 
-Please note that translations to other langauges (of the package, the notebook tutorials, the README and other documentation) are welcome. I will be happy to translate them to any language under request.
+Bitte beachten Sie, dass Übersetzungen in andere Sprachen (des Pakets, der Notebook-Tutorials, der README und anderer Dokumentationen) willkommen sind. Ich helfe gerne bei Übersetzungen auf Anfrage.

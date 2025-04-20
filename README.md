@@ -95,7 +95,7 @@ $^1$ The Alphafold package only admits UniProt IDs as input. You can find the Un
 ## Citing `gen10` package
 If you make use of this code, please cite it:
 ```bibtex
-@software{joanalnu_2024b,
+@software{joanalnu_2025,
     author = [Alcaide-Núñez, Joan],
     title = {GEN10 package},
     month = {April},
