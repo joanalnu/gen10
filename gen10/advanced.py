@@ -70,78 +70,30 @@ def simulate_pcr(sequence, fwd_primer, rev_primer):
 
     return sequence[fwd_start:rev_end]
 
-
-
-
-
-
-
-# conversion tools
-def fasta_reader():
+def get_identifier(sequence):
     """
-    This function reads a FASTA file and returns the sequences.
+    Generate a unique identifier for the sequence. Checks whether the sequence is DNA, RNA, or protein.
     """
+    if all(base in 'ATCG' for base in sequence):  # DNA check
+        return "DNA_sequence"
+    elif all(base in 'AUGC' for base in sequence):  # RNA check
+        return "RNA_sequence"
+    elif all(base in 'ACDEFGHIKLMNPQRSTVWY' for base in sequence):  # Protein check
+        return "Protein_sequence"
+    else:
+        return "Unknown_sequence"
+    
+
+def write_fasta(sequence, identifier=None, filename="output.fasta"):
     """
-    Let's analyze each of your provided sequences to determine if any qualify as FASTA-formatted:
-
-### **1. "TACCACGTGGACTGAGGACTCCTCATT"**  
-- **Type**: Likely DNA sequence (T/A/C/G nucleotides).  
-- **FASTA compliance**: **No** — missing the required `>` header line.  
-- **How to fix**: Add a header (e.g., `>DNA_sequence1`).
-
----
-
-### **2. "AUGGUGCACCUGACUCCUGAGGAGUAA"**  
-- **Type**: Likely RNA sequence (A/U/C/G nucleotides).  
-- **FASTA compliance**: **No** — missing `>` header.  
-- **How to fix**: Add a header (e.g., `>RNA_sequence1`).
-
----
-
-### **3. "Met Val His Leu Thr Pro Glu Glu"**  
-- **Type**: Amino acid sequence (3-letter codes, space-separated).  
-- **FASTA compliance**: **No** — FASTA uses **single-letter codes** (e.g., `MVHLTPEE`), and requires a header.  
-- **How to fix**:  
-  - Convert to single-letter codes.  
-  - Add a header (e.g., `>Protein_sequence1`).
-
----
-
-### **4. "MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYDAEDVLETFVQKEKLGTTSGIRKHIKRLTCIVPDRREIALYIGHVSKRITRVIRDMQSFGVQQMIVDDYMHPLRNREREIRRTFPKDNESGFVALEENVKKLVGYFVEEDNYQVVSITGMGGLGKTTLARQVFNHDMVTKKFDKLAWVSVSQDFTLKNVWQNILGDLKPKEEETKEEEKKILEMTEYTLQRELYQLLEMSKSLIVLDDIWKKEDWEVIKPIFPPTKGWKLLLTSRNESIVAPTNTKYFNFKPECLKTDDSWKLFQRIAFPINDASEFEIDEEMEKLGEKMIEHCGGLPLAIKVLGGMLAEKYTSHDWRRLSENIGSHLVGGRTNFNDDNNNSCNYVLSLSFEELPSYLKHCFLYLAHFPEDYEIKVENLSYYWAAEEIFQPRHYDGEIIRDVGDVYIEELVRRNMVISERDVKTSRFETCHLHDMMREVCLLKAKEENFLQITSNPPSTANFQSTVTSRRLVYQYPTTLHVEKDINNPKLRSLVVVTLGSWNMAGSSFTRLELLRVLDLVQAKLKGGKLASCIGKLIHLRYLSLEYAEVTHIPYSLGNLKLLIYLNLHISLSSRSNFVPNVLMGMQELRYLALPSLIERKTKLELSNLVKLETLENFSTKNSSLEDLRGMVRLRTLTIELIEETSLETLAASIGGLKYLEKLEIDDLGSKMRTKEAGIVFDFVHLKRLRLELYMPRLSKEQHFPSHLTTLYLQHCRLEEDPMPILEKLLQLKELELGHKSFSGKKMVCSSCGFPQLQKLSISGLKEWEDWKVEESSMPLLLTLNIFDCRKLKQLPDEHLPSHLTAISLKKCGLEDPIPTLERLVHLKELSLSELCGRIMVCTGGGFPQLHKLDLSELDGLEEWIVEDGSMPRLHTLEIRRCLKLKKLPNGFPQLQNLHLTEVEEWEEGMIVKQGSMPLLHTLYIWHCPKLPGEQHFPSHLTTVFLLGMYVEEDPMRILEKLLHLKNVSLFQSFSGKRMVCSGGGFPQLQKLSIREIEWEEWIVEQGSMPLLHTLYIGVCPNLKELPDGLRFIYSLKNLIVSKRWKKRLSEGGEDYYKVQHIPSVEFDD"**  
-- **Type**: Amino acid sequence (single-letter codes).  
-- **FASTA compliance**: **No** — missing `>` header.  
-- **How to fix**: Add a header (e.g., `>Large_protein_sequence`).
-
----
-
-### **FASTA Conversion Examples**
-- **DNA**:  
-  ```
-  >DNA_sequence1  
-  TACCACGTGGACTGAGGACTCCTCATT
-  ```
-- **RNA**:  
-  ```
-  >RNA_sequence1  
-  AUGGUGCACCUGACUCCUGAGGAGUAA
-  ```
-- **Protein (3-letter to single-letter conversion)**:  
-  ```
-  >Protein_sequence1  
-  MVHLTPEE
-  ```
-- **Large protein**:  
-  ```
-  >Large_protein_sequence  
-  MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYDAEDVLETFVQKEKLGTTSGIRKHIKRLTCIVPDRREIALYIGHVSKRITRVIRDMQSFGVQQMIVDDYMHPLRNREREIRRTFPKDNESGFVALEENVKKLVGYFVEEDNYQVVSITGMGGLGKTTLARQVFNHDMVTKKFDKLAWVSVSQDFTLKNVWQNILGDLKPKEEETKEEEKKILEMTEYTLQRELYQLLEMSKSLIVLDDIWKKEDWEVIKPIFPPTKGWKLLLTSRNESIVAPTNTKYFNFKPECLKTDDSWKLFQRIAFPINDASEFEIDEEMEKLGEKMIEHCGGLPLAIKVLGGMLAEKYTSHDWRRLSENIGSHLVGGRTNFNDDNNNSCNYVLSLSFEELPSYLKHCFLYLAHFPEDYEIKVENLSYYWAAEEIFQPRHYDGEIIRDVGDVYIEELVRRNMVISERDVKTSRFETCHLHDMMREVCLLKAKEENFLQITSNPPSTANFQSTVTSRRLVYQYPTTLHVEKDINNPKLRSLVVVTLGSWNMAGSSFTRLELLRVLDLVQAKLKGGKLASCIGKLIHLRYLSLEYAEVTHIPYSLGNLKLLIYLNLHISLSSRSNFVPNVLMGMQELRYLALPSLIERKTKLELSNLVKLETLENFSTKNSSLEDLRGMVRLRTLTIELIEETSLETLAASIGGLKYLEKLEIDDLGSKMRTKEAGIVFDFVHLKRLRLELYMPRLSKEQHFPSHLTTLYLQHCRLEEDPMPILEKLLQLKELELGHKSFSGKKMVCSSCGFPQLQKLSISGLKEWEDWKVEESSMPLLLTLNIFDCRKLKQLPDEHLPSHLTAISLKKCGLEDPIPTLERLVHLKELSLSELCGRIMVCTGGGFPQLHKLDLSELDGLEEWIVEDGSMPRLHTLEIRRCLKLKKLPNGFPQLQNLHLTEVEEWEEGMIVKQGSMPLLHTLYIWHCPKLPGEQHFPSHLTTVFLLGMYVEEDPMRILEKLLHLKNVSLFQSFSGKRMVCSGGGFPQLQKLSIREIEWEEWIVEQGSMPLLHTLYIGVCPNLKELPDGLRFIYSLKNLIVSKRWKKRLSEGGEDYYKVQHIPSVEFDD
-  ```
-
-**Key Takeaway**: None of your examples are currently in FASTA format, but they can easily be converted by adding a header line starting with `>`. For amino acid sequences, ensure single-letter codes are used.
-
----
-Answer from Perplexity: https://www.perplexity.ai/search/what-is-fasta-formatt-QP__WX96Q6eXbV2uMPYhyw?utm_source=copy_output"""
-
-def fasta_writer():
+    Write a sequence to a FASTA file.
     """
-    This function writes sequences to a FASTA file.
-    """
+    if identifier is None:
+        identifier = get_identifier(sequence)
+    
+    with open(filename, 'w') as fasta_file:
+        fasta_file.write(f">{identifier}\n")
+        
+        for i in range(0, len(sequence), 60):
+            fasta_file.write(sequence[i:i+60] + "\n")
+
