@@ -1,4 +1,6 @@
 import gen10
+from Bio import SeqIO
+from typing import Dict, List
 
 def reverse_complement(dna):
     """
@@ -149,3 +151,129 @@ def read_fasta(filename):
             raise ValueError("FASTA file must contain at least one identifier and one sequence (check that identifiers start with '>')")
 
     return identifiers, sequences
+
+def genbank_parser(filepath: str) -> Dict:
+    """
+    Parse a GenBank file and return a dictionary with relevant information.
+
+    Args:
+        filepath (str): The path to the GenBank file.
+
+    Returns:
+        Dict: A dictionary containing parsed information from the GenBank file.
+    """
+
+    """
+    EXAMPLE GenBank FILE:
+    LOCUS       1XJI_A                   247 aa            linear   BCT 23-SEP-2004
+    DEFINITION  Chain A, Bacteriorhodopsin Crystallized In Bicelles At Room
+                Temperature.
+    ACCESSION   1XJI_A
+    VERSION     1XJI_A  GI:66360541
+    DBSOURCE    pdb: molecule 1XJI, chain 65, release Sep 23, 2004;
+                deposition: Sep 23, 2004;
+                class: Membrane Protein;
+                source: Mol_id: 1; Organism_scientific: Halobacterium Salinarium;
+                Organism_common: Bacteria; Strain: L33;
+                Exp. method: X-Ray Diffraction.
+    KEYWORDS    .
+    SOURCE      Halobacterium salinarum
+    ORGANISM  Halobacterium salinarum
+                Archaea; Euryarchaeota; Halobacteria; Halobacteriales;
+                Halobacteriaceae; Halobacterium.
+    REFERENCE   1  (residues 1 to 247)
+    AUTHORS   Faham,S., Boulting,G.L., Massey,E.A., Yohannan,S., Yang,D. and
+                Bowie,J.U.
+    TITLE     Crystallization of bacteriorhodopsin from bicelle formulations at
+                room temperature
+    JOURNAL   Protein Sci. 14 (3), 836-840 (2005)
+    PUBMED   15689517
+    REFERENCE   2  (residues 1 to 247)
+    AUTHORS   Faham,S., Boulting,G.L., Massey,E.A., Yohannan,S., Yang,D. and
+                Bowie,J.U.
+    TITLE     Direct Submission
+    JOURNAL   Submitted (23-SEP-2004)
+    COMMENT     Revision History:
+                APR 19 5 Initial Entry.
+    FEATURES             Location/Qualifiers
+        source          1..247
+                        /organism="Halobacterium salinarum"
+                        /db_xref="taxon:2242"
+        SecStr          9..32
+                        /sec_str_type="helix"
+                        /note="helix 1"
+        SecStr          36..61
+                        /sec_str_type="helix"
+                        /note="helix 2"
+        SecStr          64..71
+                        /sec_str_type="sheet"
+                        /note="strand 1"
+        SecStr          72..79
+                        /sec_str_type="sheet"
+                        /note="strand 2"
+        SecStr          82..100
+                        /sec_str_type="helix"
+                        /note="helix 3"
+        SecStr          104..126
+                        /sec_str_type="helix"
+                        /note="helix 4"
+        SecStr          130..159
+                        /sec_str_type="helix"
+                        /note="helix 5"
+        SecStr          164..190
+                        /sec_str_type="helix"
+                        /note="helix 6"
+        SecStr          200..224
+                        /sec_str_type="helix"
+                        /note="helix 7"
+        Het             bond(215)
+                        /heterogen="(RET, 301 )"
+    ORIGIN
+            1 aqitgrpewi wlalgtalmg lgtlyflvkg mgvsdpdakk fyaittlvpa iaftmylsml
+        61 lgygltmvpf ggeqnpiywa ryadwlfttp lllldlallv dadqgtilal vgadgimigt
+        121 glvgaltkvy syrfvwwais taamlyilyv lffgftskae smrpevastf kvlrnvtvvl
+        181 wsaypvvwli gsegagivpl nietllfmvl dvsakvgfgl illrsraifg eaeapepsag
+        241 dgaaats
+    //
+    """
+
+    parsed_data = {}
+
+    # Read the GenBank file
+    with open(filepath, "r") as file:
+        for record in SeqIO.parse(file, "genbank"):
+            # Extracting relevant information
+            parsed_data['accession'] = record.id
+            parsed_data['sequence'] = str(record.seq).lower()  # Convert sequence to lowercase
+            parsed_data['organism'] = record.annotations.get('organism', 'Unknown')
+            parsed_data['source'] = record.annotations.get('source', 'Unknown')  # Adjusted to capture source
+            parsed_data['features'] = []
+            parsed_data['references'] = []
+
+            # Extract features
+            for feature in record.features:
+                feature_info = {
+                    'type': feature.type,
+                    'location': str(feature.location).replace(":", ".."),  # Adjust location format
+                }
+                if 'gene' in feature.qualifiers:
+                    feature_info['gene'] = feature.qualifiers['gene'][0]
+                if 'product' in feature.qualifiers:
+                    feature_info['product'] = feature.qualifiers['product'][0]
+                parsed_data['features'].append(feature_info)
+
+            # Extract references
+            for reference in record.annotations.get('references', []):
+                ref_info = {
+                    'title': reference.title,
+                    'authors': reference.authors if isinstance(reference.authors, list) else [reference.authors],  # Ensure authors are a list
+                }
+                # Use try/except to handle missing attributes
+                try:
+                    ref_info['year'] = reference.year
+                except AttributeError:
+                    ref_info['year'] = 'Unknown'  # Default value if year is not available
+
+                parsed_data['references'].append(ref_info)
+
+    return parsed_data

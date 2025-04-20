@@ -1,4 +1,6 @@
 import gen10
+from Bio import SeqIO
+from typing import Dict, List
 
 def complementaria(dna):
     """
@@ -144,3 +146,53 @@ def llegir_fasta(filename):
             raise ValueError("No s'han trobat seqüències o identificadors al fitxer (l'identificador ha de començar amb '>')")
 
     return identifiers, sequences
+
+def llegir_genbank(filepath):
+    """
+    LLegeix un fitxer GenBank i retorna un diccionari de informació.
+
+    Parameters:
+        filepath (str): El nom del fitxer GenBank a llegir.
+    Returns:
+        Dict: Un diccionari amb la informació analitzada del fitxer GenBank.
+    """
+    parsed_data = {}
+
+    # Read the GenBank file
+    with open(filepath, "r") as file:
+        for record in SeqIO.parse(file, "genbank"):
+            # Extracting relevant information
+            parsed_data['accession'] = record.id
+            parsed_data['sequence'] = str(record.seq).lower()  # Convert sequence to lowercase
+            parsed_data['organism'] = record.annotations.get('organism', 'Unknown')
+            parsed_data['source'] = record.annotations.get('source', 'Unknown')  # Adjusted to capture source
+            parsed_data['features'] = []
+            parsed_data['references'] = []
+
+            # Extract features
+            for feature in record.features:
+                feature_info = {
+                    'type': feature.type,
+                    'location': str(feature.location).replace(":", ".."),  # Adjust location format
+                }
+                if 'gene' in feature.qualifiers:
+                    feature_info['gene'] = feature.qualifiers['gene'][0]
+                if 'product' in feature.qualifiers:
+                    feature_info['product'] = feature.qualifiers['product'][0]
+                parsed_data['features'].append(feature_info)
+
+            # Extract references
+            for reference in record.annotations.get('references', []):
+                ref_info = {
+                    'title': reference.title,
+                    'authors': reference.authors if isinstance(reference.authors, list) else [reference.authors],  # Ensure authors are a list
+                }
+                # Use try/except to handle missing attributes
+                try:
+                    ref_info['year'] = reference.year
+                except AttributeError:
+                    ref_info['year'] = 'Unknown'  # Default value if year is not available
+
+                parsed_data['references'].append(ref_info)
+
+    return parsed_data

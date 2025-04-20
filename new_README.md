@@ -85,6 +85,7 @@ The currently available methods are the following. Note that we are always updat
 | 22 | get_identifier(sequence) | Generates a unique identifier for the sequence by checking if it is DNA, RNA, or protein. | string | string |
 | 23 | write_fasta(sequences, identifiers=None, filename="output.fasta") | Writes one or multiple sequences to a FASTA file, separated by an empty line. | string or list of strings, string or list of strings (optional), string (optional) | None (writen file) |
 | 24 | read_fasta(filename) | Reads a FASTA file and returns lists of sequence identifiers and sequences. | string | identifiers (list), sequences (lists) |
+| 25 | genbank_parser(filename) | Parses the data from a GenBank file into a usable dictionary. | filename (str) | dictionary |
 
 $^1$ The Alphafold package only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)

@@ -211,3 +211,5 @@ def test_read_fasta_multiple_sequences():
         ]
 
     os.remove(temp_file.name)  # Clean up the temporary file
+
+# `genbank_parser` was tested separately and successfully in a notebook
