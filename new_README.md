@@ -82,6 +82,9 @@ The currently available methods are the following. Note that we are always updat
 | 19 | melting_temperature(dna) | Calculates the melting temperature (Tm) of a short DNA sequence using the Wallace rule. | string | float |
 | 20 | mutate_site(sequence, pos, new_base) | This function mutates a specific site in a DNA sequence. | string, int, string | string |
 | 21. | simulate_pxr(sequence, fwd_primer, rev_primer) | This function simulates a PCR reaction using the provided sequence, forward and reverse primers. | string, string, string | string |
+| 22 | get_identifier(sequence) | Generates a unique identifier for the sequence by checking if it is DNA, RNA, or protein. | string | string |
+| 23 | write_fasta(sequence, identifier=None, filename="output.fasta") | Writes a sequence to a FASTA file with an optional identifier and filename. | string, string (optional), string (optional) | None |
+| 24 | read_fasta(filename) | Reads a FASTA file and returns the sequence identifier and sequence. | string | tuple (identifier, sequence) |
 
 $^1$ The Alphafold package only admits UniProt IDs as input. You can find the UniProt ID of a protein or gene in the web. We recommend the following databases.
 1. Official UniProt website: [https://www.uniprot.org](https://www.uniprot.org)
