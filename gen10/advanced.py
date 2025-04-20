@@ -82,7 +82,6 @@ def get_identifier(sequence):
         return "Protein_sequence"
     else:
         return "Unknown_sequence"
-    
 
 def write_fasta(sequence, identifier=None, filename="output.fasta"):
     """

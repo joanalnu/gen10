@@ -68,3 +68,48 @@ def simular_pcr(sequence, fwd_primer, rev_primer):
     rev_end = rev_start + len(rev_primer)
 
     return sequence[fwd_start:rev_end]
+
+def identificador(sequence):
+    """
+    Identificar el typo de seqüència (ADN, ARN o proteïna) en funció de la seqüència donada.
+    """
+    if all(base in 'ATCG' for base in sequence):  # DNA check
+        return "DNA_sequence"
+    elif all(base in 'AUGC' for base in sequence):  # RNA check
+        return "RNA_sequence"
+    elif all(base in 'ACDEFGHIKLMNPQRSTVWY' for base in sequence):  # Protein check
+        return "Protein_sequence"
+    else:
+        return "Unknown_sequence"
+
+def escriure_fasta(sequence, identifier=None, filename="output.fasta"):
+    """
+    Escriure una seqüència en format FASTA.
+    """
+    if identifier is None:
+        identifier = identificador(sequence)
+    
+    with open(filename, 'w') as fasta_file:
+        fasta_file.write(f">{identifier}\n")
+        
+        for i in range(0, len(sequence), 60):
+            fasta_file.write(sequence[i:i+60] + "\n")
+
+def llegir_fasta(filename):
+    """
+    Llegeix un fitxer FASTA i retorna l'identificador i la seqüència.
+    """
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+
+        if not lines:  # Check if the list of lines is empty
+            raise IndexError("Arxiu buit")
+        if len(lines) < 2:  # Must have at least one identifier and one sequence
+            raise ValueError("El fitxer FASTA ha de contenir almenys un identificador i una seqüència")
+        if not lines[0].startswith(">"):
+            raise ValueError("L'identificador FASTA ha de començar amb '>'")
+        
+        identifier = lines[0].strip()[1:]  # Remove '>' character
+        sequence = ''.join(line.strip() for line in lines[1:])  # Join remaining lines for sequence
+        
+    return identifier, sequence

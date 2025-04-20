@@ -68,3 +68,48 @@ def simular_pcr(sequence, fwd_primer, rev_primer):
     rev_end = rev_start + len(rev_primer)
 
     return sequence[fwd_start:rev_end]
+
+def identificador(sequence):
+    """
+    Generara un identificador para la secuencia.
+    """
+    if all(base in 'ATCG' for base in sequence):  # DNA check
+        return "DNA_sequence"
+    elif all(base in 'AUGC' for base in sequence):  # RNA check
+        return "RNA_sequence"
+    elif all(base in 'ACDEFGHIKLMNPQRSTVWY' for base in sequence):  # Protein check
+        return "Protein_sequence"
+    else:
+        return "Unknown_sequence"
+
+def escribir_fasta(sequence, identifier=None, filename="output.fasta"):
+    """
+    Escribe una secuencia en un archivo FASTA.
+    """
+    if identifier is None:
+        identifier = identificador(sequence)
+    
+    with open(filename, 'w') as fasta_file:
+        fasta_file.write(f">{identifier}\n")
+        
+        for i in range(0, len(sequence), 60):
+            fasta_file.write(sequence[i:i+60] + "\n")
+
+def leer_fasta(filename):
+    """
+    Lee un archivo FASTA y devuelve el identificador y la secuencia.
+    """
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+
+        if not lines:  # Check if the list of lines is empty
+            raise IndexError("Archivo vacío")
+        if len(lines) < 2:  # Must have at least one identifier and one sequence
+            raise ValueError("El archivo FASTA debe contener al menos un identificador y una secuencia")
+        if not lines[0].startswith(">"):
+            raise ValueError("El identificador FASTA debe comenzar con '>'")
+        
+        identifier = lines[0].strip()[1:]  # Remove '>' character
+        sequence = ''.join(line.strip() for line in lines[1:])  # Join remaining lines for sequence
+        
+    return identifier, sequence
