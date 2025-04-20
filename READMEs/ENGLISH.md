@@ -102,7 +102,7 @@ If you make use of this code, please cite it:
     year = {2025},
     publisher = {Zenodo},
     version = {1.4},
-    doi = {10.5281/zenodo.14059749},
+    doi = {10.5281/zenodo.15251890},
     url = {https://github.com/joanalnu/gen10},
 }
 ```
