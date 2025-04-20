@@ -13,13 +13,13 @@ with open("gen_api/_version.py") as version_file:
 
 setup(
     name="gen10",
-    version="1.3",
+    version="1.4",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
     description="API to use the functions of the Genetics10 project",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/joanalnu/gen_api',
+    url='https://github.com/joanalnu/gen10',
     packages=find_packages(),
     python_requires=">=3.9",
     install_requires=requirements,
@@ -28,6 +28,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: Unix'
     ],
-    package_data={"gen_api": ["static/*"]},
+    package_data={"gen10": ["static/*"]},
     include_package_data=True,
 )

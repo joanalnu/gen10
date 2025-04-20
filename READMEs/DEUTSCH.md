@@ -1,4 +1,5 @@
 # gen10
+---
 
 [![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen10-blue.svg?style=flat)](https://github.com/joanalnu/gen10)
 [![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen10/LICENSE)
@@ -8,248 +9,133 @@
 ![Build Status](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
 ![Open Issues](https://img.shields.io/github/issues/joanalnu/gen10)
 
+### Inhaltsverzeichnis
+- [Einführung](#einführung)
+- [Andere Sprachen](#lesen-sie-die-dokumentation-in-ihrer-sprache)
+- [Installation](#installation)
+- [Verwendung](#verwendung)
+- [Methoden](#methoden)
+- [Zitieren dieses Pakets](#zitieren-des-gen10-pakets)
+- [Mitwirken](#mitwirken)
+- [Informationen für Lehrkräfte](#informationen-für-lehrkräfte)
+- [Kontakt](#kontakt)
 
 
-`gen10` ist eine API zum Einsatz der [genetics10](https://joanalnu.github.io/genetics10)-Tools in Ihren Python-Skripten. Sie ist einfach zu installieren und leicht zu verwenden in Ihrem aktuellen Code, indem sie nützliche Funktionen bei der Arbeit mit genetischen Daten integriert.
+---
 
-Die API ermöglicht es Ihnen, DNA-Sequenzen in RNA- oder Aminosäuresequenzen zu übersetzen, Sequenzen zu vergleichen, Mutationen zu erzeugen und eine integrierte Iteration für große Datenmengen durchzuführen. Darüber hinaus gibt es eine Integration mit der AlphaFold-API, die es Benutzern ermöglicht, vorhergesagte Proteinstrukturen zu visualisieren, sowie Funktionen zum Simulieren der Wirkung von CRISPR-Cas9-Genschere. gen10 ist auch ein leistungsstarkes Tool für Studenten, um damit zu experimentieren, zu lernen und eigenen Code zu erstellen.
+## Einführung
 
-[(Zum Info für Lehrkräfte springen)](#info-für-lehrkräfte)
+*`gen10`* ist ein Paket für Genomdatenanalyse und Visualisierung, das die richtigen Werkzeuge in Ihren Python-Code integriert. Das ursprüngliche Ziel dieses Pakets ist es, Unterstützung und Werkzeuge für den Unterricht in der Oberstufe oder Hochschule bereitzustellen, aber es kann für jeden anwendbaren Zweck verwendet werden.
+
+Das `gen10`-Paket ermöglicht es Ihnen, eine große und wachsende Vielfalt von Aufgaben durchzuführen, von der Übersetzung von DNA in RNA- oder Proteinsequenzen bis hin zum Abrufen von Alphafold-Strukturvorhersagen, der Simulation von Mutationen und vielem mehr! `gen10` ist ein leistungsstarkes Werkzeug und gleichzeitig einfach zu bedienen, damit Schüler experimentieren, lernen und ihren eigenen Code erstellen können. Es benötigt keine Softwareinstallation und kann direkt aus einem Webbrowser verwendet werden.
+
+Wenn Sie Lehrkraft sind, können Sie im Abschnitt [Informationen für Lehrkräfte](#informationen-für-lehrkräfte) sehen, warum Sie dies in Ihren Unterricht integrieren sollten.
 
 ## Lesen Sie die Dokumentation in Ihrer Sprache
-- [Englisch](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
-- [Spanisch](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
-- [Deutsch](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
-- [Katalanisch](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
+- [Lesen Sie die Dokumentation in Ihrer Sprache](https://github.com/joanalnu/gen10/blob/main/READMES/ENGLISH.md)
+- [Lee la documentación en tu lenguaje](https://github.com/joanalnu/gen10/blob/main/READMES/ESPANOL.md)
+- [Lesen Sie das Dokument in ihrer Sprache](https://github.com/joanalnu/gen10/blob/main/READMES/DEUTSCH.md)
+- [Llegeix la documentació en el seu idioma](https://github.com/joanalnu/gen10/blob/main/READMES/CATALA.md)
 
 ## Installation
-Sie können die API durch Klonen dieses Repositorys auf Ihrem lokalen Computer installieren, indem Sie den folgenden Befehl in Ihrem Terminal ausführen:
+Sie können das Paket mit pip installieren:
 ```bash
-git clone https://github.com/joananlu/gen10.git
-```
-Navigieren Sie zum Klon-Verzeichnis mit ```cd gen10/``` und installieren Sie die API in Ihrer aktuellen Umgebung mit pip:
-```bash
-pip install .
+pip install gen10
 ```
 
+Alternativ können Sie ein browserbasiertes Notebook verwenden, um mit dem Paket zu interagieren und Ihren Code zellenweise auszuführen. Dies ist ein sehr nützliches Werkzeug für den Unterricht. Wir haben ein Schritt-für-Schritt-Tutorial in einem Google Colab Notebook [hier](https://joanalnu.github.io/help) vorbereitet.
+
 ## Verwendung
-Um die API zu verwenden, können Sie sie in Ihrem Python-Skript importieren:
+`gen10` funktioniert wie jedes andere `pip`-Paket. Sie können es in Ihren Code importieren, indem Sie
 ```python
 import gen10
 ```
-Denken Sie daran, das Python-Skript in der Umgebung auszuführen, in der Sie zuvor die Installation durchgeführt haben (falls Sie Umgebungen verwenden).
+hinzufügen und dann die vom Paket bereitgestellten Methoden verwenden. Denken Sie daran, um eine Methode aus einem Paket in Python zu verwenden, sollten Sie schreiben:
+```python
+output = gen10.method_name(arguments)
+```
+Wenn Sie völlig neu im Programmieren oder in Python sind, können Sie mit dem oben genannten Tutorial im Google Colab Notebook beginnen.
 
-Geben Sie ```gen10.function()``` ein, um eine beliebige Funktion aufzurufen. Denken Sie daran, das entsprechende Argument innerhalb der Klammern anzugeben. Der Codeausschnitt im obigen Beispiel ruft die Funktion ```dna2rna()``` auf. Er gibt die Zeichenkette ```dna``` als Eingabe an und die Funktion gibt die Ausgabe ```rna``` zurück.
+## Methoden
+Die derzeit verfügbaren Methoden sind die folgenden. Beachten Sie, dass wir die Methoden ständig aktualisieren und neue hinzufügen!
 
-Die verfügbaren Funktionen sind die folgenden:
-1. ```dna2rna()```\
-    Transkribiert die angegebene DNA-Zeichenkette in eine RNA-Zeichenkette, indem die Basen (A->U, T-> A, C->G, G->C) geändert werden.\
-    Argument: ```string```\
-    Ausgabe: ```string```
+| # | Name | Beschreibung | Argumente | Ausgaben |
+| --- | --- | --- | --- | --- |
+| 1 | dna2rna() | Transkribiert den bereitgestellten DNA-String in einen RNA-String, indem die Basen geändert werden (A->U, T->A, C->G, G->C). | string | string |
+| 2 | rna2amino() | Transkribiert den bereitgestellten DNA-String in eine Aminosäurekette, indem Codons (3 Basen) gelesen und der Katalog verwendet wird. | string | string |
+| 3 | dna2amino() | Transkribiert DNA-Strings direkt in Aminosäureketten, es ist eine Kombination der Methoden dna2rna und rna2amino. | string | string |
+| 4 | rna2dna() | Transkribiert RNA-Strings zurück in DNA-Strings. | string | string |
+| 5 | vergleichen() | Vergleicht die Strings (unabhängig davon, ob DNA, RNA oder Aminosäuren), gibt immer einen Boolean und einen String zurück. True, wenn beide Strings identisch sind, oder False und wo die Strings sich unterscheiden. | string1, string2 | boolean, string |
+| 6 | checken() | Prüft, ob der bereitgestellte String eine gültige DNA- oder RNA-Sequenz ist. Prüft nicht auf Aminosäureketten. | string | string |
+| 7 | input_lesen() | Wird verwendet, um Dateien zu öffnen. Der vollständige Pfad zur Datei muss im selben Ordner wie diese Datei gespeichert sein und darf nur eine Sequenz enthalten. | string | string |
+| 8 | mutation_erstellen() | Gibt einen neuen String mit einer Mutation zurück (nur 1 pro Ausführung). Die Mutation kann eine Base ändern, eine Base löschen oder eine neue an einer beliebigen Position hinzufügen. | string | string |
+| 9 | iterieren() | Durch Eingabe einer Liste von Eingaben und einer Liste von Funktionen gibt es eine Tabelle mit allen Ergebnissen für jede Funktion und Eingabe zurück. | list, list | dataframe (Tabelle) |
+| 10 | zueinfach() | Transkribiert eine Aminosäurekette vom Drei-Buchstaben-Code in den Ein-Buchstaben-Code. | string | string |
+| 11 | alphafold_struktur() | Durch Eingabe einer UniProt-ID $^1$ gibt es eine URL zur `pdb`-Datei der vorhergesagten Proteinstruktur zurück. | string | dictionary |
+| 12 | protein_generieren() | Durch Eingabe des resultierenden Wörterbuchs von `alphafold_struktur()` gibt es eine Visualisierung der vorhergesagten Proteinstruktur zurück. | dictionary | None |
+| 13 | dna_scheiden(string, integer) | Schneidet den DNA-String an der angegebenen Position in zwei Teile. | string und integer | string Original-DNA mit markiertem Schnitt |
+| 14 | dna_reparieren(string, string, integer, string) | Repariert einen geschnittenen DNA-String, indem entweder eine Base gelöscht wird (NHEJ) oder spezifische Basen an der angegebenen Stelle hinzugefügt werden (HDR). | string DNA-String, string Reparaturtyp (NHEJ oder HDR), integer Optional: Schnittposition, string Optional: einzufügender String bei HDR-Reparatur | string Reparierte DNA |
+| 15 | finden(string, sequence) | Findet eine lokale Sequenz in einer größeren, globalen Sequenz. | string, string (global, lokal) | [(int, int)] Indizes der gefundenen Position |
+| 16 | codon_checken(string) | Prüft auf nicht existierende Codons in einer DNA- oder RNA-Sequenz. | string | ['ABC'] Liste nicht existierender Codons |
+| 17 | komplementare(dna) | Berechnet das reverse Komplement einer gegebenen DNA-Sequenz. | string | string |
+| 18 | gc_gehalt(dna) | Berechnet den GC-Gehalt (Prozentsatz) einer gegebenen DNA-Sequenz. | string | float |
+| 19 | schmelz_temperatur(dna) | Berechnet die Schmelztemperatur (Tm) einer kurzen DNA-Sequenz mit der Wallace-Regel. | string | float |
+| 20 | stelle_mutieren(sequence, pos, new_base) | Diese Funktion mutiert eine spezifische Stelle in einer DNA-Sequenz. | string, int, string | string |
+| 21 | pcr_simulieren(sequence, fwd_primer, rev_primer) | Diese Funktion simuliert eine PCR-Reaktion mit der bereitgestellten Sequenz, Vorwärts- und Rückwärtsprimern. | string, string, string | string |
+| 22 | typ_bestimmen(sequence) | Generiert eine eindeutige Kennung für die Sequenz, indem geprüft wird, ob es sich um DNA, RNA oder Protein handelt. | string | string |
+| 23 | fasta_schreiben(sequences, identifiers=None, filename="output.fasta") | Schreibt eine oder mehrere Sequenzen in eine FASTA-Datei, getrennt durch eine Leerzeile. | string oder Liste von Strings, string oder Liste von Strings (optional), string (optional) | None (geschriebene Datei) |
+| 24 | fasta_lesen(filename) | Liest eine FASTA-Datei und gibt Listen von Sequenzkennungen und Sequenzen zurück. | string | Kennungen (Liste), Sequenzen (Listen) |
+| 25 | lesen_genbank(filename) | Parst die Daten aus einer GenBank-Datei in ein verwendbares Wörterbuch. | Dateiname (str) | Wörterbuch |
 
-2. ```rna2amino()```\
-    Transkribiert die angegebene DNA-Zeichenkette in eine Aminosäure-Zeichenkette, indem Codons (3x Basen) gelesen und der Katalog verwendet werden.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-3. ```dna2amino()```\
-    Transkribiert DNA-Zeichenketten direkt in Aminosäure-Zeichenketten, es ist eine Kombination der dna2rna- und rna2amino-Methoden.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-4. ```rna2dna()```\
-    Transkribiert RNA-Zeichenketten in RNA-Zeichenkentten.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-5. ```compare()```\
-    Vergleicht die Zeichenketten (unabhängig davon, ob DNA, RNA oder Aminosäuren), es gibt immer einen booleschen Wert und eine Zeichenkette zurück. True, wenn beide Zeichenketten identisch sind, oder False und wo sich die Zeichenketten unterscheiden.\
-   Argument: ```string1, string2```\
-   Ausgabe: ```boolean, string```
-
-6. ```check()```\
-    Überprüft, ob die angegebene Zeichenkette eine gültige DNA- oder RNA-Zeichenkette ist. Es überprüft nicht auf Aminosäure-Zeichenketten.\
-   Argument: ```string```\
-   Ausgabe: ```string```
-
-7. ```read_input()```\
-    Wird verwendet, um Dateien zu öffnen. Der vollständige Pfad zur Datei muss im gleichen Verzeichnis wie diese Datei gespeichert sein und darf nur eine Sequenz enthalten.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-8. ```createmutation()```\
-    Gibt eine neue Zeichenkette mit einer Mutation (nur 1 pro Durchlauf) zurück. Die Mutation kann eine Basis ändern, eine Basis löschen oder eine neue Basis an einer beliebigen Position hinzufügen.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-9. ```iterate()```\
-    Durch Eingabe einer Liste von Eingaben und einer Liste von Funktionen gibt es eine Tabelle mit allen Ergebnissen für jede Funktion und Eingabe zurück.
-    Argument: ```list, list```
-    Ausgabe: ```dataframe``` (Tabelle)
-
-10. ```tosingle()```\
-    Transkribiert eine Aminosäure-Zeichenkette vom Dreibuchstaben-Code in den Einbuchstaben-Code.\
-    Argument: ```string```\
-    Ausgabe: ```string```
-
-11. ```alphafold_prediction()```\
-    Durch Eingabe einer UniProt-ID $^1$ gibt es eine URL zur ```pbd```-Datei der vorhergesagten Proteinstruktur zurück.\
-    Argument: ```string```\
-    Ausgabe: ```dictionary```\
-
-12. ```generate_protein()```\
-    Durch Eingabe des resultierenden Dictionarys von ```alphafold_prediction()``` gibt es eine Visualisierung der vorhergesagten Proteinstruktur zurück.\
-    Argument: ```dictionary```\
-    Ausgabe: ```None```
-
-13. ```cut_dna(string, integer)```\
-    Teilt die DNA-Zeichenkette an der angegebenen Position in zwei Teile auf.\
-    Argument: ```string und integer```\
-    Ausgabe: ```string``` Ursprüngliche DNA mit einem markierten Schnitt
-
-14. ```repair_dna(string, string, integer, string)```
-    Repariert eine geschnittene DNA-Zeichenkette, indem entweder eine Basis gelöscht (NHEJ) oder spezifische Basen an der angegebenen Position hinzugefügt werden (HDR).\
-    Argument: ```string``` DNA-Zeichenkette\
-            ```string``` Reparaturtyp (NHEJ oder HDR)\
-            ```integer``` Optional: Schnittposition\
-            ```string``` Optional: Zeichenkette zum Einfügen bei der HDR-Reparatur\
-    Ausgabe: ```string``` Reparierte DNA
-
-15. ```finden(string, sequence)```\
-    Um eine lokale string in einer globale string zu finden.\
-    Argument: ```string, string``` (global, local)\
-    Ausgabe: ```[int, int]``` Indizes der gefundenen Position\
-
-16. ```codon_checken(string)```\
-    Prüft auf falsche Codons in einer DNA- oder RNA-Sequenz.\
-    Argument: ```string```\
-    Ausgabe: ```['ABC']``` liste von falschen Codons\
-
-$^1$ Die Alphafold-API akzeptiert nur UniProt-IDs als Eingabe. Sie können die UniProt-ID eines Proteins oder Gens im Internet finden. Wir empfehlen die folgenden Datenbanken.
+$^1$ Das Alphafold-Paket akzeptiert nur UniProt-IDs als Eingabe. Sie können die UniProt-ID eines Proteins oder Gens im Web finden. Wir empfehlen die folgenden Datenbanken.
 1. Offizielle UniProt-Website: [https://www.uniprot.org](https://www.uniprot.org)
 2. Für Gene: [https://www.ensembl.org/Multi/Tools/Blast](https://www.ensembl.org/Multi/Tools/Blast)
-3. UniProt-IDs sind auf der Alphafold-Website selbst verfügbar: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
+3. UniProt ist auch auf der Alphafold-Website verfügbar: [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk)
 
-Bitte beachten Sie, dass ein Schritt-für-Schritt-Leitfaden zur Erlangung von UniProt-IDs bald verfügbar sein wird.
-
-## Beispiele für Anfänger
-
-### DNA in RND und Aminosäuren übersetzen
-```python
-# Eingabe
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # geben Sie eine DNA-Zeichenkette ein
-
-# erhalten Sie die RNA-Zeichenkette
-my_rna = gen10.dna2rna(my_dna)
-print(my_rna)
-
-# erhalten Sie die Aminosäure-Zeichenkette
-my_amino = gen10.rna2amino(my_rna)
-print(my_amino)
-```
-
-### Erstellen einer Mutation
-```python
-# Eingabe
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # geben Sie eine DNA-Zeichenkette ein
-
-# erstellen Sie eine Mutation
-mutation = gen10.createmutation(my_dna)
-print(mutation)
-
-# erhalten Sie den Ort, an dem die Mutation stattgefunden hat
-index = gen10.compare(my_dna, mutation)
-print(index)
-```
-
-### Öffnen einer txt-Datei und Verwendung von Iteration
-```python
-# lesen Sie die Eingabedatei
-dnas = gen10.read_input('/examples/my_dnas.txt') # beachten Sie, dass Sie eine Datei mit diesem Namen im gleichen Verzeichnis wie diese Datei gespeichert haben müssen
-functions = ['createmutation', 'dna2rna', 'rna2amino'] # welche Funktionen möchten Sie ausführen
-output = gen10.iterate(dnas, functions) # rufen Sie die Iterationsfunktionen auf
-print(output) # zeigen Sie die Ausgabe von iterate()
-```
-
-### Visualisierung eines Proteins
-```python
-# dies ist die Aminosäuresequenz für das Protein
-# Hier wird die Aminosäuresequenz mit dem ersten Buchstaben jedes Aminosäure (anstatt der vorherigen 3 Buchstaben) dargestellt
-amino = 'MAGELVSFAVNKLWDLLSHEYTLFQGVEDQVAELKSDLNLLKSFLKDADAKKHTSALVRYCVEEIKDIVYDAEDVLETFVQKEKLGTTSGIRKHIKRLTCIVPDRREIALYIGHVSKRITRVIRDMQSFGVQQMIVDDYMHPLRNREREIRRTFPKDNESGFVALEENVKKLVGYFVEEDNYQVVSITGMGGLGKTTLARQVFNHDMVTKKFDKLAWVSVSQDFTLKNVWQNILGDLKPKEEETKEEEKKILEMTEYTLQRELYQLLEMSKSLIVLDDIWKKEDWEVIKPIFPPTKGWKLLLTSRNESIVAPTNTKYFNFKPECLKTDDSWKLFQRIAFPINDASEFEIDEEMEKLGEKMIEHCGGLPLAIKVLGGMLAEKYTSHDWRRLSENIGSHLVGGRTNFNDDNNNSCNYVLSLSFEELPSYLKHCFLYLAHFPEDYEIKVENLSYYWAAEEIFQPRHYDGEIIRDVGDVYIEELVRRNMVISERDVKTSRFETCHLHDMMREVCLLKAKEENFLQITSNPPSTANFQSTVTSRRLVYQYPTTLHVEKDINNPKLRSLVVVTLGSWNMAGSSFTRLELLRVLDLVQAKLKGGKLASCIGKLIHLRYLSLEYAEVTHIPYSLGNLKLLIYLNLHISLSSRSNFVPNVLMGMQELRYLALPSLIERKTKLELSNLVKLETLENFSTKNSSLEDLRGMVRLRTLTIELIEETSLETLAASIGGLKYLEKLEIDDLGSKMRTKEAGIVFDFVHLKRLRLELYMPRLSKEQHFPSHLTTLYLQHCRLEEDPMPILEKLLQLKELELGHKSFSGKKMVCSSCGFPQLQKLSISGLKEWEDWKVEESSMPLLLTLNIFDCRKLKQLPDEHLPSHLTAISLKKCGLEDPIPTLERLVHLKELSLSELCGRIMVCTGGGFPQLHKLDLSELDGLEEWIVEDGSMPRLHTLEIRRCLKLKKLPNGFPQLQNLHLTEVEEWEEGMIVKQGSMPLLHTLYIWHCPKLPGEQHFPSHLTTVFLLGMYVEEDPMRILEKLLHLKNVSLFQSFSGKRMVCSGGGFPQLQKLSIREIEWEEWIVEQGSMPLLHTLYIGVCPNLKELPDGLRFIYSLKNLIVSKRWKKRLSEGGEDYYKVQHIPSVEFDD'
-
-# Dies ist die UniProt-ID für dieses Protein
-uniprot_id = 'Q8W3K0'
-
-# Jetzt holen wir die AlphaFold-Strukturvorhersage
-structure = gen10.alphafold_prediction(uniprot_id)
-
-# Schließlich rufen wir generate_protein() auf, um die Vorhersage anzuzeigen
-protein = gen10.generate_protein(structure)
-```
-
-### Simulation von CRISPR Cas
-```python
-my_dna = 'TACCACGTGGACTGAGGACTCCTCATT' # geben Sie eine DNA-Zeichenkette ein
-print('Ursprüngliche DNA:', my_dna)
-
-# Schneiden Sie die DNA an Position 16
-cut_position = 16
-cut_dna = gen10.cut_dna(my_dna, cut_position)
-print('Geschnittene DNA: ', cut_dna)
-
-# Reparieren Sie die DNA mit NHEJ (Löschung)
-nhej_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'NHEJ')
-print('NHEJ reparierte DNA: ', nhej_repaired_dna)
-
-# Reparieren Sie die DNA mit HDR (Einfügen von 'XYZ')
-hdr_repaired_dna = gen10.repair_dna(my_dna, cut_position, 'HDR', repair_sequence='XYZ')
-print('HDR reparierte DNA: ', hdr_repaired_dna)
-```
-
-## Zitieren Sie die gen API
-Wenn Sie diesen Code verwenden, zitieren Sie ihn bitte:
+## Zitieren des `gen10`-Pakets
+Wenn Sie diesen Code verwenden, zitieren Sie ihn bitte wie folgt:
 ```bibtex
-@software{joanalnu_2024b,
+@software{joanalnu_2025,
     author = [Alcaide-Núñez, Joan],
-    title = {GEN API},
-    month = november,
-    year = {2024},
+    title = {GEN10 package},
+    month = {April},
+    year = {2025},
     publisher = {Zenodo},
-    version = {1.0},
+    version = {1.4},
     doi = {10.5281/zenodo.14059749},
     url = {https://github.com/joanalnu/gen10},
 }
 ```
 
 ## Mitwirken
-Bitte kontaktieren Sie mich per [E-Mail](mailto:joanalnu@outlook.com) oder senden Sie Pull-Requests.
+Sie können gerne Probleme melden oder Pull Requests an das Repository senden!
 
-## Info für Lehrkräfte
-Dies ist die formale API für die [genetic10](https://joanalnu.github.io/genetics10)-Bildungssoftware. Während das Jupyter-Notebook eine benutzerfreundliche Schnittstelle ist und keine Installation erfordert, was es ideal für schulverwaltete Geräte macht, ist die API für den Einsatz in einem professionellen Umfeld konzipiert. Es liegt an Ihnen zu entscheiden, ob Sie die API oder das Jupyter-Notebook verwenden, unter Berücksichtigung des Ausbildungsstandes Ihrer Schüler und der verfügbaren Ressourcen.
+## Informationen für Lehrkräfte
+Ein Paket ist ein Python-Code, der Funktionen (d.h. Methoden) bereitstellt, die direkt in Ihrem Code verwendet werden können, indem Sie sie einfach aufrufen, ohne weiteren Code schreiben zu müssen. Notebooks sind für Schüler leicht nutzbar und da sie browserbasiert sind, benötigen sie keine Installation, was sie ideal für schulisch verwaltete Geräte macht.
 
-### Wie kann ich dies in meinem Unterricht verwenden?
-Zuerst identifizieren Sie in Ihrem Lehrplan, wo Sie die Software integrieren können, die bereits an die allgemeinen Bildungsrichtlinien angepasst ist. Dann sollten Sie damit beginnen, die grundlegenden Konzepte der Genomik in Ihrem Biologie- oder Naturwissenschaftsunterricht zu erklären, wie Sie es normalerweise tun würden. Dann können Sie dieses Tool Ihren Schülern vorstellen und erklären, wie es verwendet wird.
+### Wie kann ich das in meinem Unterricht verwenden?
+Zuerst identifizieren Sie in Ihrem Lehrplan, wo Sie die Software integrieren können, die bereits an die allgemeinen Bildungsrichtlinien angepasst ist. Dann sollten Sie damit beginnen, die grundlegenden Konzepte der Genomik in Ihrem Biologie- oder Naturwissenschaftsunterricht zu erklären, wie Sie es normalerweise tun würden. Danach können Sie dieses Werkzeug den Schülern vorstellen und erklären, wie man es benutzt.
 
-Sie können die Software verwenden, um Problemlösungsaufgaben zu entwerfen, die von den Schülern kritisches Denken und Programmierkenntnisse erfordern. Zum Beispiel ein Szenario, in dem eine Genmutation eine Krankheit verursacht und die Schüler aufgefordert werden, Code zu schreiben, der die Mutation identifiziert und korrigiert. Diese Art von Aktivitäten fördert Kreativität und Problemlösungsfähigkeit und führt zu mehr Wissenschaft wie CRIPSR-Cas9.
+Sie können die Software verwenden, um Problemlösungsaufgaben zu entwerfen, die von den Schülern kritisches Denken und Programmierfähigkeiten erfordern. Zum Beispiel ein Szenario, in dem eine Genmutation eine Krankheit verursacht, und die Schüler sollen Code schreiben, der die Mutation identifiziert und korrigiert. Diese Art von Aktivitäten fördert Kreativität und Problemlösungsfähigkeiten und führt weiter zu wissenschaftlichen Themen wie CRISPR-Cas9.
 
-Außerdem führen Sie geplante Aktivitäten durch, bei denen die Schüler das Gelernte im realen Leben anwenden. Erstellen Sie Aufgaben, bei denen die Schüler einfachen Code mit den vordefinierten Funktionen schreiben, um genetische Prozesse wie Transkription und Translation zu emulieren.
+Führen Sie auch geplante Aktivitäten durch, bei denen die Schüler das Gelernte in der Praxis anwenden. Erstellen Sie Aufgaben, bei denen die Schüler einfachen Code schreiben, der vorgefertigte Funktionen verwendet, um genetische Prozesse wie Transkription und Translation zu simulieren.
 
-Durch die Bereitstellung von Schritt-für-Schritt-Anleitungen haben die Schüler bessere Chancen, den biologischen Inhalt zu verstehen und das volle Potenzial dieses Tools zu nutzen. Darüber hinaus kann die Integration von realen Beispielen und Anwendungen in der Genomik und Biotechnologie die Motivation und das Interesse der Schüler erhöhen und moderne Forschungsinstrumente zeigen und diskutieren.
+Durch Schritt-für-Schritt-Anleitungen haben die Schüler bessere Chancen, den biologischen Inhalt zu verstehen und das volle Potenzial dieses Werkzeugs zu nutzen. Außerdem kann die Integration von realen Beispielen und Anwendungen in Genomik und Biotechnologie die Motivation und das Interesse der Schüler steigern und moderne Forschungstools aufzeigen und diskutieren.
 
-Schließlich können Sie auch einen umgekehrten Unterrichtsansatz verfolgen, indem Sie Software-Tutorials als Hausaufgabe zuweisen und die Unterrichtszeit für interaktives und angewandtes Lernen nutzen. Dies ermöglicht eine maximale Beteiligung im Unterricht und ermöglicht eine individuellere Anleitung.
+Schließlich können Sie auch einen umgedrehten Unterrichtsansatz (Flipped Classroom) verwenden, indem Sie Software-Tutorials als Hausaufgaben aufgeben und die Unterrichtszeit für interaktives und angewandtes Lernen nutzen. Dies maximiert die Beteiligung im Unterricht und ermöglicht eine individuellere Betreuung.
 
-Durch die Förderung der Zusammenarbeit durch die Planung von Gruppenprojekten können die Schüler zusammenarbeiten, um komplexere Probleme zu lösen. Und kollaborative Projekte fördern Teamarbeit und ermöglichen es den Schülern, voneinander zu lernen.
+Durch die Förderung von Zusammenarbeit durch Gruppenprojekte können Schüler gemeinsam komplexere Probleme lösen. Kollaborative Projekte fördern Teamarbeit und ermöglichen es den Schülern, voneinander zu lernen.
 
-Durch die Integration dieser Strategien können Sie diese Software effektiv nutzen, um Ihren Biologieunterricht zu verbessern, die Schüler zu engagieren und ein tieferes Verständnis von Genomik und Programmierung zu fördern.
+Durch die Umsetzung dieser Strategien können Sie diese Software effektiv nutzen, um Ihren Biologieunterricht zu verbessern, Schüler zu engagieren und ein tieferes Verständnis sowohl der Genomik als auch des Programmierens zu fördern.
 
-### Warum sollte ich dies in meinem Unterricht verwenden?
-Dies ist eine nützliche Ressource für Schüler, um Genomik und grundlegende Programmierung zu lernen. Einerseits ist dies ein leistungsstarkes Tool, das es den Schülern ermöglicht, das Gelernte im Bereich Biologie anzuwenden. Es ist interaktiv und anpassbar und jeder kann seinen eigenen Code ohne Programmierkenntnisse ausführen. Andererseits werden die Schüler lernen und erste Erfahrungen mit Bioinformatik und Rechnung sammeln. Programmierung ist eine wesentliche Fähigkeit für zukünftige Arbeitnehmer, unabhängig von ihrem Fach.
+### Warum sollte ich das in meinem Unterricht verwenden?
+Dies ist eine nützliche Ressource für Schüler, um sowohl Genomik als auch grundlegendes Programmieren zu lernen. Einerseits ist es ein leistungsstarkes Werkzeug, das es den Schülern ermöglicht, das Gelernte zur Biologie anzuwenden. Es ist interaktiv und anpassbar gestaltet, und jeder kann seinen eigenen Code ausführen, ohne Programmierkenntnisse zu haben. Andererseits lernen die Schüler erste Erfahrungen mit Bioinformatik und Computation. Programmieren ist eine wesentliche Fähigkeit für zukünftige Arbeitskräfte, unabhängig vom Fachgebiet.
 
-Darüber hinaus macht die Tatsache, dass es webbasiert ist und keine Installation benötigt, es perfekt für schulverwaltete Geräte und ermöglicht die Nutzung unabhängig vom Betriebssystem. Es fördert auch Teamarbeit und Kommunikationsfähigkeiten, da Projekte in Zusammenarbeit durchgeführt werden können.
+Außerdem ist es webbasiert und benötigt keine Installation, was es perfekt für schulisch verwaltete Geräte macht und die Nutzung unabhängig vom Betriebssystem ermöglicht. Es fördert auch Teamarbeit und Kommunikationsfähigkeiten, da Projekte in Zusammenarbeit durchgeführt werden können.
 
-Darüber hinaus sind die Funktionen der Software an den schulischen Lehrplan angepasst und zeigen praktische Anwendungen des Unterrichtsinhalts sofort. Es fördert auch kritisches Denken, indem es den Schülern ermöglicht, eigenen Code zu schreiben, um Probleme zu lösen und aktiv zu engagieren. Und vorherige Kenntnisse in der Programmierung sind nicht erforderlich, da die Schüler die vordefinierten Funktionen verwenden, die eine breite Palette von Möglichkeiten ermöglichen. Darüber hinaus können die Schüler ihren Code an ihre Probleme anpassen oder neue Funktionen schreiben. Der Code ist leicht skalierbar und hat endlose Möglichkeiten!
+Zusätzlich sind die Funktionen der Software auf den Lehrplan abgestimmt und zeigen praktische Anwendungen des Unterrichtsinhalts sofort auf. Es fördert kritisches Denken, indem es den Schülern ermöglicht, eigenen Code zu schreiben, um Probleme zu lösen und sich aktiv zu beteiligen. Programmierkenntnisse sind nicht erforderlich, da die Schüler vorgefertigte Funktionen verwenden, die eine breite Palette von Möglichkeiten bieten. Außerdem können die Schüler ihren Code an ihre Probleme anpassen oder neue Funktionen schreiben. Der Code ist leicht skalierbar und bietet endlose Möglichkeiten!
 
-### Kontaktieren Sie mich!
-Wenn Sie weitere Fragen haben, zögern Sie nicht, mich per [E-Mail](mailto:joanalnu@outlook.com) zu kontaktieren. Ich bin auch offen für die Planung von Besprechungen oder Anrufen.
+## Kontakt
+Wenn Sie weitere Fragen, Kommentare oder Vorschläge haben, erreichen Sie mich unter [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
 
-Bitte beachten Sie, dass die Arbeit an weiteren Übersetzungen im Gange ist.
+Bitte beachten Sie, dass Übersetzungen in andere Sprachen (des Pakets, der Notebook-Tutorials, der README und anderer Dokumentationen) willkommen sind. Ich helfe gerne bei Übersetzungen auf Anfrage.
