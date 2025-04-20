@@ -82,34 +82,65 @@ def typ_bestimmen(sequence):
     else:
         return "Unknown_sequence"
 
-def fasta_schreiben(sequence, identifier=None, filename="output.fasta"):
+def fasta_schreiben(sequences, identifiers=None, filename="output.fasta"):
     """
-    Write a sequence to a FASTA file.
+    Schreibt eine Liste von Sequenzen in eine FASTA-Datei.
+    Parameters:
+        sequences (list): Liste von Sequenzen
+        identifiers (list): Liste von Identifikatoren (optional)
+        filename (str): Name der Ausgabedatei (optional, Standard: "output.fasta")
     """
-    if identifier is None:
-        identifier = typ_bestimmen(sequence)
+    # Convert a single sequence string to a list
+    if isinstance(sequences, str):
+        sequences = [sequences]
     
+    # Convert a single identifier string to a list if identifiers are provided
+    if identifiers is None:
+        identifiers = [typ_bestimmen(seq) for seq in sequences]
+    elif isinstance(identifiers, str):
+        identifiers = [identifiers]
+
     with open(filename, 'w') as fasta_file:
-        fasta_file.write(f">{identifier}\n")
-        
-        for i in range(0, len(sequence), 60):
-            fasta_file.write(sequence[i:i+60] + "\n")
+        for identifier, sequence in zip(identifiers, sequences):
+            fasta_file.write(f">{identifier}\n")
+            for i in range(0, len(sequence), 60):
+                fasta_file.write(sequence[i:i+60] + "\n")
+            fasta_file.write("\n")  # Add an empty line between sequences
 
 def fasta_lesen(filename):
     """
-    Reads a FASTA file and returns the identifier and sequence.
+    Liest eine FASTA-Datei und gibt die Sequenzen und ihre Identifikatoren zurück.
+    Parameters:
+        filename (str): Name der FASTA-Datei
+    Returns:
+        identifiers (list): Liste von Identifikatoren
+        sequences (list): Liste von Sequenzen
     """
     with open(filename, 'r') as f:
         lines = f.readlines()
 
         if not lines:  # Check if the list of lines is empty
             raise IndexError("Leere Datei")
-        if len(lines) < 2:  # Must have at least one identifier and one sequence
-            raise ValueError("FASTA-Datei muss mindestens einen Identifikator und eine Sequenz enthalten")
-        if not lines[0].startswith(">"):
-            raise ValueError("FASTA-Identifikator muss mit '>' beginnen")
         
-        identifier = lines[0].strip()[1:]  # Remove '>' character
-        sequence = ''.join(line.strip() for line in lines[1:])  # Join remaining lines for sequence
-        
-    return identifier, sequence
+        identifiers = []
+        sequences = []
+        current_sequence = []
+
+        for line in lines:
+            line = line.strip()
+            if line.startswith(">"):  # New identifier found
+                if current_sequence:
+                    sequences.append(''.join(current_sequence))
+                    current_sequence = []  # Reset for the next sequence
+                identifiers.append(line[1:]) # don't save the '>' character
+            else:
+                current_sequence.append(line)  # Add to the current sequence
+
+        # After the loop, add the last sequence if it exists
+        if current_sequence:
+            sequences.append(''.join(current_sequence))
+
+        if not identifiers or not sequences:  # Check if we have identifiers and sequences
+            raise ValueError("Fehler beim Lesen der Datei: Keine Identifikatoren oder Sequenzen gefunden (Typ muss mit '>' anfangen)")
+
+    return identifiers, sequences

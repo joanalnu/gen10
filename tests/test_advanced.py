@@ -2,6 +2,7 @@ import pytest
 import gen10.advanced as adv
 import tempfile
 import os
+import re
 
 def test_reverse_complement():
     assert adv.reverse_complement("ATGC") == "GCAT"
@@ -90,7 +91,7 @@ def test_write_fasta_creates_file_and_content():
     with tempfile.NamedTemporaryFile(delete=False) as tmpfile:
         filename = tmpfile.name
     try:
-        adv.write_fasta(sequence, identifier=identifier, filename=filename)
+        adv.write_fasta(sequence, identifiers=identifier, filename=filename)
         with open(filename, 'r') as f:
             content = f.read()
         # Check header line
@@ -119,17 +120,43 @@ def test_write_fasta_default_identifier():
     finally:
         os.remove(filename)
 
+def test_write_fasta_multiple_sequences():
+    sequences = ["AUCGAUCGAU" * 6, "GCTAGCTAGC" * 6]  # 60 bases each
+    expected_identifiers = ["RNA_sequence", "DNA_sequence"]  # Expected identifiers
+
+    with tempfile.NamedTemporaryFile(delete=False) as tmpfile:
+        filename = tmpfile.name
+
+    try:
+        adv.write_fasta(sequences, identifiers=expected_identifiers, filename=filename)  # Call method with identifiers
+        
+        with open(filename, 'r') as f:
+            content = f.readlines()
+        
+        # Check the identifiers
+        assert content[0] == f">{expected_identifiers[0]}\n"
+        assert content[1].strip() == "AUCGAUCGAU"*6
+        assert content[2].strip() == ""  # Empty line after first sequence
+        assert content[3] == f">{expected_identifiers[1]}\n"
+        assert content[4].strip() == "GCTAGCTAGC"*6
+        assert content[5].strip() == ""  # Empty line after second sequence
+
+    finally:
+        os.remove(filename)
 
 def test_read_fasta_valid():
-    # Create a temporary FASTA file
+    # Create a temporary FASTA file with multiple sequences
     with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
-        fasta_content = """>DNA_sequence\nATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGAT\nGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGC"""
+        fasta_content = """>DNA_sequence\nATCGATCGATATCGATCGATATCGATCGATATCGATCG\n>RNA_sequence\nAUCGAUCGAUCGAUCGAUCGAUCGA"""
         temp_file.write(fasta_content.encode('utf-8'))
         temp_file.close()  # Close the file to ensure it's written
 
-        identifier, sequence = adv.read_fasta(temp_file.name)
-        assert identifier == "DNA_sequence"
-        assert sequence == "ATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATATCGATCGATGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGCGCTAGCTAGC"
+        identifiers, sequences = adv.read_fasta(temp_file.name)
+        assert identifiers == ["DNA_sequence", "RNA_sequence"]
+        assert sequences == [
+            "ATCGATCGATATCGATCGATATCGATCGATATCGATCG",
+            "AUCGAUCGAUCGAUCGAUCGAUCGA"
+        ]
 
     os.remove(temp_file.name)
 
@@ -151,7 +178,7 @@ def test_read_fasta_no_sequence():
         temp_file.close()  # Close the file to ensure it's written
 
         # Check that reading this file raises a ValueError
-        with pytest.raises(ValueError, match="FASTA file must contain at least an identifier and a sequence"):
+        with pytest.raises(ValueError, match=re.escape("FASTA file must contain at least one identifier and one sequence (check that identifiers start with '>')")):
             adv.read_fasta(temp_file.name)
 
     os.remove(temp_file.name)  # Clean up the temporary file
@@ -159,11 +186,28 @@ def test_read_fasta_no_sequence():
 def test_read_fasta_invalid_format():
     # Create a temporary file with invalid FASTA format
     with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
-        invalid_content = """seq3\nATCGATCGATCG"""
+        invalid_content = """DNA_sequence\nATCGATCGATCG"""  # Missing '>' in identifier
         temp_file.write(invalid_content.encode('utf-8'))
         temp_file.close()  # Close the file to ensure it's written
 
-        with pytest.raises(ValueError, match="FASTA identifier must start with '>'"):
+        with pytest.raises(ValueError, match=re.escape("FASTA file must contain at least one identifier and one sequence (check that identifiers start with '>')")):
             adv.read_fasta(temp_file.name)
+
+    os.remove(temp_file.name)  # Clean up the temporary file
+
+def test_read_fasta_multiple_sequences():
+    # Create a temporary FASTA file with multiple sequences
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.fasta') as temp_file:
+        fasta_content = """>DNA_sequence\nATCGATCG\n>DNA_sequence\nGCTAGCTA\n>DNA_sequence\nTTAGGCCA"""
+        temp_file.write(fasta_content.encode('utf-8'))
+        temp_file.close()  # Close the file to ensure it's written
+
+        identifiers, sequences = adv.read_fasta(temp_file.name)
+        assert identifiers == ["DNA_sequence", "DNA_sequence", "DNA_sequence"]
+        assert sequences == [
+            "ATCGATCG",
+            "GCTAGCTA",
+            "TTAGGCCA"
+        ]
 
     os.remove(temp_file.name)  # Clean up the temporary file

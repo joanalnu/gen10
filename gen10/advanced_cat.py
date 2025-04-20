@@ -82,34 +82,65 @@ def identificador(sequence):
     else:
         return "Unknown_sequence"
 
-def escriure_fasta(sequence, identifier=None, filename="output.fasta"):
+def escriure_fasta(sequences, identifiers=None, filename="output.fasta"):
     """
-    Escriure una seqüència en format FASTA.
+    Escriu una o més seqüències en un fitxer FASTA.
+    Parameters:
+        sequences (str or list): Una seqüència d'ADN o una llista de seqüències.
+        identifiers (str or list, optional): Un identificador o una llista d'identificadors per a les seqüències.
+        filename (str): El nom del fitxer FASTA on s'escriuran les seqüències.
     """
-    if identifier is None:
-        identifier = identificador(sequence)
+    # Convert a single sequence string to a list
+    if isinstance(sequences, str):
+        sequences = [sequences]
     
+    # Convert a single identifier string to a list if identifiers are provided
+    if identifiers is None:
+        identifiers = [identificador(seq) for seq in sequences]
+    elif isinstance(identifiers, str):
+        identifiers = [identifiers]
+
     with open(filename, 'w') as fasta_file:
-        fasta_file.write(f">{identifier}\n")
-        
-        for i in range(0, len(sequence), 60):
-            fasta_file.write(sequence[i:i+60] + "\n")
+        for identifier, sequence in zip(identifiers, sequences):
+            fasta_file.write(f">{identifier}\n")
+            for i in range(0, len(sequence), 60):
+                fasta_file.write(sequence[i:i+60] + "\n")
+            fasta_file.write("\n")  # Add an empty line between sequences
 
 def llegir_fasta(filename):
     """
-    Llegeix un fitxer FASTA i retorna l'identificador i la seqüència.
+    LLegeix un fitxer FASTA i retorna una llista de seqüències i els seus identificadors.
+    Parameters:
+        filename (str): El nom del fitxer FASTA a llegir.
+    Returns:
+        identifiers (list): Una llista d'identificadors.
+        sequences (list): Una llista de seqüències corresponents als identificadors.
     """
     with open(filename, 'r') as f:
         lines = f.readlines()
 
         if not lines:  # Check if the list of lines is empty
             raise IndexError("Arxiu buit")
-        if len(lines) < 2:  # Must have at least one identifier and one sequence
-            raise ValueError("El fitxer FASTA ha de contenir almenys un identificador i una seqüència")
-        if not lines[0].startswith(">"):
-            raise ValueError("L'identificador FASTA ha de començar amb '>'")
         
-        identifier = lines[0].strip()[1:]  # Remove '>' character
-        sequence = ''.join(line.strip() for line in lines[1:])  # Join remaining lines for sequence
-        
-    return identifier, sequence
+        identifiers = []
+        sequences = []
+        current_sequence = []
+
+        for line in lines:
+            line = line.strip()
+            if line.startswith(">"):  # New identifier found
+                if current_sequence:
+                    sequences.append(''.join(current_sequence))
+                    current_sequence = []  # Reset for the next sequence
+                identifiers.append(line[1:]) # don't save the '>' character
+            else:
+                current_sequence.append(line)  # Add to the current sequence
+
+        # After the loop, add the last sequence if it exists
+        if current_sequence:
+            sequences.append(''.join(current_sequence))
+
+        if not identifiers or not sequences:  # Check if we have identifiers and sequences
+            raise ValueError("No s'han trobat seqüències o identificadors al fitxer (l'identificador ha de començar amb '>')")
+
+    return identifiers, sequences
