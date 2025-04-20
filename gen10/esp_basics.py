@@ -104,7 +104,7 @@ def adn2amino(dna):
             raise ValueError(f'Error: codón invalido {codon}')
     return amino
 
-def rna2dna(rna):
+def arn2adn(rna):
     """Returns DNA string by inputting a DNA string"""
     dna = ""
     for base in rna:
@@ -157,7 +157,7 @@ def leer_input(path):
     else:
         return path
 
-def crearmutacion(string):
+def crear_mutacion(string):
     bases = ['A', 'T', 'C', 'G']
     mutated = ""
 

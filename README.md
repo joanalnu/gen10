@@ -68,7 +68,7 @@ The currently available methods are the following. Note that we are always updat
 | 5 | compare() | Compares the strings (regardless if DNA, RNA, or aminoacids), it always returns a boolean and a string. True if both strings are identical, or False and where do the string differ. | string1, string2 | boolean, string |
 | 6 | check() | It checks if the provided string is a valid DNA or RNA string. It does not check for aminoacid strings. | string | string |
 | 7 | read_input() | Used to open files. The full path to the file must be saved in the same folder as this file and can have only 1 sequence. | string | string |
-| 8 | createmutation() | Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position. | string | string |
+| 8 | create_mutation() | Returns a new string with a mutation (only 1 per run). The mutation can change a base, erase a base or add a new one in any position. | string | string |
 | 9 | iterate() | By  inputting a list of inputs and a list of functions it returns a table with all the results for each functions and input. | list, list | dataframe (table) |
 | 10 | tosingle() | Transcribes an aminoacid string from three-letter code to single-letter code. | string | string |
 | 11 | alphafold_prediction() | By inputting a UniProt ID $^1$ , it returns a url to the `pbd` file of the predicted protein's structure. | string | dictionary |

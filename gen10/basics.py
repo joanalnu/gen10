@@ -159,7 +159,7 @@ def read_input(path):
     else:
         return path
 
-def createmutation(string):
+def create_mutation(string):
     bases = ['A', 'T', 'C', 'G']
     mutated = ""
 
