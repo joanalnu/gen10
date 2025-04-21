@@ -43,7 +43,7 @@ Sie können das Paket mit pip installieren:
 pip install gen10
 ```
 
-Alternativ können Sie ein browserbasiertes Notebook verwenden, um mit dem Paket zu interagieren und Ihren Code zellenweise auszuführen. Dies ist ein sehr nützliches Werkzeug für den Unterricht. Wir haben ein Schritt-für-Schritt-Tutorial in einem Google Colab Notebook [hier](https://joanalnu.github.io/help) vorbereitet.
+Alternativ können Sie ein browserbasiertes Notebook verwenden, um mit dem Paket zu interagieren und Ihren Code zellenweise auszuführen. Dies ist ein sehr nützliches Werkzeug für den Unterricht. Wir haben ein Schritt-für-Schritt-Tutorial in einem Google Colab Notebook [hier](https://colab.research.google.com/drive/1gPxB2i7kRtKM-BUmg1gMipZk5Z5G0OEb?usp=sharing) vorbereitet.
 
 ## Verwendung
 `gen10` funktioniert wie jedes andere `pip`-Paket. Sie können es in Ihren Code importieren, indem Sie

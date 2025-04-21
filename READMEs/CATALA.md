@@ -43,7 +43,7 @@ Pots instal·lar el paquet utilitzant pip:
 pip install gen10
 ```
 
-Alternativament, pots utilitzar un notebook basat en navegador per interactuar amb el paquet i executar el teu codi per cel·les. Aquesta és una eina molt útil per a l'educació. Hem preparat un tutorial pas a pas en un Google Colab Notebook [aquí](https://joanalnu.github.io/help).
+Alternativament, pots utilitzar un notebook basat en navegador per interactuar amb el paquet i executar el teu codi per cel·les. Aquesta és una eina molt útil per a l'educació. Hem preparat un tutorial pas a pas en un Google Colab Notebook [aquí](https://colab.research.google.com/drive/10mI9imQ5dXa89QLX_f_6yM9OQUVfOcqM?usp=sharing).
 
 ## Ús
 `gen10` funciona com qualsevol altre paquet `pip`. Pots importar-lo al teu codi afegint
