@@ -36,11 +36,11 @@ def melting_temperature(dna):
 
 def mutate_site(sequence, pos, new_base):
     """
-    This function mutates a specific site in a DNA sequence.
+    This function mutates a specific site in a DNA or RNA sequence.
     """
     if pos < 0 or pos >= len(sequence):
         raise ValueError("Position out of range")
-    if new_base not in ['A', 'T', 'C', 'G']:
+    if new_base not in ['A', 'T', 'C', 'G', 'U']:
         raise ValueError("Invalid base")
     
     mutated_sequence = list(sequence)

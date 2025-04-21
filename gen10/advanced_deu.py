@@ -36,11 +36,11 @@ def schmelz_temperatur(dna):
 
 def stelle_mutieren(sequence, pos, new_base):
     """
-    Diese Funktion mutiert eine spezifische Stelle in einer DNA-Sequenz.
+    Diese Funktion mutiert eine spezifische Stelle in einer DNA- oder RNA-Sequenz.
     """
     if pos < 0 or pos >= len(sequence):
         raise ValueError("Stelle außerhalb des Bereichs")
-    if new_base not in ['A', 'T', 'C', 'G']:
+    if new_base not in ['A', 'T', 'C', 'G', 'U']:
         raise ValueError("Ungültige Base")
     
     mutated_sequence = list(sequence)
