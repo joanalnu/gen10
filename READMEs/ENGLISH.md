@@ -43,7 +43,7 @@ You can install the package using pip:
 pip install gen10
 ```
 
-Alternatively, you can use a browser-based notebook to interact with the package and run your code by cells. This is a very useful tools for education. We have prepared a step-by-step tutorial in a Google Colab Notebook [here](https://joanalnu.github.io/help).
+Alternatively, you can use a browser-based notebook to interact with the package and run your code by cells. This is a very useful tools for education. We have prepared a step-by-step tutorial in a Google Colab Notebook [here](https://colab.research.google.com/drive/1L5vzkVWZcBbWgSU9thaLny3ddg2Vogy6?usp=sharing).
 
 ## Usage
 `gen10` works as any other `pip` package. You can import it to your code by adding
@@ -101,7 +101,7 @@ If you make use of this code, please cite it:
     month = {April},
     year = {2025},
     publisher = {Zenodo},
-    version = {1.4.1},
+    version = {1.4.2},
     doi = {10.5281/zenodo.15251890},
     url = {https://github.com/joanalnu/gen10},
 }

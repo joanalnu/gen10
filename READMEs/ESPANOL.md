@@ -43,7 +43,7 @@ Puedes instalar el paquete usando pip:
 pip install gen10
 ```
 
-Alternativamente, puedes usar un cuaderno basado en navegador para interactuar con el paquete y ejecutar tu código por celdas. Esta es una herramienta muy útil para la educación. Hemos preparado un tutorial paso a paso en un cuaderno de Google Colab [aquí](https://joanalnu.github.io/help).
+Alternativamente, puedes usar un cuaderno basado en navegador para interactuar con el paquete y ejecutar tu código por celdas. Esta es una herramienta muy útil para la educación. Hemos preparado un tutorial paso a paso en un cuaderno de Google Colab [aquí](https://colab.research.google.com/drive/19rTU7tJijs8oB3s4W4xBX4K7DOYSe_rb?usp=sharing).
 
 ## Uso
 `gen10` funciona como cualquier otro paquete instalado con `pip`. Puedes importarlo a tu código añadiendo
@@ -101,7 +101,7 @@ Si usas este código, por favor cítalo:
     month = {April},
     year = {2025},
     publisher = {Zenodo},
-    version = {1.4.1},
+    version = {1.4.2},
     doi = {10.5281/zenodo.15251890},
     url = {https://github.com/joanalnu/gen10},
 }
