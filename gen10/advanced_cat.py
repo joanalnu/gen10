@@ -36,11 +36,11 @@ def temperatura_fusio(dna):
 
 def mutar_lloc(sequence, pos, new_base):
     """
-    Aquesta funció muta un lloc específic en una seqüència d'ADN.
+    Aquesta funció muta un lloc específic en una seqüència d'ADN o d'ARN.
     """
     if pos < 0 or pos >= len(sequence):
         raise ValueError("Posició fora de rang")
-    if new_base not in ['A', 'T', 'C', 'G']:
+    if new_base not in ['A', 'T', 'C', 'G', 'U']:
         raise ValueError("Base invàlida")
     
     mutated_sequence = list(sequence)

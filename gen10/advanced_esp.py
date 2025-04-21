@@ -36,11 +36,11 @@ def temperatura_fusion(dna):
 
 def mutar_sitio(sequence, pos, new_base):
     """
-    Esta función muta un sitio específico en una secuencia de ADN.
+    Esta función muta un sitio específico en una secuencia de ADN o ARN.
     """
     if pos < 0 or pos >= len(sequence):
         raise ValueError("Posición fuera de rango")
-    if new_base not in ['A', 'T', 'C', 'G']:
+    if new_base not in ['A', 'T', 'C', 'G', 'U']:
         raise ValueError("Base inválida")
     
     mutated_sequence = list(sequence)
