@@ -8,6 +8,7 @@
 
 ![Estado de la compilación](https://github.com/joanalnu/gen10/actions/workflows/python-tests.yml/badge.svg)
 ![Problemas abiertos](https://img.shields.io/github/issues/joanalnu/gen10)
+![GitHub Release](https://img.shields.io/github/v/release/joanalnu/Gen10?color=teal)
 
 ### Índice
 - [Introducción](#introducción)
