@@ -137,6 +137,6 @@ Außerdem ist es webbasiert und benötigt keine Installation, was es perfekt fü
 Zusätzlich sind die Funktionen der Software auf den Lehrplan abgestimmt und zeigen praktische Anwendungen des Unterrichtsinhalts sofort auf. Es fördert kritisches Denken, indem es den Schülern ermöglicht, eigenen Code zu schreiben, um Probleme zu lösen und sich aktiv zu beteiligen. Programmierkenntnisse sind nicht erforderlich, da die Schüler vorgefertigte Funktionen verwenden, die eine breite Palette von Möglichkeiten bieten. Außerdem können die Schüler ihren Code an ihre Probleme anpassen oder neue Funktionen schreiben. Der Code ist leicht skalierbar und bietet endlose Möglichkeiten!
 
 ## Kontakt
-Wenn Sie weitere Fragen, Kommentare oder Vorschläge haben, erreichen Sie mich unter [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
+Wenn Sie weitere Fragen, Kommentare oder Vorschläge haben, [erreichen Sie mich](https://joanalnu.github.io/contact).
 
 Bitte beachten Sie, dass Übersetzungen in andere Sprachen (des Pakets, der Notebook-Tutorials, der README und anderer Dokumentationen) willkommen sind. Ich helfe gerne bei Übersetzungen auf Anfrage.
