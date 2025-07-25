@@ -137,6 +137,6 @@ Además, el hecho de que sea basado en web y no requiera instalación lo hace pe
 Adicionalmente, las características del software están alineadas con el currículo escolar y muestran aplicaciones prácticas del contenido del aula de inmediato. También promueve el pensamiento crítico al permitir que los estudiantes escriban su propio código para resolver problemas y participen activamente. Y no se requiere conocimiento previo de programación, ya que los estudiantes usarán las funciones preestablecidas que permiten una amplia gama de posibilidades. Además, los estudiantes pueden adaptar su código a sus problemas o escribir nuevas funciones. El código es fácilmente escalable y tiene posibilidades infinitas.
 
 ## ¡Contáctame!
-Si tienes más dudas, comentarios o sugerencias, por favor contáctame en [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
+Si tienes más dudas, comentarios o sugerencias, por favor [contáctame](https://joanalnu.github.io/contact).
 
 Por favor, ten en cuenta que las traducciones a otros idiomas (del paquete, los tutoriales en cuadernos, el README y otra documentación) son bienvenidas. Estaré encantado de traducirlas a cualquier idioma bajo solicitud.
