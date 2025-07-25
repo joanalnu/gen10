@@ -137,6 +137,6 @@ A més, el fet que sigui basada en web i no necessiti cap instal·lació la fa p
 A més, les característiques del programari estan alineades amb el currículum escolar i mostra aplicacions pràctiques del contingut de classe immediatament. També promou el pensament crític permetent als estudiants escriure el seu propi codi per resoldre problemes i participar activament. I no es requereix cap coneixement previ de programació, ja que els estudiants utilitzaran les funcions preestablertes que permeten una àmplia gamma de possibilitats. A més, els estudiants poden adaptar el seu codi als seus problemes o escriure noves funcions. El codi és fàcilment escalable i té possibilitats infinites!
 
 ## Contacta amb mi!
-Si tens més dubtes, comentaris o suggeriments, si us plau contacta amb mi a [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
+Si tens més dubtes, comentaris o suggeriments, si us plau [contacta amb mi](https://joanalnu.github.io/contact).
 
 Si us plau, tingues en compte que les traduccions a altres idiomes (del paquet, els tutorials dels notebooks, el README i altra documentació) són benvingudes. Estaré encantat de traduir-les a qualsevol idioma sota petició.
