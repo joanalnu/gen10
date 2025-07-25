@@ -44,4 +44,4 @@ Remember this good practices:
 By contributing either way to this project you agree to abide to the terms of our [Code of Conduct](https://github.com/joanalnu/gen_api/CODE_OF_CONDUCT.md).
 
 ## Contact
-Feel free to [contact me](mailto:joanalnu@outlook.com).
+Feel free to [contact me](https://joanalnu.github.io/contact).
