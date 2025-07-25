@@ -137,6 +137,6 @@ Further, the fact that it is web-based and does not need any installation makes 
 Additionally, the features of the software are aligned with the scholar curriculum and it shows practical applications of classroom content right away. It also promotes critical thinking by allowing students to write their own code to solve problems and engage actively. And prior knowledge of coding is not required at all, as students will use the pre-established functions that enable a wide range of possibilities. Further, students can adapt their code to their problems or write new functions. The code is easily scalable and has endless possibilities!
 
 ## Contact me!
-If you have further doubts, comments, or suggestions, please reach out to me at [joanalnu@outlook.com](mailto:joanalnu@outlook.com).
+If you have further doubts, comments, or suggestions, please [reach out to me](https://joanalnu.github.io/contact).
 
 Please note that translations to other langauges (of the package, the notebook tutorials, the README and other documentation) are welcome. I will be happy to translate them to any language under request.
