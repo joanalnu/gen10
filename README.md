@@ -1,6 +1,8 @@
 # gen10
 ---
 
+> 🚨 ATTENTION: This package was a side-project and is no longer maintained. Additional functions and bug fixing are possible via request, just contact me [here](https://joanalnu.github.io/contact), I'll be happy to work with you! $^1$
+
 [![repo](https://img.shields.io/badge/GitHub-joanalnu%2Fgen10-blue.svg?style=flat)](https://github.com/joanalnu/gen10)
 [![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/joanalnu/gen10/LICENSE)
 ![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)
@@ -102,7 +104,7 @@ If you make use of this code, please cite it:
     month = {April},
     year = {2025},
     publisher = {Zenodo},
-    version = {1.4.2},
+    version = {1.4.3},
     doi = {10.5281/zenodo.15251890},
     url = {https://github.com/joanalnu/gen10},
 }
@@ -140,3 +142,5 @@ Additionally, the features of the software are aligned with the scholar curricul
 If you have further doubts, comments, or suggestions, please [reach out to me](https://joanalnu.github.io/contact).
 
 Please note that translations to other langauges (of the package, the notebook tutorials, the README and other documentation) are welcome. I will be happy to translate them to any language under request.
+
+$^1$ Please consider using [Biopython](https://biopython.org/) for your genomics data analysis needs.

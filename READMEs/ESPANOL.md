@@ -102,7 +102,7 @@ Si usas este código, por favor cítalo:
     month = {April},
     year = {2025},
     publisher = {Zenodo},
-    version = {1.4.2},
+    version = {1.4.3},
     doi = {10.5281/zenodo.15251890},
     url = {https://github.com/joanalnu/gen10},
 }

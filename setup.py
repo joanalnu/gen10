@@ -13,7 +13,7 @@ with open("gen10/_version.py") as version_file:
 
 setup(
     name="gen10",
-    version="1.4.2",
+    version="1.4.3",
     author="Joan Alcaide-Núñez",
     author_email="joanalnu@outlook.com",
     description="Package for genetics and genomics related functions, mainly for educational purposes.",
